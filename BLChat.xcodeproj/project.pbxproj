@@ -1,0 +1,530 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F7546F7C1E2E2DA2003E38DE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7B1E2E2DA2003E38DE /* main.m */; };
+		F7546F7F1E2E2DA2003E38DE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7E1E2E2DA2003E38DE /* AppDelegate.m */; };
+		F7546F821E2E2DA2003E38DE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F811E2E2DA2003E38DE /* ViewController.m */; };
+		F7546F851E2E2DA2003E38DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7546F831E2E2DA2003E38DE /* Main.storyboard */; };
+		F7546F871E2E2DA2003E38DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7546F861E2E2DA2003E38DE /* Assets.xcassets */; };
+		F7546F8A1E2E2DA2003E38DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7546F881E2E2DA2003E38DE /* LaunchScreen.storyboard */; };
+		F7546F951E2E2DA2003E38DE /* BLChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F941E2E2DA2003E38DE /* BLChatTests.m */; };
+		F7546FA01E2E2DA2003E38DE /* BLChatUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F9F1E2E2DA2003E38DE /* BLChatUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F7546F911E2E2DA2003E38DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7546F6F1E2E2DA2003E38DE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F7546F761E2E2DA2003E38DE;
+			remoteInfo = BLChat;
+		};
+		F7546F9C1E2E2DA2003E38DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7546F6F1E2E2DA2003E38DE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F7546F761E2E2DA2003E38DE;
+			remoteInfo = BLChat;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F7546F771E2E2DA2003E38DE /* BLChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7546F7B1E2E2DA2003E38DE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F7546F7D1E2E2DA2003E38DE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F7546F7E1E2E2DA2003E38DE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F7546F801E2E2DA2003E38DE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F7546F811E2E2DA2003E38DE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F7546F841E2E2DA2003E38DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F7546F861E2E2DA2003E38DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F7546F891E2E2DA2003E38DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F7546F8B1E2E2DA2003E38DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7546F901E2E2DA2003E38DE /* BLChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BLChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7546F941E2E2DA2003E38DE /* BLChatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLChatTests.m; sourceTree = "<group>"; };
+		F7546F961E2E2DA2003E38DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7546F9B1E2E2DA2003E38DE /* BLChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BLChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7546F9F1E2E2DA2003E38DE /* BLChatUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLChatUITests.m; sourceTree = "<group>"; };
+		F7546FA11E2E2DA2003E38DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F7546F741E2E2DA2003E38DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7546F8D1E2E2DA2003E38DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7546F981E2E2DA2003E38DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F7546F6E1E2E2DA2003E38DE = {
+			isa = PBXGroup;
+			children = (
+				F7546F791E2E2DA2003E38DE /* BLChat */,
+				F7546F931E2E2DA2003E38DE /* BLChatTests */,
+				F7546F9E1E2E2DA2003E38DE /* BLChatUITests */,
+				F7546F781E2E2DA2003E38DE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F7546F781E2E2DA2003E38DE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F7546F771E2E2DA2003E38DE /* BLChat.app */,
+				F7546F901E2E2DA2003E38DE /* BLChatTests.xctest */,
+				F7546F9B1E2E2DA2003E38DE /* BLChatUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F7546F791E2E2DA2003E38DE /* BLChat */ = {
+			isa = PBXGroup;
+			children = (
+				F7546F7D1E2E2DA2003E38DE /* AppDelegate.h */,
+				F7546F7E1E2E2DA2003E38DE /* AppDelegate.m */,
+				F7546F801E2E2DA2003E38DE /* ViewController.h */,
+				F7546F811E2E2DA2003E38DE /* ViewController.m */,
+				F7546F831E2E2DA2003E38DE /* Main.storyboard */,
+				F7546F861E2E2DA2003E38DE /* Assets.xcassets */,
+				F7546F881E2E2DA2003E38DE /* LaunchScreen.storyboard */,
+				F7546F8B1E2E2DA2003E38DE /* Info.plist */,
+				F7546F7A1E2E2DA2003E38DE /* Supporting Files */,
+			);
+			path = BLChat;
+			sourceTree = "<group>";
+		};
+		F7546F7A1E2E2DA2003E38DE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F7546F7B1E2E2DA2003E38DE /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F7546F931E2E2DA2003E38DE /* BLChatTests */ = {
+			isa = PBXGroup;
+			children = (
+				F7546F941E2E2DA2003E38DE /* BLChatTests.m */,
+				F7546F961E2E2DA2003E38DE /* Info.plist */,
+			);
+			path = BLChatTests;
+			sourceTree = "<group>";
+		};
+		F7546F9E1E2E2DA2003E38DE /* BLChatUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F7546F9F1E2E2DA2003E38DE /* BLChatUITests.m */,
+				F7546FA11E2E2DA2003E38DE /* Info.plist */,
+			);
+			path = BLChatUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F7546F761E2E2DA2003E38DE /* BLChat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F7546FA41E2E2DA2003E38DE /* Build configuration list for PBXNativeTarget "BLChat" */;
+			buildPhases = (
+				F7546F731E2E2DA2003E38DE /* Sources */,
+				F7546F741E2E2DA2003E38DE /* Frameworks */,
+				F7546F751E2E2DA2003E38DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BLChat;
+			productName = BLChat;
+			productReference = F7546F771E2E2DA2003E38DE /* BLChat.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F7546F8F1E2E2DA2003E38DE /* BLChatTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F7546FA71E2E2DA2003E38DE /* Build configuration list for PBXNativeTarget "BLChatTests" */;
+			buildPhases = (
+				F7546F8C1E2E2DA2003E38DE /* Sources */,
+				F7546F8D1E2E2DA2003E38DE /* Frameworks */,
+				F7546F8E1E2E2DA2003E38DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F7546F921E2E2DA2003E38DE /* PBXTargetDependency */,
+			);
+			name = BLChatTests;
+			productName = BLChatTests;
+			productReference = F7546F901E2E2DA2003E38DE /* BLChatTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F7546F9A1E2E2DA2003E38DE /* BLChatUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F7546FAA1E2E2DA2003E38DE /* Build configuration list for PBXNativeTarget "BLChatUITests" */;
+			buildPhases = (
+				F7546F971E2E2DA2003E38DE /* Sources */,
+				F7546F981E2E2DA2003E38DE /* Frameworks */,
+				F7546F991E2E2DA2003E38DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F7546F9D1E2E2DA2003E38DE /* PBXTargetDependency */,
+			);
+			name = BLChatUITests;
+			productName = BLChatUITests;
+			productReference = F7546F9B1E2E2DA2003E38DE /* BLChatUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F7546F6F1E2E2DA2003E38DE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = HZQ;
+				TargetAttributes = {
+					F7546F761E2E2DA2003E38DE = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					F7546F8F1E2E2DA2003E38DE = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = F7546F761E2E2DA2003E38DE;
+					};
+					F7546F9A1E2E2DA2003E38DE = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = F7546F761E2E2DA2003E38DE;
+					};
+				};
+			};
+			buildConfigurationList = F7546F721E2E2DA2003E38DE /* Build configuration list for PBXProject "BLChat" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F7546F6E1E2E2DA2003E38DE;
+			productRefGroup = F7546F781E2E2DA2003E38DE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F7546F761E2E2DA2003E38DE /* BLChat */,
+				F7546F8F1E2E2DA2003E38DE /* BLChatTests */,
+				F7546F9A1E2E2DA2003E38DE /* BLChatUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F7546F751E2E2DA2003E38DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7546F8A1E2E2DA2003E38DE /* LaunchScreen.storyboard in Resources */,
+				F7546F871E2E2DA2003E38DE /* Assets.xcassets in Resources */,
+				F7546F851E2E2DA2003E38DE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7546F8E1E2E2DA2003E38DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7546F991E2E2DA2003E38DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F7546F731E2E2DA2003E38DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7546F821E2E2DA2003E38DE /* ViewController.m in Sources */,
+				F7546F7F1E2E2DA2003E38DE /* AppDelegate.m in Sources */,
+				F7546F7C1E2E2DA2003E38DE /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7546F8C1E2E2DA2003E38DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7546F951E2E2DA2003E38DE /* BLChatTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7546F971E2E2DA2003E38DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7546FA01E2E2DA2003E38DE /* BLChatUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F7546F921E2E2DA2003E38DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F7546F761E2E2DA2003E38DE /* BLChat */;
+			targetProxy = F7546F911E2E2DA2003E38DE /* PBXContainerItemProxy */;
+		};
+		F7546F9D1E2E2DA2003E38DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F7546F761E2E2DA2003E38DE /* BLChat */;
+			targetProxy = F7546F9C1E2E2DA2003E38DE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F7546F831E2E2DA2003E38DE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F7546F841E2E2DA2003E38DE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F7546F881E2E2DA2003E38DE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F7546F891E2E2DA2003E38DE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F7546FA21E2E2DA2003E38DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F7546FA31E2E2DA2003E38DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F7546FA51E2E2DA2003E38DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = BLChat/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.beiliao.BLChat;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F7546FA61E2E2DA2003E38DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = BLChat/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.beiliao.BLChat;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F7546FA81E2E2DA2003E38DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = BLChatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.beiliao.BLChatTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BLChat.app/BLChat";
+			};
+			name = Debug;
+		};
+		F7546FA91E2E2DA2003E38DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = BLChatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.beiliao.BLChatTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BLChat.app/BLChat";
+			};
+			name = Release;
+		};
+		F7546FAB1E2E2DA2003E38DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = BLChatUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.beiliao.BLChatUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = BLChat;
+			};
+			name = Debug;
+		};
+		F7546FAC1E2E2DA2003E38DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = BLChatUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.beiliao.BLChatUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = BLChat;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F7546F721E2E2DA2003E38DE /* Build configuration list for PBXProject "BLChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F7546FA21E2E2DA2003E38DE /* Debug */,
+				F7546FA31E2E2DA2003E38DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F7546FA41E2E2DA2003E38DE /* Build configuration list for PBXNativeTarget "BLChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F7546FA51E2E2DA2003E38DE /* Debug */,
+				F7546FA61E2E2DA2003E38DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F7546FA71E2E2DA2003E38DE /* Build configuration list for PBXNativeTarget "BLChatTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F7546FA81E2E2DA2003E38DE /* Debug */,
+				F7546FA91E2E2DA2003E38DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F7546FAA1E2E2DA2003E38DE /* Build configuration list for PBXNativeTarget "BLChatUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F7546FAB1E2E2DA2003E38DE /* Debug */,
+				F7546FAC1E2E2DA2003E38DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F7546F6F1E2E2DA2003E38DE /* Project object */;
+}
