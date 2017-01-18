@@ -8,10 +8,26 @@
 
 #import <Foundation/Foundation.h>
 typedef NS_ENUM(NSUInteger, BLChatMessageType) {
+    /**
+     * 文字消息类型
+     */
     BLChatMessageTypeText = 0,
+    /**
+     * 图片消息类型
+     */
     BLChatMessageTypeImage,
+    /**
+     * 语音消息类型
+     */
     BLChatMessageTypeVoice,
-    BLChatMessageTypeLocation
+    /**
+     * 位置消息类型
+     */
+    BLChatMessageTypeLocation,
+    /**
+     * 视频消息类型
+     */
+    BLChatMessageTypeVedio
 };
 
 @interface BLChatMessageModel : NSObject
