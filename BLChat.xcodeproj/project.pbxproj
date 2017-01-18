@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		846778D01E2F0DD500648298 /* BLChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846778CF1E2F0DD500648298 /* BLChatMessageModel.m */; };
 		F7546F7C1E2E2DA2003E38DE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7B1E2E2DA2003E38DE /* main.m */; };
 		F7546F7F1E2E2DA2003E38DE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7E1E2E2DA2003E38DE /* AppDelegate.m */; };
 		F7546F821E2E2DA2003E38DE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F811E2E2DA2003E38DE /* ViewController.m */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		846778CE1E2F0DD500648298 /* BLChatMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLChatMessageModel.h; path = Model/BLChatMessageModel.h; sourceTree = "<group>"; };
+		846778CF1E2F0DD500648298 /* BLChatMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLChatMessageModel.m; path = Model/BLChatMessageModel.m; sourceTree = "<group>"; };
 		F7546F771E2E2DA2003E38DE /* BLChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7546F7B1E2E2DA2003E38DE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F7546F7D1E2E2DA2003E38DE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -78,6 +81,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		846778CD1E2F0DB500648298 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				846778CE1E2F0DD500648298 /* BLChatMessageModel.h */,
+				846778CF1E2F0DD500648298 /* BLChatMessageModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		F7546F6E1E2E2DA2003E38DE = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +113,7 @@
 		F7546F791E2E2DA2003E38DE /* BLChat */ = {
 			isa = PBXGroup;
 			children = (
+				846778CD1E2F0DB500648298 /* Model */,
 				F7546F7D1E2E2DA2003E38DE /* AppDelegate.h */,
 				F7546F7E1E2E2DA2003E38DE /* AppDelegate.m */,
 				F7546F801E2E2DA2003E38DE /* ViewController.h */,
@@ -276,6 +289,7 @@
 				F7546F821E2E2DA2003E38DE /* ViewController.m in Sources */,
 				F7546F7F1E2E2DA2003E38DE /* AppDelegate.m in Sources */,
 				F7546F7C1E2E2DA2003E38DE /* main.m in Sources */,
+				846778D01E2F0DD500648298 /* BLChatMessageModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +521,7 @@
 				F7546FA61E2E2DA2003E38DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F7546FA71E2E2DA2003E38DE /* Build configuration list for PBXNativeTarget "BLChatTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +530,7 @@
 				F7546FA91E2E2DA2003E38DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F7546FAA1E2E2DA2003E38DE /* Build configuration list for PBXNativeTarget "BLChatUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +539,7 @@
 				F7546FAC1E2E2DA2003E38DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
