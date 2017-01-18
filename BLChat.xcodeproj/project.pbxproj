@@ -78,6 +78,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		846778CC1E2F0CF000648298 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		F7546F6E1E2E2DA2003E38DE = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +108,7 @@
 		F7546F791E2E2DA2003E38DE /* BLChat */ = {
 			isa = PBXGroup;
 			children = (
+				846778CC1E2F0CF000648298 /* View */,
 				F7546F7D1E2E2DA2003E38DE /* AppDelegate.h */,
 				F7546F7E1E2E2DA2003E38DE /* AppDelegate.m */,
 				F7546F801E2E2DA2003E38DE /* ViewController.h */,
@@ -507,6 +515,7 @@
 				F7546FA61E2E2DA2003E38DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F7546FA71E2E2DA2003E38DE /* Build configuration list for PBXNativeTarget "BLChatTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +524,7 @@
 				F7546FA91E2E2DA2003E38DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F7546FAA1E2E2DA2003E38DE /* Build configuration list for PBXNativeTarget "BLChatUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +533,7 @@
 				F7546FAC1E2E2DA2003E38DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
