@@ -1,13 +1,16 @@
 //
-//  BLChatMessageModel.m
+//  BLChatModel.m
 //  BLChat
 //
 //  Created by 黄泽宇 on 1/18/17.
 //  Copyright © 2017 HZQ. All rights reserved.
 //
 
-#import "BLChatMessageModel.h"
+#import "BLChatModel.h"
+@interface BLChatModel ()
 
-@implementation BLChatMessageModel
+@end
+
+@implementation BLChatModel
 
 @end

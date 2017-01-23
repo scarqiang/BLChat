@@ -1,5 +1,5 @@
 //
-//  BLChatMessageModel.h
+//  BLChatModel.h
 //  BLChat
 //
 //  Created by 黄泽宇 on 1/18/17.
@@ -30,6 +30,6 @@ typedef NS_ENUM(NSUInteger, BLChatMessageType) {
     BLChatMessageTypeVedio
 };
 
-@interface BLChatMessageModel : NSObject
+@interface BLChatModel : NSObject
 
 @end

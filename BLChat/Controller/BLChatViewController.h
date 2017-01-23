@@ -6,8 +6,12 @@
 //  Copyright © 2017 HZQ. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@class BLChatViewControllerDataSource;
 
 @interface BLChatViewController : ASViewController
+- (instancetype)initWithDataSource:(BLChatViewControllerDataSource *)dataSource;
+
++ (instancetype)controllerWithDataSource:(BLChatViewControllerDataSource *)dataSource;
+
 
 @end

@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		546F8D279040FD8280FE25B5 /* libPods-BLChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52091AA63C3541606F711640 /* libPods-BLChat.a */; };
-		846778D01E2F0DD500648298 /* BLChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846778CF1E2F0DD500648298 /* BLChatMessageModel.m */; };
+		828C91531E7995D8E1ACAE0B /* BLChatCollectionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C9855607890602D035871 /* BLChatCollectionNode.m */; };
+		828C9E16040015E619F1662F /* BLChatViewControllerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C9B2E1AD0E99A0276E629 /* BLChatViewControllerDataSource.m */; };
+		846778D01E2F0DD500648298 /* BLChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846778CF1E2F0DD500648298 /* BLChatModel.m */; };
 		848D1B121E360C200081414E /* BLChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848D1B0E1E360C200081414E /* BLChatViewController.m */; };
 		F7546F7C1E2E2DA2003E38DE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7B1E2E2DA2003E38DE /* main.m */; };
 		F7546F7F1E2E2DA2003E38DE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7E1E2E2DA2003E38DE /* AppDelegate.m */; };
@@ -40,8 +42,12 @@
 /* Begin PBXFileReference section */
 		17B94F73D6B95241445E1339 /* Pods-BLChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BLChat/Pods-BLChat.debug.xcconfig"; sourceTree = "<group>"; };
 		52091AA63C3541606F711640 /* libPods-BLChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BLChat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		846778CE1E2F0DD500648298 /* BLChatMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLChatMessageModel.h; path = Model/BLChatMessageModel.h; sourceTree = "<group>"; };
-		846778CF1E2F0DD500648298 /* BLChatMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLChatMessageModel.m; path = Model/BLChatMessageModel.m; sourceTree = "<group>"; };
+		828C96D7F734C1975B3C0BAE /* BLChatViewControllerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLChatViewControllerDataSource.h; sourceTree = "<group>"; };
+		828C96E0AAF5463D53A77854 /* BLChatCollectionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLChatCollectionNode.h; sourceTree = "<group>"; };
+		828C9855607890602D035871 /* BLChatCollectionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLChatCollectionNode.m; sourceTree = "<group>"; };
+		828C9B2E1AD0E99A0276E629 /* BLChatViewControllerDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLChatViewControllerDataSource.m; sourceTree = "<group>"; };
+		846778CE1E2F0DD500648298 /* BLChatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLChatModel.h; path = Model/BLChatModel.h; sourceTree = "<group>"; };
+		846778CF1E2F0DD500648298 /* BLChatModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLChatModel.m; path = Model/BLChatModel.m; sourceTree = "<group>"; };
 		848D1B081E3603A10081414E /* BLChat-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BLChat-prefix.pch"; sourceTree = "<group>"; };
 		848D1B0D1E360C200081414E /* BLChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLChatViewController.h; sourceTree = "<group>"; };
 		848D1B0E1E360C200081414E /* BLChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLChatViewController.m; sourceTree = "<group>"; };
@@ -102,8 +108,8 @@
 		846778CD1E2F0DB500648298 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				846778CE1E2F0DD500648298 /* BLChatMessageModel.h */,
-				846778CF1E2F0DD500648298 /* BLChatMessageModel.m */,
+				846778CE1E2F0DD500648298 /* BLChatModel.h */,
+				846778CF1E2F0DD500648298 /* BLChatModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -113,6 +119,8 @@
 			children = (
 				848D1B0D1E360C200081414E /* BLChatViewController.h */,
 				848D1B0E1E360C200081414E /* BLChatViewController.m */,
+				828C9B2E1AD0E99A0276E629 /* BLChatViewControllerDataSource.m */,
+				828C96D7F734C1975B3C0BAE /* BLChatViewControllerDataSource.h */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -134,6 +142,8 @@
 		848D1B111E360C200081414E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				828C9855607890602D035871 /* BLChatCollectionNode.m */,
+				828C96E0AAF5463D53A77854 /* BLChatCollectionNode.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -403,8 +413,10 @@
 				F7546F821E2E2DA2003E38DE /* ViewController.m in Sources */,
 				F7546F7F1E2E2DA2003E38DE /* AppDelegate.m in Sources */,
 				F7546F7C1E2E2DA2003E38DE /* main.m in Sources */,
-				846778D01E2F0DD500648298 /* BLChatMessageModel.m in Sources */,
+				846778D01E2F0DD500648298 /* BLChatModel.m in Sources */,
 				848D1B121E360C200081414E /* BLChatViewController.m in Sources */,
+				828C9E16040015E619F1662F /* BLChatViewControllerDataSource.m in Sources */,
+				828C91531E7995D8E1ACAE0B /* BLChatCollectionNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
