@@ -1,15 +1,18 @@
 PODS:
+  - AsyncDisplayKit/Core (2.0.1)
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
 
 DEPENDENCIES:
+  - AsyncDisplayKit/Core
   - JSQMessagesViewController (~> 7.3.4)
 
 SPEC CHECKSUMS:
+  AsyncDisplayKit: 6c5a21d9ab30f3f48e877a67d44e3e19c1724f91
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
 
-PODFILE CHECKSUM: c2f18170ca4718df3d4d8d05e6485a1d9577ccaa
+PODFILE CHECKSUM: f6b0c4c525bf04895b05b56116b2eec5786d32be
 
-COCOAPODS: 1.2.0.beta.1
+COCOAPODS: 1.1.1
