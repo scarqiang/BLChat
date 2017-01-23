@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		546F8D279040FD8280FE25B5 /* libPods-BLChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52091AA63C3541606F711640 /* libPods-BLChat.a */; };
 		846778D01E2F0DD500648298 /* BLChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846778CF1E2F0DD500648298 /* BLChatMessageModel.m */; };
-		848D1B0B1E36049A0081414E /* BLMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848D1B0A1E36049A0081414E /* BLMessageViewController.m */; };
+		848D1B121E360C200081414E /* BLChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848D1B0E1E360C200081414E /* BLChatViewController.m */; };
 		F7546F7C1E2E2DA2003E38DE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7B1E2E2DA2003E38DE /* main.m */; };
 		F7546F7F1E2E2DA2003E38DE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7E1E2E2DA2003E38DE /* AppDelegate.m */; };
 		F7546F821E2E2DA2003E38DE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F811E2E2DA2003E38DE /* ViewController.m */; };
@@ -43,8 +43,8 @@
 		846778CE1E2F0DD500648298 /* BLChatMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLChatMessageModel.h; path = Model/BLChatMessageModel.h; sourceTree = "<group>"; };
 		846778CF1E2F0DD500648298 /* BLChatMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLChatMessageModel.m; path = Model/BLChatMessageModel.m; sourceTree = "<group>"; };
 		848D1B081E3603A10081414E /* BLChat-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BLChat-prefix.pch"; sourceTree = "<group>"; };
-		848D1B091E36049A0081414E /* BLMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLMessageViewController.h; path = Controller/BLMessageViewController.h; sourceTree = "<group>"; };
-		848D1B0A1E36049A0081414E /* BLMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLMessageViewController.m; path = Controller/BLMessageViewController.m; sourceTree = "<group>"; };
+		848D1B0D1E360C200081414E /* BLChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLChatViewController.h; sourceTree = "<group>"; };
+		848D1B0E1E360C200081414E /* BLChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLChatViewController.m; sourceTree = "<group>"; };
 		AF6292AD86588D746496655C /* Pods-BLChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-BLChat/Pods-BLChat.release.xcconfig"; sourceTree = "<group>"; };
 		F7546F771E2E2DA2003E38DE /* BLChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7546F7B1E2E2DA2003E38DE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -108,6 +108,36 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		848D1B0C1E360C200081414E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				848D1B0D1E360C200081414E /* BLChatViewController.h */,
+				848D1B0E1E360C200081414E /* BLChatViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		848D1B0F1E360C200081414E /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		848D1B101E360C200081414E /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		848D1B111E360C200081414E /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F43B40286859D2A840CA3530 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +172,10 @@
 		F7546F791E2E2DA2003E38DE /* BLChat */ = {
 			isa = PBXGroup;
 			children = (
+				848D1B0C1E360C200081414E /* Controller */,
+				848D1B0F1E360C200081414E /* Factory */,
+				848D1B101E360C200081414E /* Resource */,
+				848D1B111E360C200081414E /* View */,
 				846778CD1E2F0DB500648298 /* Model */,
 				F7546F7D1E2E2DA2003E38DE /* AppDelegate.h */,
 				F7546F7E1E2E2DA2003E38DE /* AppDelegate.m */,
@@ -152,8 +186,6 @@
 				F7546F881E2E2DA2003E38DE /* LaunchScreen.storyboard */,
 				F7546F8B1E2E2DA2003E38DE /* Info.plist */,
 				F7546F7A1E2E2DA2003E38DE /* Supporting Files */,
-				848D1B091E36049A0081414E /* BLMessageViewController.h */,
-				848D1B0A1E36049A0081414E /* BLMessageViewController.m */,
 			);
 			path = BLChat;
 			sourceTree = "<group>";
@@ -369,10 +401,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7546F821E2E2DA2003E38DE /* ViewController.m in Sources */,
-				848D1B0B1E36049A0081414E /* BLMessageViewController.m in Sources */,
 				F7546F7F1E2E2DA2003E38DE /* AppDelegate.m in Sources */,
 				F7546F7C1E2E2DA2003E38DE /* main.m in Sources */,
 				846778D01E2F0DD500648298 /* BLChatMessageModel.m in Sources */,
+				848D1B121E360C200081414E /* BLChatViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

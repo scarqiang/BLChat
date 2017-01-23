@@ -1,5 +1,5 @@
 //
-//  BLMessageViewController.h
+//  BLChatViewController.h
 //  BLChat
 //
 //  Created by 黄泽宇 on 1/23/17.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BLMessageViewController : ASViewController
+@interface BLChatViewController : ASViewController
 
 @end
