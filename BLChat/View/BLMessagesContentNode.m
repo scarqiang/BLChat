@@ -11,7 +11,7 @@
 @end
 
 @implementation BLMessagesContentNode
-- (UIImage *)resizableBubbleImageForMessageDisplayType:(BLMessageDisplayType) displayType {
+- (UIImage *)resizableBubbleImageForMessageDisplayType:(BLMessageDisplayType)displayType {
     switch (displayType) {
         case BLMessageDisplayTypeLeft: {
             UIEdgeInsets capInsets = UIEdgeInsetsMake(kBLMessagesIncomingBubbleCapTop, kBLMessagesIncomingBubbleCapLeft, kBLMessagesIncomingBubbleCapBottom, kBLMessagesIncomingBubbleCapRight);

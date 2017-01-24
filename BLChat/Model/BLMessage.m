@@ -8,15 +8,17 @@
 
 #import "BLMessage.h"
 #import "BLMessagesTextContentNode.h"
-
+static BOOL reversed = NO;
 @implementation BLMessage
 + (instancetype)randomSampleMessage {
     BLMessage *message = [BLMessage new];
     message.senderName = @"黄志强";
     message.sendingTime = 1485270243;
     message.avatarImage = [UIImage imageNamed:@"demo_avatar_cook"];
+    message.messageDisplayType = reversed ? BLMessageDisplayTypeLeft : BLMessageDisplayTypeRight;
     message.contentNode = [BLMessagesTextContentNode textContentNodeWithText:@"this is just for test!"
-                                                          messageDisplayType:BLMessageDisplayTypeLeft];
+                                                          messageDisplayType:message.messageDisplayType];
+    reversed = !reversed;
     return message;
 }
 @end

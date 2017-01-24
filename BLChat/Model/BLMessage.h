@@ -7,8 +7,7 @@
 //
 
 #import "BLMessageData.h"
-#import "BLMessagesContentNode.h"
-
+@class BLMessagesContentNode;
 typedef NS_ENUM(NSUInteger, BLMessageDisplayType) {
     /*
      * 居左展示的消息，如接收到的聊天消息
@@ -29,6 +28,6 @@ typedef NS_ENUM(NSUInteger, BLMessageDisplayType) {
 @property (nonatomic) NSTimeInterval sendingTime;
 @property (nonatomic) UIImage *avatarImage;
 @property (nonatomic) BLMessagesContentNode *contentNode;
-
+@property (nonatomic) BLMessageDisplayType messageDisplayType;
 + (instancetype)randomSampleMessage;
 @end

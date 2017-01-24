@@ -33,7 +33,6 @@
         [self addSubnode:_timeSeparatorTextNode];
         [self addSubnode:_accessoryButton];
         [self addSubnode:_indicatorNode];
-        [self addSubnode:_contentNode];
     }
 
     return self;
@@ -120,17 +119,15 @@
                                                                                 justifyContent:contentJustifyContent
                                                                                     alignItems:contentAlignItems
                                                                                       children:contentArray];
-    avatarAndContentLayoutSpec.style.alignSelf = ASStackLayoutAlignSelfStart;
-
     NSArray *timestampAndMainContentArray = self.formattedTime ? @[self.timeSeparatorTextNode, avatarAndContentLayoutSpec] :
             @[avatarAndContentLayoutSpec];
     ASStackLayoutJustifyContent timestampAndMainContentJustifyContent = ASStackLayoutJustifyContentStart;
-    ASStackLayoutAlignItems timestampAndMainContentAlignItems = isSender ? ASStackLayoutAlignItemsEnd : ASStackLayoutAlignItemsStart;
-
+    avatarAndContentLayoutSpec.style.alignSelf = isSender ? ASStackLayoutAlignSelfEnd : ASStackLayoutAlignSelfStart;
+    
     ASStackLayoutSpec *timestampAndMainContentLayoutSpec = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical
                                                                                                    spacing:0
                                                                                             justifyContent:timestampAndMainContentJustifyContent
-                                                                                                alignItems:timestampAndMainContentAlignItems
+                                                                                                alignItems:ASStackLayoutAlignItemsStretch
                                                                                                   children:timestampAndMainContentArray];
 
     return timestampAndMainContentLayoutSpec;
@@ -169,5 +166,10 @@
 
     self.timeSeparatorTextNode.attributedText = [[NSAttributedString alloc] initWithString:formattedTime
                                                                           attributes:attributes];
+}
+
+- (void)setContentNode:(BLMessagesContentNode *)contentNode {
+    _contentNode = contentNode;
+    [self addSubnode:contentNode];
 }
 @end

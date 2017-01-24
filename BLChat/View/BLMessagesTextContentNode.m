@@ -48,7 +48,7 @@
 }
 
 + (instancetype)textContentNodeWithText:(NSString *)text messageDisplayType:(BLMessageDisplayType)displayType {
-    return [[self class] initWithText:text messageDisplayType:displayType];
+    return [[[self class] alloc] initWithText:text messageDisplayType:displayType];
 }
 
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
@@ -60,9 +60,8 @@
     ASInsetLayoutSpec *textNodeInsetLayout = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets
                                                                                     child:self.textNode];
 
-    ASOverlayLayoutSpec *bubbleAndTextNodeOverlayLayout = [ASOverlayLayoutSpec overlayLayoutSpecWithChild:self.bubbleBackgroundImageNode
-                                                                                                  overlay:textNodeInsetLayout];
-    return bubbleAndTextNodeOverlayLayout;
+    ASBackgroundLayoutSpec *bubbleAndTextNodeBackgroundLayout = [ASBackgroundLayoutSpec backgroundLayoutSpecWithChild:textNodeInsetLayout background:self.bubbleBackgroundImageNode];
+    return bubbleAndTextNodeBackgroundLayout;
 }
 
 

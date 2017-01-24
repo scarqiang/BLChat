@@ -60,7 +60,7 @@
 }
 #pragma mark - collection node data source / delegate
 - (NSInteger)collectionNode:(ASCollectionNode *)collectionNode numberOfItemsInSection:(NSInteger)section {
-    return 2;
+    return 20;
 }
 
 - (NSInteger)numberOfSectionsInCollectionNode:(ASCollectionNode *)collectionNode {
@@ -69,7 +69,7 @@
 
 - (ASCellNode *)collectionNode:(ASCollectionNode *)collectionNode nodeForItemAtIndexPath:(NSIndexPath *)indexPath {
     BLMessage *message = [BLMessage randomSampleMessage];
-    BLMessagesCollectionNodeCell *cell = [[BLMessagesCollectionNodeCell alloc] initWithMessageDisplayType:BLMessageDisplayTypeLeft];
+    BLMessagesCollectionNodeCell *cell = [[BLMessagesCollectionNodeCell alloc] initWithMessageDisplayType:message.messageDisplayType];
     cell.shouldDisplayName = YES;
     cell.contentNode = message.contentNode;
     cell.senderName = message.senderName;

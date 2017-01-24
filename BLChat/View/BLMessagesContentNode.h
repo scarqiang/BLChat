@@ -37,6 +37,6 @@ typedef  void(^BLMessagesContentNodeConfigureBlock)(BLMessagesViewController *me
  * @param displayType
  * @return
  */
-- (UIImage *)resizableBubbleImageForMessageDisplayType:(BLMessageDisplayType) displayType;
+- (nullable UIImage *)resizableBubbleImageForMessageDisplayType:(BLMessageDisplayType)displayType;
 @end
 NS_ASSUME_NONNULL_END
