@@ -48,7 +48,7 @@
 #pragma mark - configure
 - (void)configureCollectionNode {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.minimumLineSpacing = 0;
+    flowLayout.minimumLineSpacing = 2;
     flowLayout.minimumInteritemSpacing = 0;
     _collectionNode = [[BLMessagesCollectionNode alloc] initWithCollectionViewLayout:flowLayout];
     _collectionNode.delegate = self;

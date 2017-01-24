@@ -8,7 +8,7 @@
 
 @end
 @interface BLMessagesCollectionNode : ASCollectionNode
-@property (weak, nonatomic, readwrite) id<BLMessagesCollectionNodeDelegate> delegate;
+@property (weak, nonatomic) id<BLMessagesCollectionNodeDelegate> delegate;
 
 @end
 

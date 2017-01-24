@@ -4,11 +4,21 @@
 //
 
 #import "BLMessagesCollectionNode.h"
-@interface BLMessagesCollectionNode ()
 
+
+@interface BLMessagesCollectionNode ()
 @end
 
 @implementation BLMessagesCollectionNode
 @dynamic delegate;
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+
+    }
+
+    return self;
+}
 
 @end

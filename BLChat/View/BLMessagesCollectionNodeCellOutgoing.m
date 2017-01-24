@@ -5,6 +5,6 @@
 
 #import "BLMessagesCollectionNodeCellOutgoing.h"
 
-
 @implementation BLMessagesCollectionNodeCellOutgoing
+
 @end
