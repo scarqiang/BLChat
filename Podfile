@@ -1,6 +1,6 @@
 platform :ios,'7.0'
 
-target 'BLMessagesCollectionNode' do
+target 'BLChat' do
   pod 'JSQMessagesViewController', '~> 7.3.4'
   pod 'AsyncDisplayKit/Core'
 

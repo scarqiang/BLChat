@@ -1,6 +1,6 @@
 //
 //  BLMessagesViewController.m
-//  BLMessagesCollectionNode
+//  BLChat
 //
 //  Created by 黄泽宇 on 1/23/17.
 //  Copyright © 2017 HZQ. All rights reserved.
@@ -8,14 +8,14 @@
 
 #import "BLMessagesViewController.h"
 #import "BLMessagesViewControllerDataSource.h"
-#import "BLChatCollectionNode.h"
+#import "BLMessagesCollectionNode.h"
 
 @interface BLMessagesViewController () <BLChatViewControllerDataSourceDelegate, BLMessagesCollectionNodeDelegate, ASCollectionDataSource, ASCollectionViewDelegateFlowLayout>
 //model
 @property (nonatomic, strong) BLMessagesViewControllerDataSource *dataSource;
 
 //views
-@property (nonatomic, strong) BLChatCollectionNode *collectionNode;
+@property (nonatomic, strong) BLMessagesCollectionNode *collectionNode;
 @end
 @implementation BLMessagesViewController
 #pragma mark - lifecycle
@@ -50,7 +50,7 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumLineSpacing = 0;
     flowLayout.minimumInteritemSpacing = 0;
-    _collectionNode = [[BLChatCollectionNode alloc] initWithCollectionViewLayout:flowLayout];
+    _collectionNode = [[BLMessagesCollectionNode alloc] initWithCollectionViewLayout:flowLayout];
     _collectionNode.delegate = self;
     _collectionNode.dataSource = self;
     [self.node addSubnode:_collectionNode];

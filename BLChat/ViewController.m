@@ -1,6 +1,6 @@
 //
 //  ViewController.m
-//  BLMessagesCollectionNode
+//  BLChat
 //
 //  Created by HZQ on 17/1/17.
 //  Copyright © 2017年 HZQ. All rights reserved.

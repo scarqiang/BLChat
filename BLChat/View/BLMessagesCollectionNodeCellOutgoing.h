@@ -6,5 +6,5 @@
 #import <Foundation/Foundation.h>
 
 
-@interface BLMessagesCollectionNodeCellOutcoming : ASCellNode
+@interface BLMessagesCollectionNodeCellOutgoing : ASCellNode
 @end

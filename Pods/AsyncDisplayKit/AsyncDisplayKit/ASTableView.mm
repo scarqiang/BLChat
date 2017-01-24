@@ -74,6 +74,13 @@ static NSString * const kCellReuseIdentifier = @"_ASTableViewCell";
 - (void)setNode:(ASCellNode *)node
 {
   _node = node;
+  
+  self.backgroundColor = node.backgroundColor;
+  self.selectionStyle = node.selectionStyle;
+  self.accessoryType = node.accessoryType;
+  self.separatorInset = node.seperatorInset;
+  self.clipsToBounds = node.clipsToBounds;
+  
   [node __setSelectedFromUIKit:self.selected];
   [node __setHighlightedFromUIKit:self.highlighted];
 }
@@ -591,6 +598,10 @@ static NSString * const kCellReuseIdentifier = @"_ASTableViewCell";
 
 - (nullable NSIndexPath *)indexPathForNode:(ASCellNode *)cellNode waitingIfNeeded:(BOOL)wait
 {
+  if (cellNode == nil) {
+    return nil;
+  }
+
   NSIndexPath *indexPath = [_dataController completedIndexPathForNode:cellNode];
   indexPath = [self validateIndexPath:indexPath];
   if (indexPath == nil && wait) {
@@ -625,7 +636,8 @@ static NSString * const kCellReuseIdentifier = @"_ASTableViewCell";
 
 - (void)endUpdates
 {
-  [self endUpdatesAnimated:YES completion:nil];
+  // We capture the current state of whether animations are enabled if they don't provide us with one.
+  [self endUpdatesAnimated:[UIView areAnimationsEnabled] completion:nil];
 }
 
 - (void)endUpdatesAnimated:(BOOL)animated completion:(void (^)(BOOL completed))completion;
@@ -799,13 +811,6 @@ static NSString * const kCellReuseIdentifier = @"_ASTableViewCell";
     [_rangeController configureContentView:cell.contentView forCellNode:node];
 
     cell.node = node;
-    cell.backgroundColor = node.backgroundColor;
-    cell.selectionStyle = node.selectionStyle;
-
-    // the following ensures that we clip the entire cell to it's bounds if node.clipsToBounds is set (the default)
-    // This is actually a workaround for a bug we are seeing in some rare cases (selected background view
-    // overlaps other cells if size of ASCellNode has changed.)
-    cell.clipsToBounds = node.clipsToBounds;
   }
 
   return cell;
@@ -814,7 +819,18 @@ static NSString * const kCellReuseIdentifier = @"_ASTableViewCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   ASCellNode *node = [_dataController nodeAtIndexPath:indexPath];
-  return node.calculatedSize.height;
+  CGFloat height = node.calculatedSize.height;
+  
+  /**
+   * Weirdly enough, Apple expects the return value here to _include_ the height
+   * of the separator, if there is one! So if our node wants to be 43.5, we need
+   * to return 44. UITableView will make a cell of height 44 with a content view
+   * of height 43.5.
+   */
+  if (tableView.separatorStyle != UITableViewCellSeparatorStyleNone) {
+    height += 1.0 / ASScreenScale();
+  }
+  return height;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
