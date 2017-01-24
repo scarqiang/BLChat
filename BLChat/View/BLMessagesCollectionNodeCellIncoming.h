@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BLMessagesCollectionNodeCell.h"
 
-@interface BLMessagesCollectionNodeCellIncoming : ASCellNode
+@interface BLMessagesCollectionNodeCellIncoming : BLMessagesCollectionNodeCell
 
 @end

@@ -6,8 +6,6 @@
 //  Copyright © 2017 HZQ. All rights reserved.
 //
 
-@class BLMessagesViewControllerDataSource;
-
 @interface BLMessagesViewController : ASViewController
 
 @end
