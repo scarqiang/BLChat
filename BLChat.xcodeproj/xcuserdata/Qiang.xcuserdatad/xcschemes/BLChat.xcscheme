@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F7546F761E2E2DA2003E38DE"
-               BuildableName = "BLChat.app"
-               BlueprintName = "BLChat"
-               ReferencedContainer = "container:BLChat.xcodeproj">
+               BuildableName = "BLMessagesCollectionNode.app"
+               BlueprintName = "BLMessagesCollectionNode"
+               ReferencedContainer = "container:BLMessagesCollectionNode.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "F7546F8F1E2E2DA2003E38DE"
                BuildableName = "BLChatTests.xctest"
                BlueprintName = "BLChatTests"
-               ReferencedContainer = "container:BLChat.xcodeproj">
+               ReferencedContainer = "container:BLMessagesCollectionNode.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "F7546F9A1E2E2DA2003E38DE"
                BuildableName = "BLChatUITests.xctest"
                BlueprintName = "BLChatUITests"
-               ReferencedContainer = "container:BLChat.xcodeproj">
+               ReferencedContainer = "container:BLMessagesCollectionNode.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F7546F761E2E2DA2003E38DE"
-            BuildableName = "BLChat.app"
-            BlueprintName = "BLChat"
-            ReferencedContainer = "container:BLChat.xcodeproj">
+            BuildableName = "BLMessagesCollectionNode.app"
+            BlueprintName = "BLMessagesCollectionNode"
+            ReferencedContainer = "container:BLMessagesCollectionNode.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F7546F761E2E2DA2003E38DE"
-            BuildableName = "BLChat.app"
-            BlueprintName = "BLChat"
-            ReferencedContainer = "container:BLChat.xcodeproj">
+            BuildableName = "BLMessagesCollectionNode.app"
+            BlueprintName = "BLMessagesCollectionNode"
+            ReferencedContainer = "container:BLMessagesCollectionNode.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F7546F761E2E2DA2003E38DE"
-            BuildableName = "BLChat.app"
-            BlueprintName = "BLChat"
-            ReferencedContainer = "container:BLChat.xcodeproj">
+            BuildableName = "BLMessagesCollectionNode.app"
+            BlueprintName = "BLMessagesCollectionNode"
+            ReferencedContainer = "container:BLMessagesCollectionNode.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

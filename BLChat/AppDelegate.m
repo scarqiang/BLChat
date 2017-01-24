@@ -1,12 +1,13 @@
 //
 //  AppDelegate.m
-//  BLChat
+//  BLMessagesCollectionNode
 //
 //  Created by HZQ on 17/1/17.
 //  Copyright © 2017年 HZQ. All rights reserved.
 //
 
 #import "AppDelegate.h"
+#import "BLMessagesViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    BLMessagesViewController *chatVC = [[BLMessagesViewController alloc] init];
+    self.window.rootViewController = chatVC;
+    
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

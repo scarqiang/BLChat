@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = 'primary'
                BlueprintIdentifier = '269B9C52E5760B5010D35BD8DC5350CD'
-               BlueprintName = 'Pods-BLChat'
+               BlueprintName = 'Pods-BLMessagesCollectionNode'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libPods-BLChat.a'>
+               BuildableName = 'libPods-BLMessagesCollectionNode.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

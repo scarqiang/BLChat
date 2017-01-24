@@ -7,7 +7,7 @@
 
 @end
 
-@interface BLChatViewControllerDataSource : NSObject
+@interface BLMessagesViewControllerDataSource : NSObject
 @property (weak, nonatomic) id<BLChatViewControllerDataSourceDelegate> delegate;
 
 @end
