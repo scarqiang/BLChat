@@ -217,7 +217,7 @@
   return _pendingState;
 }
 
-- (void)setDelegate:(id <ASCollectionDelegate>)delegate
+- (void)setDelegate:(id <BLMessagesCollectionNodeDelegate>)delegate
 {
   if ([self pendingState]) {
     _pendingState.delegate = delegate;
@@ -235,7 +235,7 @@
   }
 }
 
-- (id <ASCollectionDelegate>)delegate
+- (id <BLMessagesCollectionNodeDelegate>)delegate
 {
   if ([self pendingState]) {
     return _pendingState.delegate;

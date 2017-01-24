@@ -93,8 +93,8 @@ NS_ASSUME_NONNULL_BEGIN
  * Delegate is optional.
  * This includes UIScrollViewDelegate as well as most methods from UICollectionViewDelegate, like willDisplay...
  */
-- (void)setDelegate:(nullable id <ASPagerDelegate>)delegate;
-- (nullable id <ASPagerDelegate>)delegate AS_WARN_UNUSED_RESULT;
+- (void)setDelegate:(id <BLMessagesCollectionNodeDelegate>)delegate;
+- (id <BLMessagesCollectionNodeDelegate>)delegate AS_WARN_UNUSED_RESULT;
 
 /**
  * The underlying ASCollectionView object.

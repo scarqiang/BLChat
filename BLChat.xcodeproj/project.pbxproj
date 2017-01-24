@@ -10,9 +10,10 @@
 		546F8D279040FD8280FE25B5 /* libPods-BLChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52091AA63C3541606F711640 /* libPods-BLChat.a */; };
 		828C91531E7995D8E1ACAE0B /* BLMessagesCollectionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C9855607890602D035871 /* BLMessagesCollectionNode.m */; };
 		828C9E16040015E619F1662F /* BLMessagesViewControllerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C9B2E1AD0E99A0276E629 /* BLMessagesViewControllerDataSource.m */; };
+		828C9EAA274B6244C790DF32 /* BLMessagesCollectionNodeCellOutcoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C90C02C05A573049DE434 /* BLMessagesCollectionNodeCellOutcoming.m */; };
 		845133A71E363A1C00E57E09 /* BLMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 845133A61E363A1C00E57E09 /* BLMessage.m */; };
 		845133AA1E363A5100E57E09 /* BLMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 845133A91E363A5100E57E09 /* BLMediaItem.m */; };
-		845133AD1E365FC900E57E09 /* BLChatCollectionViewIncommingCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 845133AC1E365FC900E57E09 /* BLChatCollectionViewIncommingCellNode.m */; };
+		845133AD1E365FC900E57E09 /* BLMessagesCollectionNodeCellIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 845133AC1E365FC900E57E09 /* BLMessagesCollectionNodeCellIncoming.m */; };
 		848D1B121E360C200081414E /* BLMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848D1B0E1E360C200081414E /* BLMessagesViewController.m */; };
 		F7546F7C1E2E2DA2003E38DE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7B1E2E2DA2003E38DE /* main.m */; };
 		F7546F7F1E2E2DA2003E38DE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7E1E2E2DA2003E38DE /* AppDelegate.m */; };
@@ -44,18 +45,20 @@
 /* Begin PBXFileReference section */
 		17B94F73D6B95241445E1339 /* Pods-BLChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BLChat/Pods-BLChat.debug.xcconfig"; sourceTree = "<group>"; };
 		52091AA63C3541606F711640 /* libPods-BLChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BLChat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		828C90C02C05A573049DE434 /* BLMessagesCollectionNodeCellOutcoming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesCollectionNodeCellOutcoming.m; sourceTree = "<group>"; };
 		828C96D7F734C1975B3C0BAE /* BLMessagesViewControllerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessagesViewControllerDataSource.h; sourceTree = "<group>"; };
 		828C96E0AAF5463D53A77854 /* BLMessagesCollectionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessagesCollectionNode.h; sourceTree = "<group>"; };
 		828C9855607890602D035871 /* BLMessagesCollectionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesCollectionNode.m; sourceTree = "<group>"; };
 		828C9B2E1AD0E99A0276E629 /* BLMessagesViewControllerDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesViewControllerDataSource.m; sourceTree = "<group>"; };
+		828C9F229B0040D83D95E89F /* BLMessagesCollectionNodeCellOutcoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessagesCollectionNodeCellOutcoming.h; sourceTree = "<group>"; };
 		8451339E1E36399000E57E09 /* BLMessageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessageData.h; sourceTree = "<group>"; };
 		845133A21E3639EC00E57E09 /* BLMessageMediaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessageMediaData.h; sourceTree = "<group>"; };
 		845133A51E363A1C00E57E09 /* BLMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessage.h; sourceTree = "<group>"; };
 		845133A61E363A1C00E57E09 /* BLMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessage.m; sourceTree = "<group>"; };
 		845133A81E363A5100E57E09 /* BLMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMediaItem.h; sourceTree = "<group>"; };
 		845133A91E363A5100E57E09 /* BLMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMediaItem.m; sourceTree = "<group>"; };
-		845133AB1E365FC900E57E09 /* BLChatCollectionViewIncommingCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLChatCollectionViewIncommingCellNode.h; sourceTree = "<group>"; };
-		845133AC1E365FC900E57E09 /* BLChatCollectionViewIncommingCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLChatCollectionViewIncommingCellNode.m; sourceTree = "<group>"; };
+		845133AB1E365FC900E57E09 /* BLMessagesCollectionNodeCellIncoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessagesCollectionNodeCellIncoming.h; sourceTree = "<group>"; };
+		845133AC1E365FC900E57E09 /* BLMessagesCollectionNodeCellIncoming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesCollectionNodeCellIncoming.m; sourceTree = "<group>"; };
 		848D1B081E3603A10081414E /* BLChat-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BLChat-prefix.pch"; sourceTree = "<group>"; };
 		848D1B0D1E360C200081414E /* BLMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessagesViewController.h; sourceTree = "<group>"; };
 		848D1B0E1E360C200081414E /* BLMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesViewController.m; sourceTree = "<group>"; };
@@ -156,8 +159,10 @@
 			children = (
 				828C9855607890602D035871 /* BLMessagesCollectionNode.m */,
 				828C96E0AAF5463D53A77854 /* BLMessagesCollectionNode.h */,
-				845133AB1E365FC900E57E09 /* BLChatCollectionViewIncommingCellNode.h */,
-				845133AC1E365FC900E57E09 /* BLChatCollectionViewIncommingCellNode.m */,
+				845133AB1E365FC900E57E09 /* BLMessagesCollectionNodeCellIncoming.h */,
+				845133AC1E365FC900E57E09 /* BLMessagesCollectionNodeCellIncoming.m */,
+				828C90C02C05A573049DE434 /* BLMessagesCollectionNodeCellOutcoming.m */,
+				828C9F229B0040D83D95E89F /* BLMessagesCollectionNodeCellOutcoming.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -427,12 +432,13 @@
 				845133A71E363A1C00E57E09 /* BLMessage.m in Sources */,
 				F7546F821E2E2DA2003E38DE /* ViewController.m in Sources */,
 				845133AA1E363A5100E57E09 /* BLMediaItem.m in Sources */,
-				845133AD1E365FC900E57E09 /* BLChatCollectionViewIncommingCellNode.m in Sources */,
+				845133AD1E365FC900E57E09 /* BLMessagesCollectionNodeCellIncoming.m in Sources */,
 				F7546F7F1E2E2DA2003E38DE /* AppDelegate.m in Sources */,
 				F7546F7C1E2E2DA2003E38DE /* main.m in Sources */,
 				848D1B121E360C200081414E /* BLMessagesViewController.m in Sources */,
 				828C9E16040015E619F1662F /* BLMessagesViewControllerDataSource.m in Sources */,
 				828C91531E7995D8E1ACAE0B /* BLMessagesCollectionNode.m in Sources */,
+				828C9EAA274B6244C790DF32 /* BLMessagesCollectionNodeCellOutcoming.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

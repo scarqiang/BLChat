@@ -6,8 +6,8 @@
 //  Copyright © 2017 HZQ. All rights reserved.
 //
 
-#import "BLChatCollectionViewIncommingCellNode.h"
+#import "BLMessagesCollectionNodeCellIncoming.h"
 
-@implementation BLMessagesCollectionNodeCellIncomming
+@implementation BLMessagesCollectionNodeCellIncoming
 
 @end

@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
  * The delegate object is responsible for providing size constraints for nodes and indicating whether batch fetching should begin.
  * @note This is a convenience method which sets the asyncDelegate on the collection node's collection view.
  */
-@property (weak, nonatomic) id <ASCollectionDelegate>   delegate;
+@property (weak, nonatomic) id <BLMessagesCollectionNodeDelegate> delegate;
 
 /**
  * The object that acts as the asynchronous data source of the collection view

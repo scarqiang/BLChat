@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BLChatCollectionViewCellNodeIncomming : ASCellNode
+@interface BLMessagesCollectionNodeCellIncoming : ASCellNode
 
 @end

@@ -185,7 +185,7 @@
   }
 }
 
-- (void)setDelegate:(id<ASPagerDelegate>)delegate
+- (void)setDelegate:(id <BLMessagesCollectionNodeDelegate>)delegate
 {
   if (delegate != _pagerDelegate) {
     _pagerDelegate = delegate;
