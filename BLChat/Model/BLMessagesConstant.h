@@ -16,10 +16,16 @@ extern NSString * const kBLMessagesPlainIncomingBubbleImageName;
 extern NSString * const kBLMessagesPlainIncomingBubbleHighlightedImageName;
 extern NSString * const kBLMessagesPlainOutgoingBubbleImageName;
 extern NSString * const kBLMessagesPlainOutgoingBubbleHighlightedImageName;
-extern CGFloat const kBLMessagesBubleContentPadding;
-extern CGFloat const kBLMessagesIncomingBubleLeftMargin;
-extern CGFloat const kBLMessagesOutgoingBubleRightMargin;
-extern CGFloat const kBLMessagesIncomingBubleLeftCapWidth;
-extern CGFloat const kBLMessagesIncomingBubleTopCapHeight;
-extern CGFloat const kBLMessagesOutgoingBubleLeftCapWidth;
-extern CGFloat const kBLMessagesOutgoingBubleTopCapHeight;
+extern CGFloat const kBLMessagesBubbleContentPadding;
+extern CGFloat const kBLMessagesIncomingBubbleLeftMargin;
+extern CGFloat const kBLMessagesOutgoingBubbleRightMargin;
+
+extern CGFloat const kBLMessagesIncomingBubbleCapLeft;
+extern CGFloat const kBLMessagesIncomingBubbleCapRight;
+extern CGFloat const kBLMessagesIncomingBubbleCapTop;
+extern CGFloat const kBLMessagesIncomingBubbleCapBottom;
+
+extern CGFloat const kBLMessagesOutgoingBubbleCapLeft;
+extern CGFloat const kBLMessagesOutgoingBubbleCapRight;
+extern CGFloat const kBLMessagesOutgoingBubbleCapTop;
+extern CGFloat const kBLMessagesOutgoingBubbleCapBottom;

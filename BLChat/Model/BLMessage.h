@@ -25,5 +25,10 @@ typedef NS_ENUM(NSUInteger, BLMessageDisplayType) {
 };
 
 @interface BLMessage : NSObject <BLMessageData>
+@property (nonatomic, copy) NSString *senderName;
+@property (nonatomic) NSTimeInterval sendingTime;
+@property (nonatomic) UIImage *avatarImage;
 @property (nonatomic) BLMessagesContentNode *contentNode;
+
++ (instancetype)randomSampleMessage;
 @end

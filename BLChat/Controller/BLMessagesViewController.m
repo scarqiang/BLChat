@@ -9,8 +9,8 @@
 #import "BLMessagesViewController.h"
 #import "BLMessagesViewControllerDataSource.h"
 #import "BLMessagesCollectionNode.h"
-#import "BLMessagesCollectionNode.h"
-#import "BLMessagesCollectionNodeCellIncoming.h"
+#import "BLMessage.h"
+#import "BLMessagesCollectionNodeCell.h"
 
 @interface BLMessagesViewController () <BLChatViewControllerDataSourceDelegate, BLMessagesCollectionNodeDelegate, ASCollectionDataSource, ASCollectionViewDelegateFlowLayout>
 //model
@@ -68,30 +68,15 @@
 }
 
 - (ASCellNode *)collectionNode:(ASCollectionNode *)collectionNode nodeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    BLMessagesCollectionNodeCellIncoming *cellIncoming = [BLMessagesCollectionNodeCellIncoming new];
-    NSDictionary *attributes = @{
-            NSFontAttributeName:[UIFont systemFontOfSize:12],
-            NSForegroundColorAttributeName:[UIColor colorWithRed:53.f / 255.f green:53.f / 255.f blue:53.f / 255.f alpha:1.f]
-    };
-
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    paragraphStyle.alignment = NSTextAlignmentCenter;
-
-    NSDictionary *formattedTimeAttributes = @{
-            NSFontAttributeName:[UIFont systemFontOfSize:12.f],
-            NSForegroundColorAttributeName:[UIColor colorWithRed:53.f / 255.f green:53.f / 255.f blue:53.f / 255.f alpha:1.f],
-            NSParagraphStyleAttributeName: paragraphStyle
-    };
-    cellIncoming.timeSeparatorTextNode.attributedText = [[NSAttributedString alloc] initWithString:@"12:31"
-                                                                             attributes:formattedTimeAttributes];
-    cellIncoming.textMessageNode.attributedText = [[NSAttributedString alloc] initWithString:@"这是多么美好的一天"
-                                                                                   attributes:attributes];
-    cellIncoming.senderNameTextNode.attributedText = [[NSAttributedString alloc] initWithString:@"黄志强"
-                                                                                   attributes:attributes];
-    cellIncoming.avatarNode.image = [UIImage imageNamed:@"demo_avatar_cook"];
-    cellIncoming.backgroundColor = [UIColor redColor];
-
-    return cellIncoming;
+    BLMessage *message = [BLMessage randomSampleMessage];
+    BLMessagesCollectionNodeCell *cell = [[BLMessagesCollectionNodeCell alloc] initWithMessageDisplayType:BLMessageDisplayTypeLeft];
+    cell.shouldDisplayName = YES;
+    cell.contentNode = message.contentNode;
+    cell.senderName = message.senderName;
+    cell.avatarNode.image = message.avatarImage;
+    cell.formattedTime = @"13: 43";
+    cell.backgroundColor = [UIColor redColor];
+    return cell;
 
 }
 

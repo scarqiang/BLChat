@@ -19,10 +19,16 @@ NSString * const kBLMessagesPlainIncomingBubbleImageName = @"receiver_MsgBg_Plai
 NSString * const kBLMessagesPlainIncomingBubbleHighlightedImageName = @"receiver_MsgBg_Plain_h";
 NSString * const kBLMessagesPlainOutgoingBubbleImageName = @"send_MsgBg_Plain_n";
 NSString * const kBLMessagesPlainOutgoingBubbleHighlightedImageName = @"send_MsgBg_Plain_h";
-CGFloat const kBLMessagesBubleContentPadding = 10.f;
-CGFloat const kBLMessagesIncomingBubleLeftMargin = 15.f;
-CGFloat const kBLMessagesOutgoingBubleRightMargin = 15.f;
-CGFloat const kBLMessagesIncomingBubleLeftCapWidth = 12.f;
-CGFloat const kBLMessagesIncomingBubleTopCapHeight = 28.f;
-CGFloat const kBLMessagesOutgoingBubleLeftCapWidth = 18.f;
-CGFloat const kBLMessagesOutgoingBubleTopCapHeight = 28.f;
+CGFloat const kBLMessagesBubbleContentPadding = 10.f;
+CGFloat const kBLMessagesIncomingBubbleLeftMargin = 15.f;
+CGFloat const kBLMessagesOutgoingBubbleRightMargin = 15.f;
+
+CGFloat const kBLMessagesIncomingBubbleCapLeft = 12.f;
+CGFloat const kBLMessagesIncomingBubbleCapRight = 20.f;
+CGFloat const kBLMessagesIncomingBubbleCapTop = 28.f;
+CGFloat const kBLMessagesIncomingBubbleCapBottom = 5.f;
+
+CGFloat const kBLMessagesOutgoingBubbleCapLeft = 20.f;
+CGFloat const kBLMessagesOutgoingBubbleCapRight = 12.f;
+CGFloat const kBLMessagesOutgoingBubbleCapTop = 28.f;
+CGFloat const kBLMessagesOutgoingBubbleCapBottom = 5.f;

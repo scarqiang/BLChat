@@ -3,6 +3,7 @@
 // Copyright (c) 2017 HZQ. All rights reserved.
 //
 #import "BLMessagesContentNode.h"
+#import "BLMessage.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @class BLMessagesCollectionNodeCell;
@@ -20,5 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BLMessagesContentNode *contentNode;
 @property (nonatomic, assign) BOOL shouldDisplayName;
 
+- (instancetype)initWithMessageDisplayType:(BLMessageDisplayType)displayType;
 @end
 NS_ASSUME_NONNULL_END

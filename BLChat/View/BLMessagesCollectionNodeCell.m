@@ -5,7 +5,6 @@
 
 #import "BLMessagesCollectionNodeCell.h"
 #import "BLMessagesConstant.h"
-#import "BLMessage.h"
 
 
 @interface BLMessagesCollectionNodeCell ()
@@ -96,26 +95,47 @@
             return [ASCenterLayoutSpec centerLayoutSpecWithCenteringOptions:ASCenterLayoutSpecCenteringXY
                                                               sizingOptions:ASCenterLayoutSpecSizingOptionDefault
                                                                       child:self.contentNode];
-        case BLMessageDisplayTypeLeft: {
-
-        }
-            break;
-        case BLMessageDisplayTypeRight: {
-
-        }
-            break;
+        case BLMessageDisplayTypeLeft:
+            return [self layoutSpecThatFits:constrainedSize isSender:NO];
+        case BLMessageDisplayTypeRight:
+            return [self layoutSpecThatFits:constrainedSize isSender:YES];
     }
-
-    ASStackLayoutSpec *contentLayoutSpec = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal
-                                                                                   spacing:0
-                                                                            justifyContent:ASStackLayoutJustifyContentStart
-                                                                                alignItems:ASStackLayoutAlignItemsStart
-                                                                                  children:@[self.avatarNode, self.textMessageNode]];
-    contentLayoutSpec.style.alignSelf = ASStackLayoutAlignSelfStart;
-
-
+    NSAssert(NO, @"unexpected message display type");
     return nil;
 }
+
+- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize isSender:(BOOL)isSender {
+    ASLayoutSpec *contentLayoutSpec = !self.shouldDisplayName ? [self.contentNode preferredLayoutSpec] :
+            [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical
+                                                    spacing:0
+                                             justifyContent:ASStackLayoutJustifyContentStart
+                                                 alignItems:ASStackLayoutAlignItemsStart
+                                                   children:@[self.senderNameTextNode, [self.contentNode preferredLayoutSpec]]];
+    NSArray *contentArray = isSender ? @[ contentLayoutSpec, self.avatarNode ] : @[ self.avatarNode, contentLayoutSpec ];
+    ASStackLayoutJustifyContent contentJustifyContent = isSender ? ASStackLayoutJustifyContentEnd : ASStackLayoutJustifyContentStart;
+    ASStackLayoutAlignItems contentAlignItems = isSender ? ASStackLayoutAlignItemsEnd : ASStackLayoutAlignItemsStart;
+
+    ASStackLayoutSpec *avatarAndContentLayoutSpec = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal
+                                                                                       spacing:0
+                                                                                justifyContent:contentJustifyContent
+                                                                                    alignItems:contentAlignItems
+                                                                                      children:contentArray];
+    avatarAndContentLayoutSpec.style.alignSelf = ASStackLayoutAlignSelfStart;
+
+    NSArray *timestampAndMainContentArray = self.formattedTime ? @[self.timeSeparatorTextNode, avatarAndContentLayoutSpec] :
+            @[avatarAndContentLayoutSpec];
+    ASStackLayoutJustifyContent timestampAndMainContentJustifyContent = ASStackLayoutJustifyContentStart;
+    ASStackLayoutAlignItems timestampAndMainContentAlignItems = isSender ? ASStackLayoutAlignItemsEnd : ASStackLayoutAlignItemsStart;
+
+    ASStackLayoutSpec *timestampAndMainContentLayoutSpec = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical
+                                                                                                   spacing:0
+                                                                                            justifyContent:timestampAndMainContentJustifyContent
+                                                                                                alignItems:timestampAndMainContentAlignItems
+                                                                                                  children:timestampAndMainContentArray];
+
+    return timestampAndMainContentLayoutSpec;
+}
+
 #pragma mark - setters
 - (void)setSenderName:(NSString *)senderName {
     if (!senderName) {
