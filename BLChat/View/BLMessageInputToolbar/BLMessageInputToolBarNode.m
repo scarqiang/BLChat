@@ -10,6 +10,8 @@
 
 CGFloat const BLInputToolBarNodeHeight = 50.f;
 CGFloat const BLInputTextNodeHeight = 34.f;
+CGFloat const BLInputTextNodeFontSize = 15.f;
+CGFloat const BLInputItemSpecWidth = 10.f;
 
 @interface BLMessageInputToolBarNode ()<ASEditableTextNodeDelegate>
 @property (nonatomic, strong) ASEditableTextNode *inputTextNode;
@@ -70,6 +72,8 @@ CGFloat const BLInputTextNodeHeight = 34.f;
         textNode.style.flexGrow = 1.f;
         textNode.style.flexShrink = 1.f;
         textNode.style.preferredSize = CGSizeMake(100.f, BLInputTextNodeHeight);
+        textNode.textView.font = [UIFont systemFontOfSize:BLInputTextNodeFontSize];
+        textNode.textContainerInset = UIEdgeInsetsMake(8, 5, 8, 5);
         [self addSubnode:textNode];
         textNode;
     });
@@ -218,22 +222,35 @@ CGFloat const BLInputTextNodeHeight = 34.f;
     [buttonNode setImage:[UIImage imageNamed:@"Message_List_MoreC_H"] forState:ASControlStateHighlighted];
 }
 
+#pragma mark - ASEditableTextNodeDelegate
 
-- (BOOL)editableTextNode:(ASEditableTextNode *)editableTextNode shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    return YES;
+- (void)editableTextNodeDidBeginEditing:(ASEditableTextNode *)editableTextNode {
+    
+    if (self.expressionButtonNode.selected) {
+        [self switchInputToolBarStateActionCurrentState:BLInuptToolBarStateExpression
+                                            targetState:BLInuptToolBarStateKeyboard
+                                       targetButtonNode:self.expressionButtonNode];
+    }
+    
+    if (self.additionalButtonNode.selected) {
+        [self switchInputToolBarStateActionCurrentState:BLInuptToolBarStateAddition
+                                            targetState:BLInuptToolBarStateKeyboard
+                                       targetButtonNode:self.additionalButtonNode];
+
+    }
 }
 
 #pragma mark - layout
 
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
      
-    self.voiceButtonNode.style.spacingBefore = 10.f;
-    self.additionalButtonNode.style.spacingAfter = 10.f;
+    self.voiceButtonNode.style.spacingBefore = BLInputItemSpecWidth;
+    self.additionalButtonNode.style.spacingAfter = BLInputItemSpecWidth;
     
     NSArray *specChildren = @[self.voiceButtonNode, self.inputTextNode, self.expressionButtonNode, self.additionalButtonNode];
     
     ASStackLayoutSpec *normalLayoutSpec = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal
-                                                                            spacing:10.f
+                                                                            spacing:BLInputItemSpecWidth
                                                                      justifyContent:ASStackLayoutJustifyContentSpaceAround
                                                                          alignItems:ASStackLayoutAlignItemsCenter
                                                                            children:specChildren];

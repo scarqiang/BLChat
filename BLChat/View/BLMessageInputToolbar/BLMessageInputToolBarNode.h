@@ -43,6 +43,7 @@ didClickAdditionalButtonNode:(ASButtonNode *)additionalButtonNode
 
 @interface BLMessageInputToolBarNode : ASDisplayNode
 @property (nonatomic, readonly) BLInuptToolBarState inputToolBarState;
+@property (nonatomic, strong, readonly) ASEditableTextNode *inputTextNode;
 
 - (instancetype)initWithDelegate:(id<BLMessageInputToolBarNodeDelegate>)delegate;
 @end

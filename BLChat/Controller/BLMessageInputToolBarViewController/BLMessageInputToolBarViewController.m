@@ -12,6 +12,7 @@
 
 @interface BLMessageInputToolBarViewController ()<BLMessageInputToolBarNodeDelegate>
 @property (nonatomic, strong) BLMessageInputToolBarNode *inputToolBarNode;
+@property (nonatomic) CGRect inputToolBarNormalFrame;
 @end
 
 @implementation BLMessageInputToolBarViewController
@@ -25,7 +26,6 @@
     
     if (self) {
         [self setupSubNode];
-       
     }
     
     return self;
@@ -36,14 +36,13 @@
     [self addNotificationAction];
     
     // Do any additional setup after loading the view.
-    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 100, 50)];
-    [self.view addSubview:textView];
 }
 
 - (void)setupSubNode {
     _inputToolBarNode = [[BLMessageInputToolBarNode alloc] initWithDelegate:self];
     CGRect screenFrame = [UIScreen mainScreen].bounds;
     _inputToolBarNode.frame = CGRectMake(0, screenFrame.size.height - BLInputToolBarNodeHeight, CGRectGetWidth(screenFrame), BLInputToolBarNodeHeight);
+    _inputToolBarNormalFrame = _inputToolBarNode.frame;
     [self.view addSubnode:self.inputToolBarNode];
     
 }
@@ -54,6 +53,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHidden:)
+                                                 name:UIKeyboardWillHideNotification
                                                object:nil];
 }
 
@@ -77,12 +81,31 @@
                      animations:^{
                          
                          CGRect barFrame = self.inputToolBarNode.frame;
-                         barFrame.origin.y = barFrame.origin.y - kbSize.height;
+                         CGFloat riseHeight = CGRectGetHeight([UIScreen mainScreen].bounds) - barFrame.origin.y - BLInputToolBarNodeHeight;
+                         CGFloat increaseHeight = riseHeight - kbSize.height;
+                         barFrame.origin.y = barFrame.origin.y + increaseHeight;
                          self.inputToolBarNode.frame = barFrame;
                          
                      } completion:nil];
 }
 
+- (void)keyboardWillHidden:(NSNotification*)notification {
+    NSDictionary *info = [notification userInfo];
+    
+    UIViewAnimationCurve animationCurve = [info[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    NSInteger animationCurveOption = (animationCurve << 16);
+    
+    double animationDuration = [info[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    [UIView animateWithDuration:animationDuration
+                          delay:0.f
+                        options:animationCurveOption
+                     animations:^{
+                         self.inputToolBarNode.frame = self.inputToolBarNormalFrame;
+                     } completion:nil];
+}
+
+#pragma mark - BLMessageInputToolBarNodeDelegate
 
 
 - (void)didReceiveMemoryWarning {
