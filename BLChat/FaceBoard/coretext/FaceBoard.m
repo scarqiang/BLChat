@@ -14,29 +14,29 @@
 
 - (void)dealloc
 {
-    [_faceMap release];
-    [_inputTextField release];
-    [_inputTextView release];
-    [faceView release];
-    [facePageControl release];
-    [super dealloc];
+//    [_faceMap release];
+//    [_inputTextField release];
+//    [_inputTextView release];
+//    [faceView release];
+//    [facePageControl release];
+//    [super dealloc];
 }
 
 - (id)init
 {
-    self = [super initWithFrame:CGRectMake(0, 0, kMainWidth, 216 - 47)];
+    self = [super initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 216 - 47)];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
-        _btnWidth = (kMainWidth - 6*2) /7.0f ;
+        _btnWidth = ([UIScreen mainScreen].bounds.size.width - 6*2) /7.0f ;
         
-        _faceMap = [[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"faceMap_ch"
-                                                                                              ofType:@"plist"]]retain];
+        _faceMap = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"faceMap_ch"
+                                                                                              ofType:@"plist"]];
         
         //表情盘
-        faceView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kMainWidth, 190-47)];
+        faceView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 190-47)];
         faceView.pagingEnabled = YES;
         faceView.backgroundColor = [UIColor whiteColor];
-        faceView.contentSize = CGSizeMake((60/20)*kMainWidth, 190 - 47);
+        faceView.contentSize = CGSizeMake((60/20)*[UIScreen mainScreen].bounds.size.width, 190 - 47);
         faceView.showsHorizontalScrollIndicator = NO;
         faceView.showsVerticalScrollIndicator = NO;
         faceView.delegate = self;
@@ -51,14 +51,14 @@
             
             //计算每一个表情按钮的坐标和在哪一屏
             
-            faceButton.frame = CGRectMake((((i-1)%20)%7)* _btnWidth + 6+((i-1)/20*kMainWidth), (((i-1)%20)/7)*44+8, _btnWidth, _btnWidth);
+            faceButton.frame = CGRectMake((((i-1)%20)%7)* _btnWidth + 6+((i-1)/20*[UIScreen mainScreen].bounds.size.width), (((i-1)%20)/7)*44+8, _btnWidth, _btnWidth);
 
             [faceButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%03d",i]] forState:UIControlStateNormal];
             [faceView addSubview:faceButton];
         }
         
         //添加PageControl
-        facePageControl = [[GrayPageControl alloc]initWithFrame:CGRectMake((kMainWidth - 100)/2.0f, 190-47, 100, 20)];
+        facePageControl = [[GrayPageControl alloc]initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - 100)/2.0f, 190-47, 100, 20)];
         [facePageControl addTarget:self
                             action:@selector(pageChange:)
                   forControlEvents:UIControlEventValueChanged];
@@ -79,7 +79,7 @@
             [back setImage:[UIImage imageNamed:@"backFace"] forState:UIControlStateNormal];
             [back setImage:[UIImage imageNamed:@"backFaceSelect"] forState:UIControlStateSelected];
             [back addTarget:self action:@selector(backFace) forControlEvents:UIControlEventTouchUpInside];
-            back.frame = CGRectMake(6 + 6 *_btnWidth + i * kMainWidth, 96, _btnWidth, _btnWidth);
+            back.frame = CGRectMake(6 + 6 *_btnWidth + i * [UIScreen mainScreen].bounds.size.width, 96, _btnWidth, _btnWidth);
             [faceView addSubview:back];
         }
     }
@@ -91,14 +91,14 @@
     
     if (isRecentlyUsed) {
         
-        _btnWidth = (kMainWidth - 6*2) /7.0f ;
+        _btnWidth = ([UIScreen mainScreen].bounds.size.width - 6*2) /7.0f ;
         
         if (_recentFaceView == nil) {
             
             
             _recentFaceMap = [[NSUserDefaults standardUserDefaults]valueForKey:EmojiRecent];
             //表情盘
-            _recentFaceView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kMainWidth, 190 - 47)];
+            _recentFaceView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 190 - 47)];
             _recentFaceView.pagingEnabled = YES;
             _recentFaceView.showsHorizontalScrollIndicator = NO;
             _recentFaceView.showsVerticalScrollIndicator = NO;
@@ -107,7 +107,7 @@
            
             _noHisHint = [[UILabel alloc]init];
             _noHisHint.backgroundColor = [UIColor clearColor];
-            _noHisHint.textColor = [@"666666" getColor];
+//            _noHisHint.textColor = [@"666666" getColor];
             _noHisHint.text = @"用表情跟大家打个招呼吧，我都空好久了~";
             _noHisHint.textAlignment = NSTextAlignmentCenter;
             _noHisHint.frame = CGRectZero;
@@ -115,7 +115,7 @@
             _noHisHint.hidden = YES;
             [_recentFaceView addSubview:_noHisHint];
             
-            _recentFacePageControl = [[GrayPageControl alloc]initWithFrame:CGRectMake(0, 190-47, kMainWidth, 20)];
+            _recentFacePageControl = [[GrayPageControl alloc]initWithFrame:CGRectMake(0, 190-47, [UIScreen mainScreen].bounds.size.width, 20)];
             [_recentFacePageControl addTarget:self
                                        action:@selector(pageChange:)
                              forControlEvents:UIControlEventValueChanged];
@@ -147,7 +147,7 @@
             hasRecent = YES;
         }
         
-        _recentFaceView.contentSize = CGSizeMake(pages*kMainWidth, 190-47);
+        _recentFaceView.contentSize = CGSizeMake(pages*[UIScreen mainScreen].bounds.size.width, 190-47);
         if (hasRecent) {
             
             _noHisHint.hidden = YES;
@@ -171,7 +171,7 @@
                      forControlEvents:UIControlEventTouchUpInside];
                 
                 //计算每一个表情按钮的坐标和在哪一屏
-                faceButton.frame = CGRectMake((((i-1)%20)%7)*_btnWidth+6+((i-1)/20*kMainWidth), (((i-1)%20)/7)*44+8, _btnWidth, _btnWidth);
+                faceButton.frame = CGRectMake((((i-1)%20)%7)*_btnWidth+6+((i-1)/20*[UIScreen mainScreen].bounds.size.width), (((i-1)%20)/7)*44+8, _btnWidth, _btnWidth);
                 
                 [faceButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%03d",index]] forState:UIControlStateNormal];
             }
@@ -188,7 +188,7 @@
                 [back setImage:[UIImage imageNamed:@"backFace"] forState:UIControlStateNormal];
                 [back setImage:[UIImage imageNamed:@"backFaceSelect"] forState:UIControlStateSelected];
                 [back addTarget:self action:@selector(backFace) forControlEvents:UIControlEventTouchUpInside];
-                back.frame = CGRectMake(6 + 6 *_btnWidth + i * kMainWidth, 96, _btnWidth, _btnWidth);
+                back.frame = CGRectMake(6 + 6 *_btnWidth + i * [UIScreen mainScreen].bounds.size.width, 96, _btnWidth, _btnWidth);
                 [_recentFaceView addSubview:back];
             }
 
@@ -196,14 +196,14 @@
         else  {
             _recentFacePageControl.numberOfPages = 0;
             _noHisHint.hidden = NO;
-            _noHisHint.frame = CGRectMake(0, 56, kMainWidth, 30);
+            _noHisHint.frame = CGRectMake(0, 56, [UIScreen mainScreen].bounds.size.width, 30);
         }
         
 //MARK:
         
         _recentFaceView.hidden = NO;
         _recentFacePageControl.hidden = NO;
-        _recentFaceView.frame = CGRectMake(0, 0, kMainWidth, 190 - 47);
+        _recentFaceView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 190 - 47);
         
         facePageControl.hidden = YES;
         faceView.hidden = YES;
@@ -222,7 +222,7 @@
         
         facePageControl.hidden = NO;
         faceView.hidden = NO;
-        faceView.frame = CGRectMake(0, 0, kMainWidth, 190-47);
+        faceView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 190-47);
 
         [self bringSubviewToFront:faceView];
         [self bringSubviewToFront:facePageControl];
@@ -236,10 +236,10 @@
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     
     if (scrollView == _recentFaceView) {
-        [_recentFacePageControl setCurrentPage:_recentFaceView.contentOffset.x/kMainWidth];
+        [_recentFacePageControl setCurrentPage:_recentFaceView.contentOffset.x/[UIScreen mainScreen].bounds.size.width];
         [_recentFacePageControl updateCurrentPageDisplay];
     }else{
-        [facePageControl setCurrentPage:faceView.contentOffset.x/kMainWidth];
+        [facePageControl setCurrentPage:faceView.contentOffset.x/[UIScreen mainScreen].bounds.size.width];
         [facePageControl updateCurrentPageDisplay];
     }
 }
@@ -247,7 +247,7 @@
 - (void)pageChange:(id)sender {
     GrayPageControl *control=(GrayPageControl *)sender;
 
-    [faceView setContentOffset:CGPointMake(facePageControl.currentPage*kMainWidth, 0) animated:YES];
+    [faceView setContentOffset:CGPointMake(facePageControl.currentPage*[UIScreen mainScreen].bounds.size.width, 0) animated:YES];
     [control setCurrentPage:facePageControl.currentPage];
 }
 //- (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)aString
@@ -270,7 +270,7 @@
         NSMutableString *faceString = [[NSMutableString alloc]initWithString:self.inputTextView.text];
         [faceString replaceCharactersInRange:range withString:[_faceMap objectForKey:[NSString stringWithFormat:@"%03d",i]]];
         self.inputTextView.text = faceString;
-        [faceString release];
+//        [faceString release];
         self.inputTextView.selectedRange=NSMakeRange(range.location+[[_faceMap objectForKey:[NSString stringWithFormat:@"%03d",i]] length],0);
         if (self.emojiClicked) {
             self.emojiClicked([NSString stringWithFormat:@"%03d",i],[_faceMap objectForKey:[NSString stringWithFormat:@"%03d",i]]);

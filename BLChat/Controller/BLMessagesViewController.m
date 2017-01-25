@@ -9,6 +9,7 @@
 #import "BLMessagesViewController.h"
 #import "BLMessagesViewControllerDataSource.h"
 #import "BLMessagesCollectionNode.h"
+#import "BLMessageInputToolBarViewController.h"
 
 @interface BLMessagesViewController () <BLChatViewControllerDataSourceDelegate, BLMessagesCollectionNodeDelegate, ASCollectionDataSource, ASCollectionViewDelegateFlowLayout>
 //model
@@ -38,7 +39,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     self.node.backgroundColor = [UIColor whiteColor];
+    
+    BLMessageInputToolBarViewController *viewController = [[BLMessageInputToolBarViewController alloc] init];
+    [self addChildViewController:viewController];
+    [self.view addSubnode:viewController.node];
+    [viewController didMoveToParentViewController:self];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -77,6 +84,7 @@
     CGSize itemSize = CGSizeMake(CGRectGetWidth(self.view.frame), 200);
     return ASSizeRangeMake(itemSize, itemSize);
 }
+
 
 #pragma mark - chat view controller data source delegate
 #pragma mark - collection cell delegate

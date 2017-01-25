@@ -14,7 +14,6 @@
 		845133A71E363A1C00E57E09 /* BLMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 845133A61E363A1C00E57E09 /* BLMessage.m */; };
 		845133AA1E363A5100E57E09 /* BLMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 845133A91E363A5100E57E09 /* BLMediaItem.m */; };
 		845133AD1E365FC900E57E09 /* BLMessagesCollectionNodeCellIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 845133AC1E365FC900E57E09 /* BLMessagesCollectionNodeCellIncoming.m */; };
-		848D1B121E360C200081414E /* BLMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848D1B0E1E360C200081414E /* BLMessagesViewController.m */; };
 		F7546F7C1E2E2DA2003E38DE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7B1E2E2DA2003E38DE /* main.m */; };
 		F7546F7F1E2E2DA2003E38DE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7E1E2E2DA2003E38DE /* AppDelegate.m */; };
 		F7546F821E2E2DA2003E38DE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F811E2E2DA2003E38DE /* ViewController.m */; };
@@ -23,6 +22,7 @@
 		F7546F8A1E2E2DA2003E38DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7546F881E2E2DA2003E38DE /* LaunchScreen.storyboard */; };
 		F7546F951E2E2DA2003E38DE /* BLChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F941E2E2DA2003E38DE /* BLChatTests.m */; };
 		F7546FA01E2E2DA2003E38DE /* BLChatUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F9F1E2E2DA2003E38DE /* BLChatUITests.m */; };
+		F76776341E37623B006F36C3 /* BLMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F76776331E37623B006F36C3 /* BLMessagesViewController.m */; };
 		F7872BF81E373CCC0089C176 /* Message_List_Voice_H@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7872BF41E373CCC0089C176 /* Message_List_Voice_H@2x.png */; };
 		F7872BF91E373CCC0089C176 /* Message_List_Voice_H@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7872BF51E373CCC0089C176 /* Message_List_Voice_H@3x.png */; };
 		F7872BFA1E373CCC0089C176 /* Message_List_Voice_N@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7872BF61E373CCC0089C176 /* Message_List_Voice_N@2x.png */; };
@@ -43,6 +43,10 @@
 		F7872C191E373CE00089C176 /* Message_List_MoreC_H@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7872C0D1E373CE00089C176 /* Message_List_MoreC_H@3x.png */; };
 		F7872C1A1E373CE00089C176 /* Message_List_MoreC_N@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7872C0E1E373CE00089C176 /* Message_List_MoreC_N@2x.png */; };
 		F7872C1B1E373CE00089C176 /* Message_List_MoreC_N@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7872C0F1E373CE00089C176 /* Message_List_MoreC_N@3x.png */; };
+		F7872C201E37413C0089C176 /* Message_List_Emoji_H@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7872C1C1E37413C0089C176 /* Message_List_Emoji_H@2x.png */; };
+		F7872C211E37413C0089C176 /* Message_List_Emoji_H@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7872C1D1E37413C0089C176 /* Message_List_Emoji_H@3x.png */; };
+		F7872C221E37413C0089C176 /* Message_List_Emoji_N@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7872C1E1E37413C0089C176 /* Message_List_Emoji_N@2x.png */; };
+		F7872C231E37413C0089C176 /* Message_List_Emoji_N@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7872C1F1E37413C0089C176 /* Message_List_Emoji_N@3x.png */; };
 		F7A742111E36F3A5004AF3DB /* FaceBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A741C81E36F3A5004AF3DB /* FaceBoard.m */; };
 		F7A742121E36F3A5004AF3DB /* FaceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A741CA1E36F3A5004AF3DB /* FaceButton.m */; };
 		F7A742131E36F3A5004AF3DB /* GrayPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A741CC1E36F3A5004AF3DB /* GrayPageControl.m */; };
@@ -151,8 +155,6 @@
 		845133AB1E365FC900E57E09 /* BLMessagesCollectionNodeCellIncoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessagesCollectionNodeCellIncoming.h; sourceTree = "<group>"; };
 		845133AC1E365FC900E57E09 /* BLMessagesCollectionNodeCellIncoming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesCollectionNodeCellIncoming.m; sourceTree = "<group>"; };
 		848D1B081E3603A10081414E /* BLChat-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BLChat-prefix.pch"; sourceTree = "<group>"; };
-		848D1B0D1E360C200081414E /* BLMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessagesViewController.h; sourceTree = "<group>"; };
-		848D1B0E1E360C200081414E /* BLMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesViewController.m; sourceTree = "<group>"; };
 		BB7AD314456607B3B54830D2 /* Pods-BLChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-BLChat/Pods-BLChat.release.xcconfig"; sourceTree = "<group>"; };
 		F7546F771E2E2DA2003E38DE /* BLChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7546F7B1E2E2DA2003E38DE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -170,6 +172,8 @@
 		F7546F9B1E2E2DA2003E38DE /* BLChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BLChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7546F9F1E2E2DA2003E38DE /* BLChatUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLChatUITests.m; sourceTree = "<group>"; };
 		F7546FA11E2E2DA2003E38DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F76776321E37623B006F36C3 /* BLMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessagesViewController.h; sourceTree = "<group>"; };
+		F76776331E37623B006F36C3 /* BLMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesViewController.m; sourceTree = "<group>"; };
 		F7872BF41E373CCC0089C176 /* Message_List_Voice_H@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Message_List_Voice_H@2x.png"; sourceTree = "<group>"; };
 		F7872BF51E373CCC0089C176 /* Message_List_Voice_H@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Message_List_Voice_H@3x.png"; sourceTree = "<group>"; };
 		F7872BF61E373CCC0089C176 /* Message_List_Voice_N@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Message_List_Voice_N@2x.png"; sourceTree = "<group>"; };
@@ -190,6 +194,10 @@
 		F7872C0D1E373CE00089C176 /* Message_List_MoreC_H@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Message_List_MoreC_H@3x.png"; sourceTree = "<group>"; };
 		F7872C0E1E373CE00089C176 /* Message_List_MoreC_N@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Message_List_MoreC_N@2x.png"; sourceTree = "<group>"; };
 		F7872C0F1E373CE00089C176 /* Message_List_MoreC_N@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Message_List_MoreC_N@3x.png"; sourceTree = "<group>"; };
+		F7872C1C1E37413C0089C176 /* Message_List_Emoji_H@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Message_List_Emoji_H@2x.png"; sourceTree = "<group>"; };
+		F7872C1D1E37413C0089C176 /* Message_List_Emoji_H@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Message_List_Emoji_H@3x.png"; sourceTree = "<group>"; };
+		F7872C1E1E37413C0089C176 /* Message_List_Emoji_N@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Message_List_Emoji_N@2x.png"; sourceTree = "<group>"; };
+		F7872C1F1E37413C0089C176 /* Message_List_Emoji_N@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Message_List_Emoji_N@3x.png"; sourceTree = "<group>"; };
 		F7A741C71E36F3A5004AF3DB /* FaceBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceBoard.h; sourceTree = "<group>"; };
 		F7A741C81E36F3A5004AF3DB /* FaceBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceBoard.m; sourceTree = "<group>"; };
 		F7A741C91E36F3A5004AF3DB /* FaceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceButton.h; sourceTree = "<group>"; };
@@ -311,8 +319,8 @@
 			isa = PBXGroup;
 			children = (
 				F7A742561E372D21004AF3DB /* BLMessageInputToolBarViewController */,
-				848D1B0D1E360C200081414E /* BLMessagesViewController.h */,
-				848D1B0E1E360C200081414E /* BLMessagesViewController.m */,
+				F76776321E37623B006F36C3 /* BLMessagesViewController.h */,
+				F76776331E37623B006F36C3 /* BLMessagesViewController.m */,
 				828C9B2E1AD0E99A0276E629 /* BLMessagesViewControllerDataSource.m */,
 				828C96D7F734C1975B3C0BAE /* BLMessagesViewControllerDataSource.h */,
 			);
@@ -431,6 +439,10 @@
 		F7872BF31E373CB60089C176 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				F7872C1C1E37413C0089C176 /* Message_List_Emoji_H@2x.png */,
+				F7872C1D1E37413C0089C176 /* Message_List_Emoji_H@3x.png */,
+				F7872C1E1E37413C0089C176 /* Message_List_Emoji_N@2x.png */,
+				F7872C1F1E37413C0089C176 /* Message_List_Emoji_N@3x.png */,
 				F7872C041E373CE00089C176 /* Message_List_Keyboard_H@2x.png */,
 				F7872C051E373CE00089C176 /* Message_List_Keyboard_H@3x.png */,
 				F7872C061E373CE00089C176 /* Message_List_Keyboard_N@2x.png */,
@@ -714,6 +726,7 @@
 				F7A7421E1E36F3A5004AF3DB /* 010@2x.png in Resources */,
 				F7A7423C1E36F3A5004AF3DB /* 040@2x.png in Resources */,
 				F7A742241E36F3A5004AF3DB /* 016@2x.png in Resources */,
+				F7872C201E37413C0089C176 /* Message_List_Emoji_H@2x.png in Resources */,
 				F7A742361E36F3A5004AF3DB /* 034@2x.png in Resources */,
 				F7A7421C1E36F3A5004AF3DB /* 008@2x.png in Resources */,
 				F7A7421B1E36F3A5004AF3DB /* 007@2x.png in Resources */,
@@ -721,6 +734,7 @@
 				F7872BF81E373CCC0089C176 /* Message_List_Voice_H@2x.png in Resources */,
 				F7A7422B1E36F3A5004AF3DB /* 023@2x.png in Resources */,
 				F7A742421E36F3A5004AF3DB /* 046@2x.png in Resources */,
+				F7872C221E37413C0089C176 /* Message_List_Emoji_N@2x.png in Resources */,
 				F7A742531E36F3A5004AF3DB /* backFace@2x.png in Resources */,
 				F7546F871E2E2DA2003E38DE /* Assets.xcassets in Resources */,
 				F7A7422D1E36F3A5004AF3DB /* 025@2x.png in Resources */,
@@ -757,6 +771,7 @@
 				F7872C1B1E373CE00089C176 /* Message_List_MoreC_N@3x.png in Resources */,
 				F7872BFB1E373CCC0089C176 /* Message_List_Voice_N@3x.png in Resources */,
 				F7A7421A1E36F3A5004AF3DB /* 006@2x.png in Resources */,
+				F7872C231E37413C0089C176 /* Message_List_Emoji_N@3x.png in Resources */,
 				F7A7423A1E36F3A5004AF3DB /* 038@2x.png in Resources */,
 				F7A742221E36F3A5004AF3DB /* 014@2x.png in Resources */,
 				F7A742291E36F3A5004AF3DB /* 021@2x.png in Resources */,
@@ -771,6 +786,7 @@
 				F7A742211E36F3A5004AF3DB /* 013@2x.png in Resources */,
 				F7872C151E373CE00089C176 /* Message_List_More_H@3x.png in Resources */,
 				F7A742261E36F3A5004AF3DB /* 018@2x.png in Resources */,
+				F7872C211E37413C0089C176 /* Message_List_Emoji_H@3x.png in Resources */,
 				F7546F851E2E2DA2003E38DE /* Main.storyboard in Resources */,
 				F7A742501E36F3A5004AF3DB /* 060@2x.png in Resources */,
 				F7A742331E36F3A5004AF3DB /* 031@2x.png in Resources */,
@@ -851,18 +867,17 @@
 				F7546F821E2E2DA2003E38DE /* ViewController.m in Sources */,
 				F7A7425D1E373519004AF3DB /* BLMessageInputToolBarNode.m in Sources */,
 				845133AA1E363A5100E57E09 /* BLMediaItem.m in Sources */,
+				F76776341E37623B006F36C3 /* BLMessagesViewController.m in Sources */,
 				845133AD1E365FC900E57E09 /* BLMessagesCollectionNodeCellIncoming.m in Sources */,
 				F7A742111E36F3A5004AF3DB /* FaceBoard.m in Sources */,
 				F7A742591E372D4A004AF3DB /* BLMessageInputToolBarViewController.m in Sources */,
 				F7546F7F1E2E2DA2003E38DE /* AppDelegate.m in Sources */,
 				F7546F7C1E2E2DA2003E38DE /* main.m in Sources */,
-				848D1B121E360C200081414E /* BLMessagesViewController.m in Sources */,
 				828C9E16040015E619F1662F /* BLMessagesViewControllerDataSource.m in Sources */,
 				828C91531E7995D8E1ACAE0B /* BLMessagesCollectionNode.m in Sources */,
 				828C949BDFB0D474273F4113 /* BLMessagesCollectionNodeCellOutgoing.m in Sources */,
 				F7A742121E36F3A5004AF3DB /* FaceButton.m in Sources */,
 				F7A742131E36F3A5004AF3DB /* GrayPageControl.m in Sources */,
-				848D1B121E360C200081414E /* BLMessagesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

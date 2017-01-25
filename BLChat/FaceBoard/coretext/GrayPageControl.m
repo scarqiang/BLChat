@@ -12,8 +12,8 @@
 -(id) initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
-    activeImage = [[UIImage imageNamed:@"active_page_image"] retain];
-    inactiveImage = [[UIImage imageNamed:@"inactive_page_image"] retain];
+    activeImage = [UIImage imageNamed:@"active_page_image"];
+    inactiveImage = [UIImage imageNamed:@"inactive_page_image"];
     [self setCurrentPage:1];
     self.currentPageIndicatorTintColor = [UIColor colorWithRed:99.0/255.0 green:109.0/255.0 blue:119.0/255.0 alpha:1];
     self.pageIndicatorTintColor = [UIColor colorWithRed:219.0/255.0 green:220.0/255.0 blue:223.0/255.0 alpha:1];
@@ -23,8 +23,8 @@
 - (id)initWithFrame:(CGRect)aFrame {
     
 	if (self = [super initWithFrame:aFrame]) {
-        activeImage = [[UIImage imageNamed:@"active_page_image"] retain];
-        inactiveImage = [[UIImage imageNamed:@"inactive_page_image"] retain];
+        activeImage = [UIImage imageNamed:@"active_page_image"];
+        inactiveImage = [UIImage imageNamed:@"inactive_page_image"];
         [self setCurrentPage:1];
 	}
 	return self;
@@ -49,8 +49,8 @@
 }
 -(void)dealloc
 {
-    [activeImage release];
-    [inactiveImage release];
-    [super dealloc];
+//    [activeImage release];
+//    [inactiveImage release];
+//    [super dealloc];
 }
 @end
