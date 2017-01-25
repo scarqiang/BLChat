@@ -6,7 +6,6 @@
 #import "BLMessagesContentNode.h"
 
 @interface BLMessagesContentNode ()
-@property (nonatomic, copy) BLMessagesContentNodeConfigureBlock configureBlock;
 
 @end
 

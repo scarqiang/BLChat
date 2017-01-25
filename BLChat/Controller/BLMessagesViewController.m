@@ -70,7 +70,7 @@
 - (ASCellNode *)collectionNode:(ASCollectionNode *)collectionNode nodeForItemAtIndexPath:(NSIndexPath *)indexPath {
     BLMessage *message = [BLMessage randomSampleMessage];
     BLMessagesCollectionNodeCell *cell = [[BLMessagesCollectionNodeCell alloc] initWithMessageDisplayType:message.messageDisplayType];
-    cell.shouldDisplayName = YES;
+    cell.shouldDisplayName = NO;
     cell.contentNode = message.contentNode;
     cell.senderName = message.senderName;
     cell.avatarNode.image = message.avatarImage;

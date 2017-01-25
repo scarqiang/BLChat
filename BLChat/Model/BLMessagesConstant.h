@@ -44,3 +44,5 @@ extern CGFloat const kBLMessagesIncomingContentNodeRightMargin;
 extern CGFloat const kBLMessagesIncomingContentNodeTopMargin;
 extern CGFloat const kBLMessagesIncomingContentNodeBottomMargin;
 
+extern CGFloat const kBLMessagesPhotoMessageMaxWidth;
+extern CGFloat const kBLMessagesPhotoMessageMaxHeight;

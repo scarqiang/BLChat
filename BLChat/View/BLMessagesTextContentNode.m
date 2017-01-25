@@ -16,6 +16,8 @@
 @implementation BLMessagesTextContentNode
 - (instancetype)initWithText:(NSString *)text messageDisplayType:(BLMessageDisplayType)displayType {
     NSParameterAssert(text);
+    NSParameterAssert(displayType != BLMessageDisplayTypeCenter);
+
     self = [super init];
     if (self) {
 

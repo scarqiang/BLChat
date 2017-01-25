@@ -8,6 +8,9 @@
 
 #import "BLMessage.h"
 #import "BLMessagesTextContentNode.h"
+#import "BLMessagesPhotoContentNode.h"
+
+
 static BOOL reversed = NO;
 @implementation BLMessage
 + (instancetype)randomSampleMessage {
@@ -16,10 +19,31 @@ static BOOL reversed = NO;
     message.sendingTime = 1485270243;
     message.avatarImage = [UIImage imageNamed:@"demo_avatar_cook"];
     message.messageDisplayType = reversed ? BLMessageDisplayTypeLeft : BLMessageDisplayTypeRight;
-    message.contentNode = [BLMessagesTextContentNode textContentNodeWithText:[message randomText]
-                                                          messageDisplayType:message.messageDisplayType];
+    message.contentNode = [message randomContentNodeWithMessage:message];
     reversed = !reversed;
     return message;
+}
+
+- (BLMessagesContentNode *)randomContentNodeWithMessage:(BLMessage *)message {
+    NSInteger random = arc4random_uniform(2);
+    switch (random) {
+        case 0:
+            return [BLMessagesTextContentNode textContentNodeWithText:[message randomText]
+                                                   messageDisplayType:message.messageDisplayType];
+        default:
+            return [BLMessagesPhotoContentNode photoContentNodeWithImage:[message randomImage]
+                                                      messageDisplayType:message.messageDisplayType];
+    }
+}
+
+- (UIImage *)randomImage {
+    NSInteger random = arc4random_uniform(2);
+    switch (random) {
+        case 0:
+            return [UIImage imageNamed:@"beiliao"];
+        default:
+            return [UIImage imageNamed:@"goldengate"];
+    }
 }
 
 - (NSString *)randomText {

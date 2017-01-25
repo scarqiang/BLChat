@@ -45,3 +45,6 @@ CGFloat const kBLMessagesIncomingContentNodeLeftMargin = 5.f;
 CGFloat const kBLMessagesIncomingContentNodeRightMargin = 0.f;
 CGFloat const kBLMessagesIncomingContentNodeTopMargin = 0.f;
 CGFloat const kBLMessagesIncomingContentNodeBottomMargin = 0.f;
+
+CGFloat const kBLMessagesPhotoMessageMaxWidth = 150.f;
+CGFloat const kBLMessagesPhotoMessageMaxHeight = 200.f;
