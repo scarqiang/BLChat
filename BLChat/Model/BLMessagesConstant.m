@@ -33,7 +33,7 @@ CGFloat const kBLMessagesIncomingBubbleCapBottom = 5.f;
 
 CGFloat const kBLMessagesIncomingSenderNameLeftMargin = 15.f;
 CGFloat const kBLMessagesIncomingSenderNameRightMargin = 5.f;
-CGFloat const kBLMessagesIncomingSenderNameBottomMargin = 2.f;
+CGFloat const kBLMessagesIncomingSenderNameBottomMargin = 3.f;
 CGFloat const kBLMessagesIncomingSenderNameTopMargin = 0.f;
 
 CGFloat const kBLMessagesIncomingMessageLeftMargin = 10.f;

@@ -60,7 +60,7 @@
 }
 #pragma mark - collection node data source / delegate
 - (NSInteger)collectionNode:(ASCollectionNode *)collectionNode numberOfItemsInSection:(NSInteger)section {
-    return 20;
+    return 200;
 }
 
 - (NSInteger)numberOfSectionsInCollectionNode:(ASCollectionNode *)collectionNode {
