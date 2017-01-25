@@ -6,7 +6,7 @@
 #import "BLMessagesCollectionNode.h"
 
 
-@interface BLMessagesCollectionNode ()
+@interface BLMessagesCollectionNode () <BLMessagesCollectionNodeCellDelegate>
 @end
 
 @implementation BLMessagesCollectionNode
@@ -22,4 +22,11 @@
     return self;
 }
 
+#pragma mark - BLMessagesCollectionNodeCellDelegate
+- (void)didTapContentNode:(BLMessagesContentNode *)contentNode inMessagesCell:(BLMessagesCollectionNodeCell *)cell  preferredContentNodeAction:(BLMessagesContentNodeAction)action {
+    [self.delegate didTapContentNode:contentNode
+                      inMessagesCell:cell
+                    inCollectionNode:self
+          preferredContentNodeAction:action];
+}
 @end

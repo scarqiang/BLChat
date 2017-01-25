@@ -141,8 +141,9 @@
     if (!action) {
         return;
     }
-    
+
     action(self, collectionNode, cell);
 }
+
 #pragma mark - chat view controller data source delegate
 @end

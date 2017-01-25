@@ -8,6 +8,10 @@
 @protocol BLMessageData;
 NS_ASSUME_NONNULL_BEGIN
 @protocol BLMessagesCollectionNodeDelegate <ASCollectionDelegate>
+- (void)    didTapContentNode:(BLMessagesContentNode *)contentNode
+               inMessagesCell:(BLMessagesCollectionNodeCell *)cell
+             inCollectionNode:(BLMessagesCollectionNode *)collectionNode
+   preferredContentNodeAction:(BLMessagesContentNodeAction)action;
 
 @end
 
@@ -19,22 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@protocol BLMessagesCollectionNodeDataSource <ASCollectionDataSource>
-- (id<BLMessageData>)messageDataForCollectionNode:(BLMessagesCollectionNode *)collectionNode
-                                      atIndexPath:(NSIndexPath *)indexPath;
-- (nullable NSString *)formattedTimeForCollectionNode:(BLMessagesCollectionNode *)collectionNode
-                                          atIndexPath:(NSIndexPath *)indexPath;
-
-@end
-
-@protocol BLMessagesCollectionNodeDataSource <ASCollectionDataSource>
-- (id<BLMessageData>)messageDataForCollectionNode:(BLMessagesCollectionNode *)collectionNode
-                                      atIndexPath:(NSIndexPath *)indexPath;
-- (nullable NSString *)formattedTimeForCollectionNode:(BLMessagesCollectionNode *)collectionNode
-                                          atIndexPath:(NSIndexPath *)indexPath;
-
-@end
-@interface BLMessagesCollectionNode : ASCollectionNode <BLMessagesCollectionNodeCellDelegate>
+@interface BLMessagesCollectionNode : ASCollectionNode
 @property (weak, nonatomic) id<BLMessagesCollectionNodeDelegate> delegate;
 @property (weak, nonatomic) id<BLMessagesCollectionNodeDataSource> dataSource;
 @end
