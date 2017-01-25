@@ -21,4 +21,11 @@
     return self;
 }
 
+#pragma mark - BLMessagesCollectionNodeCellDelegate
+- (void)didTapContentNode:(BLMessagesContentNode *)contentNode inMessagesCell:(BLMessagesCollectionNodeCell *)cell  preferredContentNodeAction:(BLMessagesContentNodeAction)action {
+    [self.delegate didTapContentNode:contentNode
+                      inMessagesCell:cell
+                    inCollectionNode:self
+          preferredContentNodeAction:action];
+}
 @end

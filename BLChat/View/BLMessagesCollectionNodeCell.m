@@ -8,7 +8,7 @@
 #import "ASDimension.h"
 
 
-@interface BLMessagesCollectionNodeCell ()
+@interface BLMessagesCollectionNodeCell () <BLMessagesContentNodeDelegate>
 @property (nonatomic, assign) BLMessageDisplayType messageDisplayType;
 
 @property (nonatomic) ASNetworkImageNode *avatarNode;
@@ -205,5 +205,16 @@
 - (void)setContentNode:(BLMessagesContentNode *)contentNode {
     _contentNode = contentNode;
     [self addSubnode:contentNode];
+    contentNode.delegate = self;
+}
+#pragma mark - BLMessagesContentNodeDelegate
+- (void)didTapMessagesContentNode:(BLMessagesContentNode *)contentNode preferredAction:(BLMessagesContentNodeAction)action {
+    if (contentNode != self.contentNode) {
+        return;
+    }
+
+    [self.delegate didTapContentNode:contentNode
+                      inMessagesCell:self
+          preferredContentNodeAction:action];
 }
 @end

@@ -4,24 +4,20 @@
 //
 #import "BLMessage.h"
 #import "BLMessagesConstant.h"
-
+#import "BLMessagesViewController.h"
+#import "BLMessagesCollectionNode.h"
+#import "BLMessagesCollectionNodeCell.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@class BLMessagesViewController;
 @class BLMessagesContentNode;
 
-typedef  void(^BLMessagesContentNodeAction)(BLMessagesViewController *messagesViewController);
-typedef  void(^BLMessagesContentNodeConfigureBlock)(BLMessagesViewController *messagesViewController);
+typedef void(^BLMessagesContentNodeAction)(BLMessagesViewController *messagesViewController, BLMessagesCollectionNode *collectionNode, BLMessagesCollectionNodeCell *collectionNodeCell);
 
 @protocol BLMessagesContentNodeDelegate <NSObject>
 - (void)didTapMessagesContentNode:(BLMessagesContentNode *)contentNode preferredAction:(BLMessagesContentNodeAction)action;
 @end
 
 @interface BLMessagesContentNode : ASDisplayNode
-/**
- * contentNode的配置block，会传入此contentNode所在的messagesViewController，contentNode的代理在这里设置，注意循环引用
- */
-@property (nonatomic, copy) BLMessagesContentNodeConfigureBlock configureBlock;
 /**
  * 代理
  */

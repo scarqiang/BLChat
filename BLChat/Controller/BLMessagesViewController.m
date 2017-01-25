@@ -83,6 +83,8 @@
     cell.avatarNode.image = message.avatarImage;
     cell.formattedTime = @"13: 43";
     cell.backgroundColor = [UIColor redColor];
+
+    cell.delegate = (BLMessagesCollectionNode *)collectionNode;
     return cell;
 
 }
@@ -96,6 +98,16 @@
     return ASSizeRangeMake(minItemSize, maxItemSize);
 }
 
+- (void)  didTapContentNode:(BLMessagesContentNode *)contentNode
+             inMessagesCell:(BLMessagesCollectionNodeCell *)cell
+           inCollectionNode:(BLMessagesCollectionNode *)collectionNode
+ preferredContentNodeAction:(BLMessagesContentNodeAction)action {
+    if (!action) {
+        return;
+    }
+
+    action(self, collectionNode, cell);
+}
 
 #pragma mark - chat view controller data source delegate
 #pragma mark - collection cell delegate
