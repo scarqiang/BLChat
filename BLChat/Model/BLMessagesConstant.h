@@ -16,16 +16,31 @@ extern NSString * const kBLMessagesPlainIncomingBubbleImageName;
 extern NSString * const kBLMessagesPlainIncomingBubbleHighlightedImageName;
 extern NSString * const kBLMessagesPlainOutgoingBubbleImageName;
 extern NSString * const kBLMessagesPlainOutgoingBubbleHighlightedImageName;
+
 extern CGFloat const kBLMessagesBubbleContentPadding;
-extern CGFloat const kBLMessagesIncomingBubbleLeftMargin;
-extern CGFloat const kBLMessagesOutgoingBubbleRightMargin;
+
+extern CGFloat const kBLMessagesIncomingBubbleContentTopPadding;
+extern CGFloat const kBLMessagesIncomingBubbleContentLeftPadding;
+extern CGFloat const kBLMessagesIncomingBubbleContentBottomPadding;
+extern CGFloat const kBLMessagesIncomingBubbleContentRightPadding;
 
 extern CGFloat const kBLMessagesIncomingBubbleCapLeft;
 extern CGFloat const kBLMessagesIncomingBubbleCapRight;
 extern CGFloat const kBLMessagesIncomingBubbleCapTop;
 extern CGFloat const kBLMessagesIncomingBubbleCapBottom;
 
-extern CGFloat const kBLMessagesOutgoingBubbleCapLeft;
-extern CGFloat const kBLMessagesOutgoingBubbleCapRight;
-extern CGFloat const kBLMessagesOutgoingBubbleCapTop;
-extern CGFloat const kBLMessagesOutgoingBubbleCapBottom;
+extern CGFloat const kBLMessagesIncomingSenderNameRightMargin;
+extern CGFloat const kBLMessagesIncomingSenderNameLeftMargin;
+extern CGFloat const kBLMessagesIncomingSenderNameBottomMargin;
+extern CGFloat const kBLMessagesIncomingSenderNameTopMargin;
+
+extern CGFloat const kBLMessagesIncomingMessageLeftMargin;
+extern CGFloat const kBLMessagesIncomingMessageRightMargin;
+extern CGFloat const kBLMessagesIncomingMessageTopMargin;
+extern CGFloat const kBLMessagesIncomingMessageBottomMargin;
+
+extern CGFloat const kBLMessagesIncomingContentNodeLeftMargin;
+extern CGFloat const kBLMessagesIncomingContentNodeRightMargin;
+extern CGFloat const kBLMessagesIncomingContentNodeTopMargin;
+extern CGFloat const kBLMessagesIncomingContentNodeBottomMargin;
+

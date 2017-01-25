@@ -5,6 +5,7 @@
 
 #import "BLMessagesCollectionNodeCell.h"
 #import "BLMessagesConstant.h"
+#import "ASDimension.h"
 
 
 @interface BLMessagesCollectionNodeCell ()
@@ -95,44 +96,77 @@
                                                               sizingOptions:ASCenterLayoutSpecSizingOptionDefault
                                                                       child:self.contentNode];
         case BLMessageDisplayTypeLeft:
-            return [self layoutSpecThatFits:constrainedSize isSender:NO];
+            return [self layoutSpecThatFits:constrainedSize isIncoming:YES];
         case BLMessageDisplayTypeRight:
-            return [self layoutSpecThatFits:constrainedSize isSender:YES];
+            return [self layoutSpecThatFits:constrainedSize isIncoming:NO];
     }
     NSAssert(NO, @"unexpected message display type");
     return nil;
 }
 
-- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize isSender:(BOOL)isSender {
-    ASLayoutSpec *contentLayoutSpec = !self.shouldDisplayName ? [self.contentNode preferredLayoutSpec] :
+- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize isIncoming:(BOOL)isIncoming {
+    ASLayoutSpec *contentNodeLayoutSpec = [self contentNodeLayoutSpecWithIsIncoming:isIncoming constrainedSize:constrainedSize];
+    ASLayoutSpec *contentLayoutSpec = !self.shouldDisplayName ? contentNodeLayoutSpec :
             [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical
                                                     spacing:0
                                              justifyContent:ASStackLayoutJustifyContentStart
-                                                 alignItems:ASStackLayoutAlignItemsStart
-                                                   children:@[self.senderNameTextNode, [self.contentNode preferredLayoutSpec]]];
-    NSArray *contentArray = isSender ? @[ contentLayoutSpec, self.avatarNode ] : @[ self.avatarNode, contentLayoutSpec ];
-    ASStackLayoutJustifyContent contentJustifyContent = isSender ? ASStackLayoutJustifyContentEnd : ASStackLayoutJustifyContentStart;
-    ASStackLayoutAlignItems contentAlignItems = isSender ? ASStackLayoutAlignItemsEnd : ASStackLayoutAlignItemsStart;
+                                                 alignItems:isIncoming ? ASStackLayoutAlignItemsStart : ASStackLayoutAlignItemsEnd
+                                                   children:@[[self senderNameLayoutSpecWithIsIncoming:isIncoming], contentNodeLayoutSpec]];
+    NSArray *contentArray = isIncoming ? @[self.avatarNode, contentLayoutSpec] : @[contentLayoutSpec, self.avatarNode];
 
-    ASStackLayoutSpec *avatarAndContentLayoutSpec = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal
-                                                                                       spacing:0
-                                                                                justifyContent:contentJustifyContent
-                                                                                    alignItems:contentAlignItems
-                                                                                      children:contentArray];
-    NSArray *timestampAndMainContentArray = self.formattedTime ? @[self.timeSeparatorTextNode, avatarAndContentLayoutSpec] :
-            @[avatarAndContentLayoutSpec];
-    ASStackLayoutJustifyContent timestampAndMainContentJustifyContent = ASStackLayoutJustifyContentStart;
-    avatarAndContentLayoutSpec.style.alignSelf = isSender ? ASStackLayoutAlignSelfEnd : ASStackLayoutAlignSelfStart;
+    ASStackLayoutSpec *avatarAndContentLayoutSpec =
+    [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal
+                                            spacing:0
+                                     justifyContent:isIncoming ? ASStackLayoutJustifyContentStart : ASStackLayoutJustifyContentEnd
+                                         alignItems:ASStackLayoutAlignItemsStart
+                                           children:contentArray];
+
+    ASInsetLayoutSpec *avatarAndContentInsetLayout = [self avatarAndContentInsetLayoutWithLayout:avatarAndContentLayoutSpec
+                                                                                      isIncoming:isIncoming];
+    NSArray *timestampAndMainContentArray = self.formattedTime ? @[self.timeSeparatorTextNode, avatarAndContentInsetLayout] :
+            @[avatarAndContentInsetLayout];
+    avatarAndContentLayoutSpec.style.alignSelf = isIncoming ? ASStackLayoutAlignSelfStart : ASStackLayoutAlignSelfEnd;
     
     ASStackLayoutSpec *timestampAndMainContentLayoutSpec = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical
                                                                                                    spacing:0
-                                                                                            justifyContent:timestampAndMainContentJustifyContent
+                                                                                            justifyContent:ASStackLayoutJustifyContentStart
                                                                                                 alignItems:ASStackLayoutAlignItemsStretch
                                                                                                   children:timestampAndMainContentArray];
+
 
     return timestampAndMainContentLayoutSpec;
 }
 
+- (ASInsetLayoutSpec *)avatarAndContentInsetLayoutWithLayout:(ASLayoutSpec *)avatarAndContentLayoutSpec isIncoming:(BOOL)isIncoming {
+    UIEdgeInsets avatarAndContentInsets =
+            UIEdgeInsetsMake(kBLMessagesIncomingMessageTopMargin,
+                             isIncoming ? kBLMessagesIncomingMessageLeftMargin : kBLMessagesIncomingMessageRightMargin,
+                             kBLMessagesIncomingMessageBottomMargin,
+                             isIncoming ? kBLMessagesIncomingMessageRightMargin : kBLMessagesIncomingMessageLeftMargin);
+    return [ASInsetLayoutSpec insetLayoutSpecWithInsets:avatarAndContentInsets child:avatarAndContentLayoutSpec];
+}
+
+- (ASLayoutSpec *)senderNameLayoutSpecWithIsIncoming:(BOOL)isIncoming {
+    UIEdgeInsets insets =
+            UIEdgeInsetsMake(kBLMessagesIncomingSenderNameTopMargin,
+                             isIncoming ? kBLMessagesIncomingSenderNameLeftMargin : kBLMessagesIncomingSenderNameRightMargin,
+                             kBLMessagesIncomingSenderNameBottomMargin,
+                             isIncoming ? kBLMessagesIncomingSenderNameRightMargin : kBLMessagesIncomingSenderNameLeftMargin);
+    return [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets
+                                                  child:self.senderNameTextNode];
+}
+
+- (ASLayoutSpec *)contentNodeLayoutSpecWithIsIncoming:(BOOL)isIncoming constrainedSize:(ASSizeRange)constrainedSize {
+    [self.contentNode addConstrainWithCollectionNodeCellConstrainedSize:constrainedSize];
+    UIEdgeInsets insets =
+            UIEdgeInsetsMake(kBLMessagesIncomingContentNodeTopMargin,
+                             isIncoming ? kBLMessagesIncomingContentNodeLeftMargin : kBLMessagesIncomingContentNodeRightMargin,
+                             kBLMessagesIncomingContentNodeBottomMargin,
+                             isIncoming ? kBLMessagesIncomingContentNodeRightMargin : kBLMessagesIncomingContentNodeLeftMargin);
+    ASInsetLayoutSpec *insetLayoutSpec = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets
+                                                  child:[self.contentNode preferredLayoutSpec]];
+    return insetLayoutSpec;
+}
 #pragma mark - setters
 - (void)setSenderName:(NSString *)senderName {
     if (!senderName) {

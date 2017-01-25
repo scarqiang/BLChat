@@ -16,7 +16,7 @@ static BOOL reversed = NO;
     message.sendingTime = 1485270243;
     message.avatarImage = [UIImage imageNamed:@"demo_avatar_cook"];
     message.messageDisplayType = reversed ? BLMessageDisplayTypeLeft : BLMessageDisplayTypeRight;
-    message.contentNode = [BLMessagesTextContentNode textContentNodeWithText:@"this is just for test!"
+    message.contentNode = [BLMessagesTextContentNode textContentNodeWithText:@"this is just for test!this is just for test!this is just for test!this is just for test!this is just for test!this is just for test!this is just for test!this is just for test!this is just for test!this is just for test!this is just for test!this is just for test!this is just for test!this is just for test!this is just for test!"
                                                           messageDisplayType:message.messageDisplayType];
     reversed = !reversed;
     return message;

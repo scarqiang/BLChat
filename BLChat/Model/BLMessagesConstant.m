@@ -20,15 +20,28 @@ NSString * const kBLMessagesPlainIncomingBubbleHighlightedImageName = @"receiver
 NSString * const kBLMessagesPlainOutgoingBubbleImageName = @"send_MsgBg_Plain_n";
 NSString * const kBLMessagesPlainOutgoingBubbleHighlightedImageName = @"send_MsgBg_Plain_h";
 CGFloat const kBLMessagesBubbleContentPadding = 10.f;
-CGFloat const kBLMessagesIncomingBubbleLeftMargin = 15.f;
-CGFloat const kBLMessagesOutgoingBubbleRightMargin = 15.f;
+
+CGFloat const kBLMessagesIncomingBubbleContentTopPadding = 10.f;
+CGFloat const kBLMessagesIncomingBubbleContentLeftPadding = 15.f;
+CGFloat const kBLMessagesIncomingBubbleContentBottomPadding = 10.f;
+CGFloat const kBLMessagesIncomingBubbleContentRightPadding = 10.f;
 
 CGFloat const kBLMessagesIncomingBubbleCapLeft = 12.f;
 CGFloat const kBLMessagesIncomingBubbleCapRight = 20.f;
 CGFloat const kBLMessagesIncomingBubbleCapTop = 28.f;
 CGFloat const kBLMessagesIncomingBubbleCapBottom = 5.f;
 
-CGFloat const kBLMessagesOutgoingBubbleCapLeft = 20.f;
-CGFloat const kBLMessagesOutgoingBubbleCapRight = 12.f;
-CGFloat const kBLMessagesOutgoingBubbleCapTop = 28.f;
-CGFloat const kBLMessagesOutgoingBubbleCapBottom = 5.f;
+CGFloat const kBLMessagesIncomingSenderNameLeftMargin = 15.f;
+CGFloat const kBLMessagesIncomingSenderNameRightMargin = 5.f;
+CGFloat const kBLMessagesIncomingSenderNameBottomMargin = 2.f;
+CGFloat const kBLMessagesIncomingSenderNameTopMargin = 0.f;
+
+CGFloat const kBLMessagesIncomingMessageLeftMargin = 10.f;
+CGFloat const kBLMessagesIncomingMessageRightMargin = 50.f;
+CGFloat const kBLMessagesIncomingMessageTopMargin = 5.f;
+CGFloat const kBLMessagesIncomingMessageBottomMargin = 15.f;
+
+CGFloat const kBLMessagesIncomingContentNodeLeftMargin = 5.f;
+CGFloat const kBLMessagesIncomingContentNodeRightMargin = 0.f;
+CGFloat const kBLMessagesIncomingContentNodeTopMargin = 0.f;
+CGFloat const kBLMessagesIncomingContentNodeBottomMargin = 0.f;

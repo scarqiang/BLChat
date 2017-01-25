@@ -14,8 +14,12 @@
 - (UIImage *)resizableBubbleImageForMessageDisplayType:(BLMessageDisplayType)displayType {
     switch (displayType) {
         case BLMessageDisplayTypeLeft: {
-            UIEdgeInsets capInsets = UIEdgeInsetsMake(kBLMessagesIncomingBubbleCapTop, kBLMessagesIncomingBubbleCapLeft, kBLMessagesIncomingBubbleCapBottom, kBLMessagesIncomingBubbleCapRight);
-            UIImage *image = [[UIImage imageNamed:@"receive_MsgBg"] resizableImageWithCapInsets:capInsets
+            UIEdgeInsets capInsets = UIEdgeInsetsMake(
+                    kBLMessagesIncomingBubbleCapTop,
+                    kBLMessagesIncomingBubbleCapLeft,
+                    kBLMessagesIncomingBubbleCapBottom,
+                    kBLMessagesIncomingBubbleCapRight);
+            UIImage *image = [[UIImage imageNamed:kBLMessagesIncomingBubbleImageName] resizableImageWithCapInsets:capInsets
                                                                                    resizingMode:UIImageResizingModeStretch];
             return image;
         }
@@ -25,16 +29,14 @@
         }
 
         case BLMessageDisplayTypeRight: {
-            UIEdgeInsets capInsets = UIEdgeInsetsMake(kBLMessagesOutgoingBubbleCapTop,
-                    kBLMessagesOutgoingBubbleCapLeft,
-                    kBLMessagesOutgoingBubbleCapBottom,
-                    kBLMessagesOutgoingBubbleCapRight);
-            UIImage *image = [UIImage imageNamed:@"receive_MsgBg"];
-            UIImage* flippedImage = [UIImage imageWithCGImage:image.CGImage
-                                                        scale:image.scale
-                                                  orientation:UIImageOrientationUpMirrored];
+            UIEdgeInsets capInsets = UIEdgeInsetsMake(
+                    kBLMessagesIncomingBubbleCapTop,
+                    kBLMessagesIncomingBubbleCapRight,
+                    kBLMessagesIncomingBubbleCapBottom,
+                    kBLMessagesIncomingBubbleCapLeft);
 
-            return [flippedImage resizableImageWithCapInsets:capInsets resizingMode:UIImageResizingModeStretch];
+            return [[UIImage imageNamed:kBLMessagesOutgoingBubbleImageName] resizableImageWithCapInsets:capInsets
+                                                                                           resizingMode:UIImageResizingModeStretch];
         }
     }
 
@@ -44,5 +46,9 @@
 
 - (ASLayoutSpec *)preferredLayoutSpec {
     return [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(0, 0, 0, 0) child:self];
+}
+
+- (void)addConstrainWithCollectionNodeCellConstrainedSize:(ASSizeRange)constrainedSize {
+
 }
 @end

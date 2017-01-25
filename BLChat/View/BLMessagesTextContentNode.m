@@ -4,6 +4,7 @@
 //
 
 #import "BLMessagesTextContentNode.h"
+#import "ASDimension.h"
 
 
 @interface BLMessagesTextContentNode ()
@@ -36,6 +37,7 @@
 
             textNode.attributedText =  [[NSAttributedString alloc] initWithString:text ?: @""
                                                                        attributes:attributes];
+            textNode.maximumNumberOfLines = 0;
             textNode;
         });
 
@@ -48,20 +50,24 @@
 }
 
 + (instancetype)textContentNodeWithText:(NSString *)text messageDisplayType:(BLMessageDisplayType)displayType {
-    return [[[self class] alloc] initWithText:text messageDisplayType:displayType];
+    return [(BLMessagesTextContentNode *) [[self class] alloc] initWithText:text messageDisplayType:displayType];
 }
 
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
     UIEdgeInsets insets = UIEdgeInsetsMake(
-            kBLMessagesBubbleContentPadding,
-            kBLMessagesBubbleContentPadding,
-            kBLMessagesBubbleContentPadding,
-            kBLMessagesBubbleContentPadding);
+            kBLMessagesIncomingBubbleContentTopPadding,
+            self.messageDisplayType ==  BLMessageDisplayTypeLeft ? kBLMessagesIncomingBubbleContentLeftPadding : kBLMessagesIncomingBubbleContentRightPadding,
+            kBLMessagesIncomingBubbleContentBottomPadding,
+            self.messageDisplayType ==  BLMessageDisplayTypeLeft ? kBLMessagesIncomingBubbleContentRightPadding : kBLMessagesIncomingBubbleContentLeftPadding);
     ASInsetLayoutSpec *textNodeInsetLayout = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets
                                                                                     child:self.textNode];
 
     ASBackgroundLayoutSpec *bubbleAndTextNodeBackgroundLayout = [ASBackgroundLayoutSpec backgroundLayoutSpecWithChild:textNodeInsetLayout background:self.bubbleBackgroundImageNode];
     return bubbleAndTextNodeBackgroundLayout;
+}
+
+- (void)addConstrainWithCollectionNodeCellConstrainedSize:(ASSizeRange)constrainedSize {
+    self.style.maxWidth = ASDimensionMake(constrainedSize.max.width - 2 * (kBLMessagesCollectionNodeCellAvatarHeight + kBLMessagesIncomingMessageLeftMargin + kBLMessagesIncomingContentNodeLeftMargin) - 20);
 }
 
 

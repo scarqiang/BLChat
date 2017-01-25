@@ -33,6 +33,12 @@ typedef  void(^BLMessagesContentNodeConfigureBlock)(BLMessagesViewController *me
  */
 - (ASLayoutSpec *)preferredLayoutSpec;
 /**
+ * cell布局时调用，content node可在此方法内约束自己或subnode的大小，子类需要重写
+ * @param constrainedSize
+ */
+- (void)addConstrainWithCollectionNodeCellConstrainedSize:(ASSizeRange)constrainedSize;
+
+/**
  * 获取响应消息展示类型的气泡图片
  * @param displayType
  * @return
