@@ -18,6 +18,14 @@ NS_ASSUME_NONNULL_BEGIN
                                           atIndexPath:(NSIndexPath *)indexPath;
 
 @end
+
+@protocol BLMessagesCollectionNodeDataSource <ASCollectionDataSource>
+- (id<BLMessageData>)messageDataForCollectionNode:(BLMessagesCollectionNode *)collectionNode
+                                      atIndexPath:(NSIndexPath *)indexPath;
+- (nullable NSString *)formattedTimeForCollectionNode:(BLMessagesCollectionNode *)collectionNode
+                                          atIndexPath:(NSIndexPath *)indexPath;
+
+@end
 @interface BLMessagesCollectionNode : ASCollectionNode <BLMessagesCollectionNodeCellDelegate>
 @property (weak, nonatomic) id<BLMessagesCollectionNodeDelegate> delegate;
 @property (weak, nonatomic) id<BLMessagesCollectionNodeDataSource> dataSource;
