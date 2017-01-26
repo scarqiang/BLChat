@@ -365,8 +365,8 @@
 				F7A742561E372D21004AF3DB /* BLMessageInputToolBarViewController */,
 				F76776321E37623B006F36C3 /* BLMessagesViewController.h */,
 				F76776331E37623B006F36C3 /* BLMessagesViewController.m */,
-				828C9B2E1AD0E99A0276E629 /* BLMessagesViewControllerDataSource.m */,
 				828C96D7F734C1975B3C0BAE /* BLMessagesViewControllerDataSource.h */,
+				828C9B2E1AD0E99A0276E629 /* BLMessagesViewControllerDataSource.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

@@ -43,6 +43,10 @@ didClickAdditionalButtonNode:(ASButtonNode *)additionalButtonNode
                                currentState:(BLInuptToolBarState)currentState
                                 targetState:(BLInuptToolBarState)targetState;
 
+- (void)inputToolBarTextNodeDidUpdateText:(ASEditableTextNode *)editableTextNode
+                           textNumberLine:(NSInteger)textNumberLine
+                                barHeight:(CGFloat)barHeight;
+
 @end
 
 @interface BLMessageInputToolBarNode : ASDisplayNode

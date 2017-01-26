@@ -13,6 +13,7 @@
 @interface BLMessageInputToolBarViewController ()<BLMessageInputToolBarNodeDelegate>
 @property (nonatomic, strong) BLMessageInputToolBarNode *inputToolBarNode;
 @property (nonatomic) CGRect inputToolBarNormalFrame;
+@property (nonatomic) CGRect inputToolBarRiseFrame;
 @end
 
 @implementation BLMessageInputToolBarViewController
@@ -85,7 +86,7 @@
                          CGFloat increaseHeight = riseHeight - kbSize.height;
                          barFrame.origin.y = barFrame.origin.y + increaseHeight;
                          self.inputToolBarNode.frame = barFrame;
-                         
+                         self.inputToolBarRiseFrame = self.inputToolBarNode.frame;
                      } completion:nil];
 }
 
@@ -107,6 +108,27 @@
 
 #pragma mark - BLMessageInputToolBarNodeDelegate
 
+
+- (void)inputToolBarTextNodeDidUpdateText:(ASEditableTextNode *)editableTextNode
+                           textNumberLine:(NSInteger)textNumberLine
+                                barHeight:(CGFloat)barHeight {
+    
+    CGRect targetFrame = self.inputToolBarRiseFrame;
+    
+    if (textNumberLine > 1) {
+        CGFloat barY = CGRectGetMinY(self.inputToolBarRiseFrame) + BLInputToolBarNodeHeight - barHeight;
+        CGRect barFrame = self.inputToolBarRiseFrame;
+        barFrame.origin.y = barY;
+        barFrame.size.height = barHeight;
+        targetFrame = barFrame;
+    }
+    
+    self.inputToolBarNode.frame = targetFrame;
+    
+//    [UIView animateWithDuration:0.25 animations:^{
+//        self.inputToolBarNode.frame = targetFrame;
+//    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

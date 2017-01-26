@@ -44,6 +44,7 @@
     [self addChildViewController:viewController];
     [self.view addSubnode:viewController.node];
     [viewController didMoveToParentViewController:self];
+   
     NSMutableArray<id<BLMessageData>> *messages = [NSMutableArray array];
     for (NSInteger i = 0; i < 2000; i++) {
         [messages addObject:[BLMessage randomSampleMessage]];
