@@ -7,8 +7,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @class BLMessagesCollectionNodeCell;
-@protocol BLMessagesCollectionNodeCellDelegate <NSObject>
 
+@protocol BLMessagesCollectionNodeCellDelegate <NSObject>
+- (void) didTapContentNode:(BLMessagesContentNode *)contentNode
+            inMessagesCell:(BLMessagesCollectionNodeCell *)cell
+preferredContentNodeAction:(BLMessagesContentNodeAction)action;
 @end
 
 @interface BLMessagesCollectionNodeCell : ASCellNode

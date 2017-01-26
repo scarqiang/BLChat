@@ -10,6 +10,17 @@
 @end
 
 @implementation BLMessagesContentNode
+
+- (void)didLoad {
+    [super didLoad];
+    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapContentNode)];
+    [self.view addGestureRecognizer:tapGR];
+}
+
+- (void)didTapContentNode {
+    
+}
+
 - (UIImage *)resizableBubbleImageForMessageDisplayType:(BLMessageDisplayType)displayType {
     switch (displayType) {
         case BLMessageDisplayTypeLeft: {

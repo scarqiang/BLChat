@@ -13,7 +13,7 @@
 #import "BLMessagesCollectionNodeCell.h"
 #import "BLMessageInputToolBarViewController.h"
 
-@interface BLMessagesViewController () <BLChatViewControllerDataSourceDelegate, BLMessagesCollectionNodeDelegate, ASCollectionDataSource, ASCollectionViewDelegateFlowLayout>
+@interface BLMessagesViewController () <BLChatViewControllerDataSourceDelegate, BLMessagesCollectionNodeDelegate, BLMessagesCollectionNodeDataSource, ASCollectionViewDelegateFlowLayout>
 //model
 @property (nonatomic, strong) BLMessagesViewControllerDataSource *dataSource;
 
@@ -22,10 +22,6 @@
 @end
 @implementation BLMessagesViewController
 #pragma mark - lifecycle
-- (void)dealloc {
-    
-}
-
 - (instancetype)init {
     self = [super initWithNode:[ASDisplayNode new]];
     if (self) {
@@ -33,7 +29,6 @@
         _dataSource.delegate = self;
         
         [self configureCollectionNode];
-
     }
 
     return self;
@@ -49,6 +44,11 @@
     [self addChildViewController:viewController];
     [self.view addSubnode:viewController.node];
     [viewController didMoveToParentViewController:self];
+    NSMutableArray<id<BLMessageData>> *messages = [NSMutableArray array];
+    for (NSInteger i = 0; i < 2000; i++) {
+        [messages addObject:[BLMessage randomSampleMessage]];
+    }
+    self.dataSource.messages = messages;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -65,38 +65,62 @@
     _collectionNode.dataSource = self;
     [self.node addSubnode:_collectionNode];
 }
-#pragma mark - collection node data source / delegate
+#pragma mark - collection node data source
 - (NSInteger)collectionNode:(ASCollectionNode *)collectionNode numberOfItemsInSection:(NSInteger)section {
-    return 200;
+    return self.dataSource.messages.count;
 }
 
 - (NSInteger)numberOfSectionsInCollectionNode:(ASCollectionNode *)collectionNode {
     return 1;
 }
 
-- (ASCellNode *)collectionNode:(ASCollectionNode *)collectionNode nodeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    BLMessage *message = [BLMessage randomSampleMessage];
+- (ASCellNode *)collectionNode:(BLMessagesCollectionNode *)collectionNode nodeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    BLMessage *message = [collectionNode.dataSource messageDataForCollectionNode:collectionNode atIndexPath:indexPath];
     BLMessagesCollectionNodeCell *cell = [[BLMessagesCollectionNodeCell alloc] initWithMessageDisplayType:message.messageDisplayType];
     cell.shouldDisplayName = NO;
     cell.contentNode = message.contentNode;
     cell.senderName = message.senderName;
     cell.avatarNode.image = message.avatarImage;
-    cell.formattedTime = @"13: 43";
+    cell.formattedTime = [collectionNode.dataSource formattedTimeForCollectionNode:collectionNode atIndexPath:indexPath];
     cell.backgroundColor = [UIColor redColor];
+
+    cell.delegate = collectionNode;
     return cell;
 
 }
 
+- (id<BLMessageData>)messageDataForCollectionNode:(BLMessagesCollectionNode *)collectionNode atIndexPath:(NSIndexPath *)indexPath {
+    return self.dataSource.messages[(NSUInteger) indexPath.row];
+}
 
+- (nullable NSString *)formattedTimeForCollectionNode:(BLMessagesCollectionNode *)collectionNode
+                                          atIndexPath:(NSIndexPath *)indexPath {
+    NSIndexPath *previousIndexPath = indexPath.row == 0 ? nil : [NSIndexPath indexPathForItem:indexPath.row - 1 inSection:1];
+    id<BLMessageData> currentMessageData = [collectionNode.dataSource messageDataForCollectionNode:collectionNode
+                                                                                       atIndexPath:indexPath];
+    id<BLMessageData> previousMessageData = !previousIndexPath ? nil : [collectionNode.dataSource messageDataForCollectionNode:collectionNode
+                                                                                                                   atIndexPath:previousIndexPath];
+    return @"12:33";
+}
+
+#pragma mark - collection node delegate
 - (ASSizeRange)collectionNode:(ASCollectionNode *)collectionNode constrainedSizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     CGSize minItemSize = CGSizeMake(CGRectGetWidth(self.view.frame), 0);
     CGSize maxItemSize = CGSizeMake(CGRectGetWidth(self.view.frame), INFINITY);
-
+    
     return ASSizeRangeMake(minItemSize, maxItemSize);
 }
 
-
+- (void)  didTapContentNode:(BLMessagesContentNode *)contentNode
+             inMessagesCell:(BLMessagesCollectionNodeCell *)cell
+           inCollectionNode:(BLMessagesCollectionNode *)collectionNode
+ preferredContentNodeAction:(BLMessagesContentNodeAction)action {
+    if (!action) {
+        return;
+    }
+    
+    action(self, collectionNode, cell);
+}
 #pragma mark - chat view controller data source delegate
-#pragma mark - collection cell delegate
 @end

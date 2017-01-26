@@ -18,7 +18,7 @@ extern NSString * const kBLMessagesPlainOutgoingBubbleImageName;
 extern NSString * const kBLMessagesPlainOutgoingBubbleHighlightedImageName;
 
 extern CGFloat const kBLMessagesBubbleContentPadding;
-
+extern CGFloat const kBLMessagesBubbleMouthWidth;
 extern CGFloat const kBLMessagesIncomingBubbleContentTopPadding;
 extern CGFloat const kBLMessagesIncomingBubbleContentLeftPadding;
 extern CGFloat const kBLMessagesIncomingBubbleContentBottomPadding;

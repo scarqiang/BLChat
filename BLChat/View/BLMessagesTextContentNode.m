@@ -69,7 +69,7 @@
 }
 
 - (void)addConstrainWithCollectionNodeCellConstrainedSize:(ASSizeRange)constrainedSize {
-    self.style.maxWidth = ASDimensionMake(constrainedSize.max.width - 2 * (kBLMessagesCollectionNodeCellAvatarHeight + kBLMessagesIncomingMessageLeftMargin + kBLMessagesIncomingContentNodeLeftMargin) - 20);
+    self.style.maxWidth = ASDimensionMake(constrainedSize.max.width - 2 * (kBLMessagesCollectionNodeCellAvatarHeight + kBLMessagesIncomingMessageLeftMargin + kBLMessagesIncomingContentNodeLeftMargin) - kBLMessagesBubbleMouthWidth);
 }
 
 

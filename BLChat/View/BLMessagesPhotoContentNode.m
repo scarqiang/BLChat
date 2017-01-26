@@ -6,6 +6,13 @@
 #import "BLMessagesPhotoContentNode.h"
 #import "BLMessagesConstant.h"
 
+/**
+ * 一个view中导入viewController、superview以及superview的superview，乖乖的，但这里只是为了在代理action中处理点击相关逻辑，无妨
+ */
+#import "BLMessagesViewController.h"
+#import "BLMessagesCollectionNode.h"
+#import "BLMessagesCollectionNodeCell.h"
+
 @interface BLMessagesPhotoContentNode ()
 @property (nonatomic) ASNetworkImageNode *photoNode;
 
@@ -36,10 +43,6 @@
         
         [self addSubnode:_photoNode];
 
-        self.configureBlock = ^(BLMessagesViewController *messagesViewController) {
-
-        };
-
     }
 
     return self;
@@ -47,6 +50,13 @@
 
 + (instancetype)photoContentNodeWithImage:(UIImage *)image messageDisplayType:(BLMessageDisplayType)displayType {
     return [[self alloc] initWithImage:image messageDisplayType:displayType];
+}
+
+- (void)didTapContentNode {
+    [self.delegate didTapMessagesContentNode:self preferredAction:^(BLMessagesViewController *messagesViewController,
+            BLMessagesCollectionNode *collectionNode, BLMessagesCollectionNodeCell *collectionNodeCell) {
+        NSLog(@"photo is tapped");
+    }];
 }
 
 - (void)maskImageNode:(ASImageNode *)imageNode withImage:(UIImage *)image {
