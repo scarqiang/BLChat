@@ -26,18 +26,22 @@ typedef NS_ENUM(NSUInteger, BLInuptToolBarState) {
 
 - (void)inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
  didClickVoiceButtonNode:(ASButtonNode *)voiceButtonNode
-            currentState:(BLInuptToolBarState)state
-             targetState:(BLInuptToolBarState)state;
+            currentState:(BLInuptToolBarState)currentState
+             targetState:(BLInuptToolBarState)targetState;
 
 - (void)    inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
 didClickExpressionButtonNode:(ASButtonNode *)expressionButtonNode
-                currentState:(BLInuptToolBarState)state
-                 targetState:(BLInuptToolBarState)state;
+                currentState:(BLInuptToolBarState)currentState
+                 targetState:(BLInuptToolBarState)targetState;
 
 - (void)    inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
 didClickAdditionalButtonNode:(ASButtonNode *)additionalButtonNode
-                currentState:(BLInuptToolBarState)state
-                 targetState:(BLInuptToolBarState)state;
+                currentState:(BLInuptToolBarState)currentState
+                 targetState:(BLInuptToolBarState)targetState;
+
+- (void)inputToolBarTextNodeDidBeginEditing:(ASEditableTextNode *)editableTextNode
+                               currentState:(BLInuptToolBarState)currentState
+                                targetState:(BLInuptToolBarState)targetState;
 
 @end
 

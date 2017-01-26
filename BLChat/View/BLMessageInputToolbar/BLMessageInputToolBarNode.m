@@ -12,6 +12,7 @@ CGFloat const BLInputToolBarNodeHeight = 50.f;
 CGFloat const BLInputTextNodeHeight = 34.f;
 CGFloat const BLInputTextNodeFontSize = 15.f;
 CGFloat const BLInputItemSpecWidth = 10.f;
+CGFloat const BLInputItemInsetHeight = 5.f;
 
 @interface BLMessageInputToolBarNode ()<ASEditableTextNodeDelegate>
 @property (nonatomic, strong) ASEditableTextNode *inputTextNode;
@@ -226,34 +227,54 @@ CGFloat const BLInputItemSpecWidth = 10.f;
 
 - (void)editableTextNodeDidBeginEditing:(ASEditableTextNode *)editableTextNode {
     
+    BLInuptToolBarState currentState = BLInuptToolBarStateNone;
+    
     if (self.expressionButtonNode.selected) {
         [self switchInputToolBarStateActionCurrentState:BLInuptToolBarStateExpression
                                             targetState:BLInuptToolBarStateKeyboard
                                        targetButtonNode:self.expressionButtonNode];
+        currentState = BLInuptToolBarStateExpression;
     }
     
     if (self.additionalButtonNode.selected) {
         [self switchInputToolBarStateActionCurrentState:BLInuptToolBarStateAddition
                                             targetState:BLInuptToolBarStateKeyboard
                                        targetButtonNode:self.additionalButtonNode];
-
+        currentState = BLInuptToolBarStateAddition;
     }
+    
+    if ([self.delegate respondsToSelector:@selector(inputToolBarTextNodeDidBeginEditing:currentState:targetState:)]) {
+        [self.delegate inputToolBarTextNodeDidBeginEditing:editableTextNode currentState:currentState targetState:BLInuptToolBarStateKeyboard];
+    }
+}
+
+- (BOOL)editableTextNode:(ASEditableTextNode *)editableTextNode
+ shouldChangeTextInRange:(NSRange)range
+         replacementText:(NSString *)text {
+    
+    
+    return YES;
 }
 
 #pragma mark - layout
 
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
-     
+    
+    
+    return [self inputToolBarTextSingleLineLayoutSpec];
+}
+
+- (ASLayoutSpec *)inputToolBarTextSingleLineLayoutSpec {
     self.voiceButtonNode.style.spacingBefore = BLInputItemSpecWidth;
     self.additionalButtonNode.style.spacingAfter = BLInputItemSpecWidth;
     
     NSArray *specChildren = @[self.voiceButtonNode, self.inputTextNode, self.expressionButtonNode, self.additionalButtonNode];
     
     ASStackLayoutSpec *normalLayoutSpec = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal
-                                                                            spacing:BLInputItemSpecWidth
-                                                                     justifyContent:ASStackLayoutJustifyContentSpaceAround
-                                                                         alignItems:ASStackLayoutAlignItemsCenter
-                                                                           children:specChildren];
+                                                                                  spacing:BLInputItemSpecWidth
+                                                                           justifyContent:ASStackLayoutJustifyContentSpaceAround
+                                                                               alignItems:ASStackLayoutAlignItemsCenter
+                                                                                 children:specChildren];
     
     ASLayoutSpec *bottomSpec = [ASLayoutSpec new];
     
@@ -265,7 +286,5 @@ CGFloat const BLInputItemSpecWidth = 10.f;
     
     return packSpec;
 }
-
-
 
 @end
