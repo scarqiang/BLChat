@@ -11,6 +11,7 @@
 
 @implementation BLMessagesCollectionNode
 @dynamic delegate;
+@dynamic dataSource;
 
 - (instancetype)init {
     self = [super init];

@@ -6,8 +6,9 @@
 @protocol BLChatViewControllerDataSourceDelegate <NSObject>
 
 @end
+@protocol BLMessageData;
 
 @interface BLMessagesViewControllerDataSource : NSObject
 @property (weak, nonatomic) id<BLChatViewControllerDataSourceDelegate> delegate;
-
+@property (nonatomic) NSMutableArray<id<BLMessageData>> *messages;
 @end

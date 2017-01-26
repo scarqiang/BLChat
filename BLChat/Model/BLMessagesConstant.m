@@ -20,6 +20,7 @@ NSString * const kBLMessagesPlainIncomingBubbleHighlightedImageName = @"receiver
 NSString * const kBLMessagesPlainOutgoingBubbleImageName = @"send_MsgBg_Plain_n";
 NSString * const kBLMessagesPlainOutgoingBubbleHighlightedImageName = @"send_MsgBg_Plain_h";
 CGFloat const kBLMessagesBubbleContentPadding = 10.f;
+CGFloat const kBLMessagesBubbleMouthWidth = 5.f;
 
 CGFloat const kBLMessagesIncomingBubbleContentTopPadding = 10.f;
 CGFloat const kBLMessagesIncomingBubbleContentLeftPadding = 15.f;

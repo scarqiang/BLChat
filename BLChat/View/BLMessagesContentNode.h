@@ -4,17 +4,18 @@
 //
 #import "BLMessage.h"
 #import "BLMessagesConstant.h"
-#import "BLMessagesViewController.h"
-#import "BLMessagesCollectionNode.h"
-#import "BLMessagesCollectionNodeCell.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @class BLMessagesContentNode;
+@class BLMessagesViewController;
+@class BLMessagesCollectionNode;
+@class BLMessagesCollectionNodeCell;
 
 typedef void(^BLMessagesContentNodeAction)(BLMessagesViewController *messagesViewController, BLMessagesCollectionNode *collectionNode, BLMessagesCollectionNodeCell *collectionNodeCell);
 
 @protocol BLMessagesContentNodeDelegate <NSObject>
-- (void)didTapMessagesContentNode:(BLMessagesContentNode *)contentNode preferredAction:(BLMessagesContentNodeAction)action;
+- (void)didTapMessagesContentNode:(BLMessagesContentNode *)contentNode
+                  preferredAction:(BLMessagesContentNodeAction)action;
 @end
 
 @interface BLMessagesContentNode : ASDisplayNode
@@ -25,20 +26,24 @@ typedef void(^BLMessagesContentNodeAction)(BLMessagesViewController *messagesVie
 
 /**
  * content node偏好布局
- * @return
+ * @return ASLayoutSpec
  */
 - (ASLayoutSpec *)preferredLayoutSpec;
 /**
  * cell布局时调用，content node可在此方法内约束自己或subnode的大小，子类需要重写
- * @param constrainedSize
+ * @param constrainedSize 约束尺寸
  */
 - (void)addConstrainWithCollectionNodeCellConstrainedSize:(ASSizeRange)constrainedSize;
 
 /**
  * 获取响应消息展示类型的气泡图片
- * @param displayType
- * @return
+ * @param displayType 需要展示消息的类型
+ * @return UIImage
  */
 - (nullable UIImage *)resizableBubbleImageForMessageDisplayType:(BLMessageDisplayType)displayType;
+/**
+ * content node的点击action，供子类重写，默认没有任何实现
+ */
+- (void)didTapContentNode;
 @end
 NS_ASSUME_NONNULL_END
