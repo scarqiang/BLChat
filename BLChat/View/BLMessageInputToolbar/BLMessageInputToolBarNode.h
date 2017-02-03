@@ -13,12 +13,12 @@
 extern CGFloat const BLInputToolBarNodeHeight;
 extern CGFloat const BLInputTextNodeHeight;;
 
-typedef NS_ENUM(NSUInteger, BLInuptToolBarState) {
-    BLInuptToolBarStateNone,
-    BLInuptToolBarStateVoice,
-    BLInuptToolBarStateExpression,
-    BLInuptToolBarStateAddition,
-    BLInuptToolBarStateKeyboard
+typedef NS_ENUM(NSUInteger, BLInputToolBarState) {
+    BLInputToolBarStateNone,
+    BLInputToolBarStateVoice,
+    BLInputToolBarStateExpression,
+    BLInputToolBarStateAddition,
+    BLInputToolBarStateKeyboard
 };
 
 
@@ -26,22 +26,22 @@ typedef NS_ENUM(NSUInteger, BLInuptToolBarState) {
 
 - (void)inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
  didClickVoiceButtonNode:(ASButtonNode *)voiceButtonNode
-            currentState:(BLInuptToolBarState)currentState
-             targetState:(BLInuptToolBarState)targetState;
+            currentState:(BLInputToolBarState)currentState
+             targetState:(BLInputToolBarState)targetState;
 
 - (void)    inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
 didClickExpressionButtonNode:(ASButtonNode *)expressionButtonNode
-                currentState:(BLInuptToolBarState)currentState
-                 targetState:(BLInuptToolBarState)targetState;
+                currentState:(BLInputToolBarState)currentState
+                 targetState:(BLInputToolBarState)targetState;
 
 - (void)    inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
 didClickAdditionalButtonNode:(ASButtonNode *)additionalButtonNode
-                currentState:(BLInuptToolBarState)currentState
-                 targetState:(BLInuptToolBarState)targetState;
+                currentState:(BLInputToolBarState)currentState
+                 targetState:(BLInputToolBarState)targetState;
 
 - (void)inputToolBarTextNodeDidBeginEditing:(ASEditableTextNode *)editableTextNode
-                               currentState:(BLInuptToolBarState)currentState
-                                targetState:(BLInuptToolBarState)targetState;
+                               currentState:(BLInputToolBarState)currentState
+                                targetState:(BLInputToolBarState)targetState;
 
 - (void)inputToolBarTextNodeDidUpdateText:(ASEditableTextNode *)editableTextNode
                            textNumberLine:(NSInteger)textNumberLine
@@ -50,7 +50,7 @@ didClickAdditionalButtonNode:(ASButtonNode *)additionalButtonNode
 @end
 
 @interface BLMessageInputToolBarNode : ASDisplayNode
-@property (nonatomic, readonly) BLInuptToolBarState inputToolBarState;
+@property (nonatomic, readonly) BLInputToolBarState inputToolBarState;
 @property (nonatomic, strong, readonly) ASEditableTextNode *inputTextNode;
 
 - (instancetype)initWithDelegate:(id<BLMessageInputToolBarNodeDelegate>)delegate;

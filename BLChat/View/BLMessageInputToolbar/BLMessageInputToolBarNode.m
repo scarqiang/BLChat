@@ -23,7 +23,7 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
 @property (nonatomic, strong) ASButtonNode *additionalButtonNode;
 @property (nonatomic, strong) ASDisplayNode *lineNode;
 @property (nonatomic, weak) id<BLMessageInputToolBarNodeDelegate> delegate;
-@property (nonatomic, readwrite) BLInuptToolBarState inputToolBarState;
+@property (nonatomic, readwrite) BLInputToolBarState inputToolBarState;
 @property (nonatomic) CGRect inputToolBarNormalFrame;
 @property (nonatomic) CGRect inputToolBarRiseFrame;
 @property (nonatomic) CGFloat maxTextNodeHeight;
@@ -105,8 +105,8 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
 #pragma mark - target action
 
 - (void)didClickVoiceButtonNode:(ASButtonNode *)buttonNode {
-    
-    BLInuptToolBarState targetState = buttonNode.selected ? BLInuptToolBarStateKeyboard : BLInuptToolBarStateVoice;
+
+    BLInputToolBarState targetState = buttonNode.selected ? BLInputToolBarStateKeyboard : BLInputToolBarStateVoice;
     
     if ([self.delegate respondsToSelector:@selector(inputToolBarNode:didClickVoiceButtonNode:currentState:targetState:)]) {
         [self.delegate inputToolBarNode:self
@@ -121,8 +121,8 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
 }
 
 - (void)didClickExpressionButtonNode:(ASButtonNode *)buttonNode {
-    
-    BLInuptToolBarState targetState = buttonNode.selected ? BLInuptToolBarStateKeyboard : BLInuptToolBarStateExpression;
+
+    BLInputToolBarState targetState = buttonNode.selected ? BLInputToolBarStateKeyboard : BLInputToolBarStateExpression;
     
     if ([self.delegate respondsToSelector:@selector(inputToolBarNode:didClickExpressionButtonNode:currentState:targetState:)]) {
         [self.delegate inputToolBarNode:self
@@ -137,8 +137,8 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
 }
 
 - (void)didClickAdditionalButtonNode:(ASButtonNode *)buttonNode {
-    
-    BLInuptToolBarState targetState = buttonNode.selected ? BLInuptToolBarStateKeyboard : BLInuptToolBarStateAddition;
+
+    BLInputToolBarState targetState = buttonNode.selected ? BLInputToolBarStateKeyboard : BLInputToolBarStateAddition;
     
     if ([self.delegate respondsToSelector:@selector(inputToolBarNode:didClickAdditionalButtonNode:currentState:targetState:)]) {
         [self.delegate inputToolBarNode:self
@@ -152,19 +152,19 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
                                    targetButtonNode:buttonNode];
 }
 
-- (void)switchInputToolBarStateActionCurrentState:(BLInuptToolBarState)currentState
-                                      targetState:(BLInuptToolBarState)targetState
+- (void)switchInputToolBarStateActionCurrentState:(BLInputToolBarState)currentState
+                                      targetState:(BLInputToolBarState)targetState
                                  targetButtonNode:(ASButtonNode *)buttonNode {
     
-    if (targetState == BLInuptToolBarStateKeyboard) {
+    if (targetState == BLInputToolBarStateKeyboard) {
         switch (currentState) {
-            case BLInuptToolBarStateVoice:
+            case BLInputToolBarStateVoice:
                 [self setupVoiceButtonNodeImage:self.voiceButtonNode];
                 break;
-            case BLInuptToolBarStateExpression:
+            case BLInputToolBarStateExpression:
                 [self setupExpressionButtonNodeImage:self.expressionButtonNode];
                 break;
-            case BLInuptToolBarStateAddition:
+            case BLInputToolBarStateAddition:
                 [self setupAdditionalButtonNodeImage:self.additionalButtonNode];
                 break;
             default:
@@ -176,15 +176,15 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
     }
     else {
         switch (currentState) {
-            case BLInuptToolBarStateVoice:
+            case BLInputToolBarStateVoice:
                 [self setupVoiceButtonNodeImage:self.voiceButtonNode];
                 self.voiceButtonNode.selected = NO;
                 break;
-            case BLInuptToolBarStateExpression:
+            case BLInputToolBarStateExpression:
                 [self setupExpressionButtonNodeImage:self.expressionButtonNode];
                 self.expressionButtonNode.selected = NO;
                 break;
-            case BLInuptToolBarStateAddition:
+            case BLInputToolBarStateAddition:
                 [self setupAdditionalButtonNodeImage:self.additionalButtonNode];
                 self.additionalButtonNode.selected = NO;
                 break;
@@ -193,13 +193,13 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
         }
         
         switch (targetState) {
-            case BLInuptToolBarStateVoice:
+            case BLInputToolBarStateVoice:
                 [self setupKeyboardButtonNodeImage:buttonNode];
                 break;
-            case BLInuptToolBarStateExpression:
+            case BLInputToolBarStateExpression:
                 [self setupKeyboardButtonNodeImage:buttonNode];
                 break;
-            case BLInuptToolBarStateAddition:
+            case BLInputToolBarStateAddition:
                 [self setupCrossButtonNodeImage:buttonNode];
                 break;
             default:
@@ -239,25 +239,25 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
 #pragma mark - ASEditableTextNodeDelegate
 
 - (void)editableTextNodeDidBeginEditing:(ASEditableTextNode *)editableTextNode {
-    
-    BLInuptToolBarState currentState = BLInuptToolBarStateNone;
+
+    BLInputToolBarState currentState = BLInputToolBarStateNone;
     
     if (self.expressionButtonNode.selected) {
-        [self switchInputToolBarStateActionCurrentState:BLInuptToolBarStateExpression
-                                            targetState:BLInuptToolBarStateKeyboard
+        [self switchInputToolBarStateActionCurrentState:BLInputToolBarStateExpression
+                                            targetState:BLInputToolBarStateKeyboard
                                        targetButtonNode:self.expressionButtonNode];
-        currentState = BLInuptToolBarStateExpression;
+        currentState = BLInputToolBarStateExpression;
     }
     
     if (self.additionalButtonNode.selected) {
-        [self switchInputToolBarStateActionCurrentState:BLInuptToolBarStateAddition
-                                            targetState:BLInuptToolBarStateKeyboard
+        [self switchInputToolBarStateActionCurrentState:BLInputToolBarStateAddition
+                                            targetState:BLInputToolBarStateKeyboard
                                        targetButtonNode:self.additionalButtonNode];
-        currentState = BLInuptToolBarStateAddition;
+        currentState = BLInputToolBarStateAddition;
     }
     
     if ([self.delegate respondsToSelector:@selector(inputToolBarTextNodeDidBeginEditing:currentState:targetState:)]) {
-        [self.delegate inputToolBarTextNodeDidBeginEditing:editableTextNode currentState:currentState targetState:BLInuptToolBarStateKeyboard];
+        [self.delegate inputToolBarTextNodeDidBeginEditing:editableTextNode currentState:currentState targetState:BLInputToolBarStateKeyboard];
     }
 }
 
@@ -361,23 +361,5 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
     return packSpec;
 }
 
-- (void)animateLayoutTransition:(id<ASContextTransitioning>)context {
-    
-//    CGRect initalInputFrame = [context initialFrameForNode:self.inputTextNode];
-//    CGRect initalVoiceNodeFrame = [context initialFrameForNode:self.voiceButtonNode];
-//    
-//    CGFloat textNodeHeight = self.inputTextNode.textView.contentSize.height;
-//    CGFloat riseHeight = textNodeHeight - 5;
-//    initalVoiceNodeFrame.origin.y += riseHeight;
-//    self.voiceButtonNode.frame = initalVoiceNodeFrame;
-//    
-//    
-//    [UIView animateWithDuration:0.4 animations:^{
-//        
-//        self.voiceButtonNode.frame = [context finalFrameForNode:self.voiceButtonNode];
-//    } completion:^(BOOL finished) {
-//        [context completeTransition:finished];
-//    }];
-}
 
 @end
