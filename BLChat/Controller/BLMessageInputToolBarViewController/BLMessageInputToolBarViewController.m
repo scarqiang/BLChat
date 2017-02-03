@@ -42,7 +42,8 @@
 - (void)setupSubNode {
     _inputToolBarNode = [[BLMessageInputToolBarNode alloc] initWithDelegate:self];
     CGRect screenFrame = [UIScreen mainScreen].bounds;
-    _inputToolBarNode.frame = CGRectMake(0, screenFrame.size.height - BLInputToolBarNodeHeight, CGRectGetWidth(screenFrame), BLInputToolBarNodeHeight);
+    CGSize size = [_inputToolBarNode layoutThatFits:ASSizeRangeMake(CGSizeZero, self.view.frame.size)].size;
+    _inputToolBarNode.frame = CGRectMake(0, screenFrame.size.height - BLInputToolBarNodeHeight, CGRectGetWidth(screenFrame), size.height);
     _inputToolBarNormalFrame = _inputToolBarNode.frame;
     [self.view addSubnode:self.inputToolBarNode];
     
@@ -87,6 +88,8 @@
                          barFrame.origin.y = barFrame.origin.y + increaseHeight;
                          self.inputToolBarNode.frame = barFrame;
                          self.inputToolBarRiseFrame = self.inputToolBarNode.frame;
+                         self.inputToolBarNode.inputToolBarNormalFrame = self.inputToolBarNode.frame;
+
                      } completion:nil];
 }
 
@@ -123,7 +126,7 @@
         targetFrame = barFrame;
     }
     
-    self.inputToolBarNode.frame = targetFrame;
+//    self.inputToolBarNode.frame = targetFrame;
     
 //    [UIView animateWithDuration:0.25 animations:^{
 //        self.inputToolBarNode.frame = targetFrame;

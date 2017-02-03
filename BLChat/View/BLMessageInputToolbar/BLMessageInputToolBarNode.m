@@ -24,7 +24,6 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
 @property (nonatomic, strong) ASDisplayNode *lineNode;
 @property (nonatomic, weak) id<BLMessageInputToolBarNodeDelegate> delegate;
 @property (nonatomic, readwrite) BLInputToolBarState inputToolBarState;
-@property (nonatomic) CGRect inputToolBarNormalFrame;
 @property (nonatomic) CGRect inputToolBarRiseFrame;
 @property (nonatomic) CGFloat maxTextNodeHeight;
 @property (nonatomic) NSInteger textNumberLine;
@@ -86,7 +85,7 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
         textNode.clipsToBounds = YES;
         textNode.style.flexGrow = 1.f;
         textNode.style.flexShrink = 1.f;
-        textNode.style.preferredSize = CGSizeMake(100.f, BLInputTextNodeHeight);
+        textNode.style.preferredSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, BLInputTextNodeHeight);
         textNode.textView.font = [UIFont systemFontOfSize:BLInputTextNodeFontSize];
         textNode.textContainerInset = UIEdgeInsetsMake(8, 5, 8, 5);
 //        [self addSubnode:textNode];
@@ -274,6 +273,8 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
     self.textNumberLine = editableTextNode.textView.contentSize.height / editableTextNode.textView.font.lineHeight;
     CGFloat textNodeHeight = self.inputTextNode.textView.contentSize.height;
     
+    self.inputTextNode.style.preferredSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, textNodeHeight);
+    
     if (self.textNumberLine == 5) {
         self.maxTextNodeHeight = self.inputTextNode.textView.contentSize.height;
     }
@@ -283,6 +284,8 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
     }
     
     CGFloat barHeight = textNodeHeight + BLInputToolBarLineHeight + 2 * BLInputTextNodeInsetHeight;
+    
+    [self transitionLayoutWithAnimation:YES shouldMeasureAsync:NO measurementCompletion:nil];
     
     if ([self.delegate respondsToSelector:@selector(inputToolBarTextNodeDidUpdateText:textNumberLine:barHeight:)]) {
         [self.delegate inputToolBarTextNodeDidUpdateText:editableTextNode textNumberLine:self.textNumberLine barHeight:barHeight];
@@ -295,17 +298,15 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
     
     
-    return self.textNumberLine > 1 ? [self inputToolBarTextMultipleLineLayoutSpec] :
-                                      [self inputToolBarTextSingleLineLayoutSpec];
+//    return self.textNumberLine > 1 ? [self inputToolBarTextMultipleLineLayoutSpec] :
+//                                      [self inputToolBarTextSingleLineLayoutSpec];
     
-    return [self inputToolBarTextSingleLineLayoutSpec];
+    return [self inputToolBarTextMultipleLineLayoutSpec];
 
 }
 
 - (ASLayoutSpec *)inputToolBarTextMultipleLineLayoutSpec {
     
-    CGFloat textNodeHeight = self.inputTextNode.textView.contentSize.height;
-    self.inputTextNode.style.preferredSize = CGSizeMake(100.f, textNodeHeight);
     self.voiceButtonNode.contentEdgeInsets = UIEdgeInsetsMake(BLInputItemInsetHeight, 0, BLInputItemInsetHeight, 0);
     self.expressionButtonNode.contentEdgeInsets = UIEdgeInsetsMake(BLInputItemInsetHeight, 0, BLInputItemInsetHeight, 0);
     self.additionalButtonNode.contentEdgeInsets = UIEdgeInsetsMake(BLInputItemInsetHeight, 0, BLInputItemInsetHeight, 0);
@@ -330,6 +331,8 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
                                                                          children:@[self.lineNode, contentLayoutSpec, bottomSpec]];
     
     return packSpec;
+    
+//    return [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(10, 10, 10, 10) child:self.inputTextNode];
 }
 
 - (ASLayoutSpec *)inputToolBarTextSingleLineLayoutSpec {
@@ -361,5 +364,44 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
     return packSpec;
 }
 
+
+- (void)animateLayoutTransition:(id<ASContextTransitioning>)context {
+    
+    CGRect fromFrame = [context initialFrameForNode:self.inputTextNode];
+    fromFrame.size.height = self.inputTextNode.textView.contentSize.height;
+    
+    CGRect voiceFromFrame = [context initialFrameForNode:self.voiceButtonNode];
+    CGRect voiceToFrame = [context finalFrameForNode:self.voiceButtonNode];
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        
+        CGSize fromSize = [context layoutForKey:ASTransitionContextFromLayoutKey].size;
+        CGSize toSize = [context layoutForKey:ASTransitionContextToLayoutKey].size;
+        BOOL isResized = (CGSizeEqualToSize(fromSize, toSize) == NO);
+        if (isResized == YES) {
+            CGPoint position = self.frame.origin;
+            CGFloat textNodeHeight = self.inputTextNode.textView.contentSize.height;
+            CGFloat barHeight = textNodeHeight + BLInputToolBarLineHeight + 2 * BLInputTextNodeInsetHeight;
+            CGFloat barY = CGRectGetMinY(self.inputToolBarNormalFrame) + BLInputToolBarNodeHeight - barHeight;
+            CGRect barFrame = self.frame;
+            barFrame.origin.y = barY;
+            barFrame.size.height = barHeight;
+            position.y = barY;
+            self.frame = CGRectMake(position.x, position.y, toSize.width, toSize.height);
+            self.voiceButtonNode.frame = [context finalFrameForNode:self.voiceButtonNode];
+            self.additionalButtonNode.frame = [context finalFrameForNode:self.additionalButtonNode];
+            self.expressionButtonNode.frame = [context finalFrameForNode:self.expressionButtonNode];
+        }
+        
+        self.inputTextNode.frame = fromFrame;
+
+        
+    } completion:^(BOOL finished) {
+       
+        [context completeTransition:finished];
+        
+    }];
+}
 
 @end

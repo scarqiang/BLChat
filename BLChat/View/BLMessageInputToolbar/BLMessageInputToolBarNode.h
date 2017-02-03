@@ -52,6 +52,7 @@ didClickAdditionalButtonNode:(ASButtonNode *)additionalButtonNode
 @interface BLMessageInputToolBarNode : ASDisplayNode
 @property (nonatomic, readonly) BLInputToolBarState inputToolBarState;
 @property (nonatomic, strong, readonly) ASEditableTextNode *inputTextNode;
+@property (nonatomic) CGRect inputToolBarNormalFrame;
 
 - (instancetype)initWithDelegate:(id<BLMessageInputToolBarNodeDelegate>)delegate;
 @end
