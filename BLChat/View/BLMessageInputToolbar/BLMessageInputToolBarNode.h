@@ -43,11 +43,17 @@ didClickAdditionalButtonNode:(ASButtonNode *)additionalButtonNode
                                currentState:(BLInputToolBarState)currentState
                                 targetState:(BLInputToolBarState)targetState;
 
+- (void)     inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
+pressingSoundRecordButtonNode:(ASButtonNode *)recordButtonNode;
+
+- (void)      inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
+didLoosenSoundRecordButtonNode:(ASButtonNode *)recordButtonNode;
 
 @end
 
 @interface BLMessageInputToolBarNode : ASDisplayNode
-@property (nonatomic, readonly) BLInputToolBarState inputToolBarState;
+@property (nonatomic, readonly) BLInputToolBarState inputToolBarCurrentState;
+@property (nonatomic, readonly) BLInputToolBarState inputToolBarPreviousState;
 @property (nonatomic, strong, readonly) ASEditableTextNode *inputTextNode;
 @property (nonatomic, readonly) CGFloat barBottomItemHeight;
 @property (nonatomic) CGRect inputToolBarNormalFrame;

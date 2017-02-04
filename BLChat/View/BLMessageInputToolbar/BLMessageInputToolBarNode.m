@@ -7,6 +7,7 @@
 //
 
 #import "BLMessageInputToolBarNode.h"
+#import <YYKit/YYKit.h>
 
 CGFloat const BLInputToolBarNodeHeight = 50.f;
 CGFloat const BLInputTextNodeHeight = 34.f;
@@ -24,7 +25,8 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
 @property (nonatomic, strong) ASButtonNode *recordingButtonNode;
 @property (nonatomic, strong) ASDisplayNode *lineNode;
 @property (nonatomic, weak) id<BLMessageInputToolBarNodeDelegate> delegate;
-@property (nonatomic, readwrite) BLInputToolBarState inputToolBarState;
+@property (nonatomic, readwrite) BLInputToolBarState inputToolBarCurrentState;
+@property (nonatomic, readwrite) BLInputToolBarState inputToolBarPreviousState;
 @property (nonatomic, readwrite) CGFloat barBottomItemHeight;
 @property (nonatomic) CGRect maxTextNodeFrame;
 @property (nonatomic) CGFloat maxTextNodeHeight;
@@ -88,6 +90,7 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
         textNode.style.preferredSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, BLInputTextNodeHeight);
         textNode.textView.font = [UIFont systemFontOfSize:BLInputTextNodeFontSize];
         textNode.textContainerInset = UIEdgeInsetsMake(8, 5, 8, 5);
+//        textNode.returnKeyType = UIReturnKeySend;
         textNode;
     });
     
@@ -98,14 +101,50 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
         node;
     });
     
+    UIImage *normalButtonImage = [UIImage imageWithColor:[UIColor colorWithRed:80.f/255.f green:82.f/255.f blue:83.f/255.f alpha:1]];
+    UIImage *hightlightButtonImage = [UIImage imageWithColor:[UIColor colorWithRed:180.f/255.f green:180.f/255.f blue:181.f/255.f alpha:1]];
+    
     _recordingButtonNode = ({
         ASButtonNode *button = [ASButtonNode new];
+        [button setBackgroundImage:normalButtonImage forState:ASControlStateNormal];
+        [button setBackgroundImage:hightlightButtonImage forState:ASControlStateHighlighted];
+        
+        [button setTitle:@"按住说话" withFont:[UIFont systemFontOfSize:15.f] withColor:[UIColor whiteColor] forState:ASControlStateNormal];
+        [button setTitle:@"松开发送" withFont:[UIFont systemFontOfSize:15.f] withColor:[UIColor whiteColor] forState:ASControlStateHighlighted];
+        
+        [button addTarget:self action:@selector(pressRecordButtonNode:) forControlEvents:ASControlNodeEventTouchDown];
+        [button addTarget:self action:@selector(didLoosenButtonNode:) forControlEvents:ASControlNodeEventTouchUpInside];
+        
+        button.layer.cornerRadius = 4.f;
+        button.clipsToBounds = YES;
+        button.style.flexGrow = 1.f;
+        button.style.flexShrink = 1.f;
+        
+        button.style.preferredSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, BLInputTextNodeHeight);
         
         button;
     });
 }
 
 #pragma mark - target action
+
+- (void)pressRecordButtonNode:(ASButtonNode *)buttonNode {
+    
+    if ([self.delegate respondsToSelector:@selector(inputToolBarNode:pressingSoundRecordButtonNode:)]) {
+        [self.delegate inputToolBarNode:self pressingSoundRecordButtonNode:buttonNode];
+    }
+    
+    NSLog(@"你按住了~~~");
+}
+
+- (void)didLoosenButtonNode:(ASButtonNode *)buttonNode {
+    
+    if ([self.delegate respondsToSelector:@selector(inputToolBarNode:didLoosenSoundRecordButtonNode:)]) {
+        [self.delegate inputToolBarNode:self didLoosenSoundRecordButtonNode:buttonNode];
+    }
+    
+    NSLog(@"你松开了~~~~");
+}
 
 - (void)didClickVoiceButtonNode:(ASButtonNode *)buttonNode {
 
@@ -114,11 +153,11 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
     if ([self.delegate respondsToSelector:@selector(inputToolBarNode:didClickVoiceButtonNode:currentState:targetState:)]) {
         [self.delegate inputToolBarNode:self
                 didClickVoiceButtonNode:buttonNode
-                           currentState:self.inputToolBarState
+                           currentState:self.inputToolBarCurrentState
                             targetState:targetState];
     }
     
-    [self switchInputToolBarStateActionCurrentState:self.inputToolBarState
+    [self switchInputToolBarStateActionCurrentState:self.inputToolBarCurrentState
                                         targetState:targetState
                                    targetButtonNode:buttonNode];
 }
@@ -130,11 +169,11 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
     if ([self.delegate respondsToSelector:@selector(inputToolBarNode:didClickExpressionButtonNode:currentState:targetState:)]) {
         [self.delegate inputToolBarNode:self
            didClickExpressionButtonNode:buttonNode
-                           currentState:self.inputToolBarState
+                           currentState:self.inputToolBarCurrentState
                             targetState:targetState];
     }
     
-    [self switchInputToolBarStateActionCurrentState:self.inputToolBarState
+    [self switchInputToolBarStateActionCurrentState:self.inputToolBarCurrentState
                                         targetState:targetState
                                    targetButtonNode:buttonNode];
 }
@@ -146,11 +185,11 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
     if ([self.delegate respondsToSelector:@selector(inputToolBarNode:didClickAdditionalButtonNode:currentState:targetState:)]) {
         [self.delegate inputToolBarNode:self
            didClickAdditionalButtonNode:buttonNode
-                           currentState:self.inputToolBarState
+                           currentState:self.inputToolBarCurrentState
                             targetState:targetState];
     }
     
-    [self switchInputToolBarStateActionCurrentState:self.inputToolBarState
+    [self switchInputToolBarStateActionCurrentState:self.inputToolBarCurrentState
                                         targetState:targetState
                                    targetButtonNode:buttonNode];
 }
@@ -158,6 +197,8 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
 - (void)switchInputToolBarStateActionCurrentState:(BLInputToolBarState)currentState
                                       targetState:(BLInputToolBarState)targetState
                                  targetButtonNode:(ASButtonNode *)buttonNode {
+    
+    self.inputToolBarPreviousState = currentState;
     
     if (targetState == BLInputToolBarStateKeyboard) {
         switch (currentState) {
@@ -174,7 +215,7 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
                 break;
         }
         buttonNode.selected = NO;
-        self.inputToolBarState = targetState;
+        self.inputToolBarCurrentState = targetState;
         [self.inputTextNode becomeFirstResponder];
     }
     else {
@@ -209,8 +250,12 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
                 break;
         }
         buttonNode.selected = YES;
-        self.inputToolBarState = targetState;
+        self.inputToolBarCurrentState = targetState;
         [self.inputTextNode resignFirstResponder];
+    }
+
+    if (currentState == BLInputToolBarStateVoice || targetState == BLInputToolBarStateVoice) {
+        [self transitionLayoutWithAnimation:YES shouldMeasureAsync:NO measurementCompletion:nil];
     }
 }
 
@@ -300,7 +345,9 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
     self.expressionButtonNode.contentEdgeInsets = UIEdgeInsetsMake(BLInputItemInsetHeight, 0, BLInputItemInsetHeight, 0);
     self.additionalButtonNode.contentEdgeInsets = UIEdgeInsetsMake(BLInputItemInsetHeight, 0, BLInputItemInsetHeight, 0);
     
-    NSArray *specChildren = @[self.voiceButtonNode, self.inputTextNode, self.expressionButtonNode, self.additionalButtonNode];
+    ASDisplayNode *middleNode = self.voiceButtonNode.selected ? self.recordingButtonNode : self.inputTextNode;
+    
+    NSArray *specChildren = @[self.voiceButtonNode, middleNode, self.expressionButtonNode, self.additionalButtonNode];
     
     ASStackLayoutSpec *contentLayoutSpec = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal
                                                                                   spacing:BLInputItemSpecWidth
@@ -322,13 +369,53 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
     return packSpec;
 }
 
+#pragma mark - animate layout transition
+
 - (void)animateLayoutTransition:(id<ASContextTransitioning>)context {
+    
+    if (self.voiceButtonNode.selected) {
+        [self voiceStateLayoutTransition:context];
+        return;
+    }
+    
+    [self keyboardStateLayoutTransition:context];
+}
+
+- (void)voiceStateLayoutTransition:(id<ASContextTransitioning>)context {
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        CGSize fromSize = [context layoutForKey:ASTransitionContextFromLayoutKey].size;
+        CGSize toSize = [context layoutForKey:ASTransitionContextToLayoutKey].size;
+        BOOL isResized = (CGSizeEqualToSize(fromSize, toSize) == NO);
+        if (isResized == YES) {
+            CGPoint position = self.inputToolBarNormalFrame.origin;
+            self.frame = CGRectMake(position.x, position.y, toSize.width, toSize.height);
+            self.voiceButtonNode.frame = [context finalFrameForNode:self.voiceButtonNode];
+            self.additionalButtonNode.frame = [context finalFrameForNode:self.additionalButtonNode];
+            self.expressionButtonNode.frame = [context finalFrameForNode:self.expressionButtonNode];
+        }
+        
+    } completion:^(BOOL finished) {
+        
+        [context completeTransition:finished];
+    }];
+
+}
+
+- (void)keyboardStateLayoutTransition:(id<ASContextTransitioning>)context {
+    
+    ASDisplayNode *removeNode = nil;
+    if (self.inputToolBarPreviousState == BLInputToolBarStateVoice) {
+        removeNode = [[context removedSubnodes] firstObject];
+        removeNode.hidden = YES;
+    }
     
     CGRect fromFrame = [context initialFrameForNode:self.inputTextNode];
     CGFloat textViewHeigth = self.inputTextNode.textView.contentSize.height;
     
     fromFrame.size.height = self.textNumberLine < 5 ? textViewHeigth :
-                                                      self.maxTextNodeHeight;
+    self.maxTextNodeHeight;
     
     [UIView animateWithDuration:0.25 animations:^{
         
@@ -338,7 +425,7 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
         if (isResized == YES) {
             CGPoint position = self.frame.origin;
             CGFloat textNodeHeight = self.textNumberLine < 5 ? textViewHeigth :
-                                                               self.maxTextNodeHeight;
+            self.maxTextNodeHeight;
             CGFloat barHeight = textNodeHeight + BLInputToolBarLineHeight + 2 * BLInputTextNodeInsetHeight;
             CGFloat barY = CGRectGetMinY(self.inputToolBarRiseFrame) + CGRectGetHeight(self.inputToolBarRiseFrame) - barHeight;
             CGRect barFrame = self.frame;
@@ -354,9 +441,9 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
         self.inputTextNode.frame = fromFrame;
         
     } completion:^(BOOL finished) {
-       
-        [context completeTransition:finished];
         
+        [context completeTransition:finished];
+        removeNode.hidden = NO;
     }];
 }
 
