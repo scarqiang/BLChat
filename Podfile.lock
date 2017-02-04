@@ -38,18 +38,23 @@ PODS:
     - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.4.1)
   - libextobjc/UmbrellaHeader (0.4.1)
+  - YYKit (1.0.9):
+    - YYKit/no-arc (= 1.0.9)
+  - YYKit/no-arc (1.0.9)
 
 DEPENDENCIES:
   - AsyncDisplayKit/Core
   - JSQMessagesViewController (~> 7.3.4)
   - libextobjc
+  - YYKit
 
 SPEC CHECKSUMS:
   AsyncDisplayKit: 5c22daa1499c530fcc3e5589ddb201bf1176842b
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
+  YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: fc421adf39cee472f01bbb8b8e557311fc331bf5
+PODFILE CHECKSUM: c08cc123afcd9eca788f09d6dd7abcd569c63eff
 
 COCOAPODS: 1.2.0.beta.1
