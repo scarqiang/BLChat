@@ -50,7 +50,7 @@
     
 }
 
-#pragma mark - notification action
+#pragma mark - keyboard notification action
 
 - (void)addNotificationAction {
     [[NSNotificationCenter defaultCenter] addObserver:self

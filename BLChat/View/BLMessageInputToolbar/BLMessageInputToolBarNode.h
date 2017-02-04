@@ -49,6 +49,7 @@ didClickAdditionalButtonNode:(ASButtonNode *)additionalButtonNode
 @interface BLMessageInputToolBarNode : ASDisplayNode
 @property (nonatomic, readonly) BLInputToolBarState inputToolBarState;
 @property (nonatomic, strong, readonly) ASEditableTextNode *inputTextNode;
+@property (nonatomic, readonly) CGFloat barBottomItemHeight;
 @property (nonatomic) CGRect inputToolBarNormalFrame;
 @property (nonatomic) CGRect inputToolBarRiseFrame;
 

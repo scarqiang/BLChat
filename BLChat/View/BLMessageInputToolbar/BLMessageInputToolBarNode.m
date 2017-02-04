@@ -21,9 +21,11 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
 @property (nonatomic, strong) ASButtonNode *voiceButtonNode;
 @property (nonatomic, strong) ASButtonNode *expressionButtonNode;
 @property (nonatomic, strong) ASButtonNode *additionalButtonNode;
+@property (nonatomic, strong) ASButtonNode *recordingButtonNode;
 @property (nonatomic, strong) ASDisplayNode *lineNode;
 @property (nonatomic, weak) id<BLMessageInputToolBarNodeDelegate> delegate;
 @property (nonatomic, readwrite) BLInputToolBarState inputToolBarState;
+@property (nonatomic, readwrite) CGFloat barBottomItemHeight;
 @property (nonatomic) CGRect maxTextNodeFrame;
 @property (nonatomic) CGFloat maxTextNodeHeight;
 @property (nonatomic) NSInteger textNumberLine;
@@ -76,6 +78,7 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
     _inputTextNode = ({
         ASEditableTextNode *textNode = [ASEditableTextNode new];
         textNode.delegate = self;
+        textNode.backgroundColor = [UIColor whiteColor];
         textNode.layer.borderWidth = 1 / [UIScreen mainScreen].scale;
         textNode.layer.borderColor = [UIColor colorWithRed:203.f/255.f green:203.f/255.f blue:203.f/255.f alpha:1].CGColor;
         textNode.layer.cornerRadius = 4.f;
@@ -93,6 +96,12 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
         node.backgroundColor = [UIColor colorWithRed:203.f/255.f green:203.f/255.f blue:203.f/255.f alpha:1];
         node.style.preferredSize = CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), BLInputToolBarLineHeight);
         node;
+    });
+    
+    _recordingButtonNode = ({
+        ASButtonNode *button = [ASButtonNode new];
+        
+        button;
     });
 }
 
