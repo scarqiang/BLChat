@@ -43,9 +43,6 @@ didClickAdditionalButtonNode:(ASButtonNode *)additionalButtonNode
                                currentState:(BLInputToolBarState)currentState
                                 targetState:(BLInputToolBarState)targetState;
 
-- (void)inputToolBarTextNodeDidUpdateText:(ASEditableTextNode *)editableTextNode
-                           textNumberLine:(NSInteger)textNumberLine
-                                barHeight:(CGFloat)barHeight;
 
 @end
 
@@ -53,6 +50,7 @@ didClickAdditionalButtonNode:(ASButtonNode *)additionalButtonNode
 @property (nonatomic, readonly) BLInputToolBarState inputToolBarState;
 @property (nonatomic, strong, readonly) ASEditableTextNode *inputTextNode;
 @property (nonatomic) CGRect inputToolBarNormalFrame;
+@property (nonatomic) CGRect inputToolBarRiseFrame;
 
 - (instancetype)initWithDelegate:(id<BLMessageInputToolBarNodeDelegate>)delegate;
 @end

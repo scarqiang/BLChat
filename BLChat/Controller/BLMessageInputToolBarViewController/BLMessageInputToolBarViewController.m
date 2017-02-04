@@ -45,6 +45,7 @@
     CGSize size = [_inputToolBarNode layoutThatFits:ASSizeRangeMake(CGSizeZero, self.view.frame.size)].size;
     _inputToolBarNode.frame = CGRectMake(0, screenFrame.size.height - BLInputToolBarNodeHeight, CGRectGetWidth(screenFrame), size.height);
     _inputToolBarNormalFrame = _inputToolBarNode.frame;
+    _inputToolBarNode.inputToolBarNormalFrame = _inputToolBarNormalFrame;
     [self.view addSubnode:self.inputToolBarNode];
     
 }
@@ -83,12 +84,12 @@
                      animations:^{
                          
                          CGRect barFrame = self.inputToolBarNode.frame;
-                         CGFloat riseHeight = CGRectGetHeight([UIScreen mainScreen].bounds) - barFrame.origin.y - BLInputToolBarNodeHeight;
+                         CGFloat riseHeight = CGRectGetHeight([UIScreen mainScreen].bounds) - barFrame.origin.y - CGRectGetHeight(barFrame);
                          CGFloat increaseHeight = riseHeight - kbSize.height;
                          barFrame.origin.y = barFrame.origin.y + increaseHeight;
                          self.inputToolBarNode.frame = barFrame;
                          self.inputToolBarRiseFrame = self.inputToolBarNode.frame;
-                         self.inputToolBarNode.inputToolBarNormalFrame = self.inputToolBarNode.frame;
+                         self.inputToolBarNode.inputToolBarRiseFrame = self.inputToolBarNode.frame;
 
                      } completion:nil];
 }
@@ -105,7 +106,12 @@
                           delay:0.f
                         options:animationCurveOption
                      animations:^{
-                         self.inputToolBarNode.frame = self.inputToolBarNormalFrame;
+                         
+                         CGFloat barY = CGRectGetHeight([UIScreen mainScreen].bounds) - CGRectGetHeight(self.inputToolBarNode.frame);
+                         
+                         CGRect barFrame = self.inputToolBarNode.frame;
+                         barFrame.origin.y = barY;
+                         self.inputToolBarNode.frame = barFrame;
                      } completion:nil];
 }
 
@@ -116,21 +122,6 @@
                            textNumberLine:(NSInteger)textNumberLine
                                 barHeight:(CGFloat)barHeight {
     
-    CGRect targetFrame = self.inputToolBarRiseFrame;
-    
-    if (textNumberLine > 1) {
-        CGFloat barY = CGRectGetMinY(self.inputToolBarRiseFrame) + BLInputToolBarNodeHeight - barHeight;
-        CGRect barFrame = self.inputToolBarRiseFrame;
-        barFrame.origin.y = barY;
-        barFrame.size.height = barHeight;
-        targetFrame = barFrame;
-    }
-    
-//    self.inputToolBarNode.frame = targetFrame;
-    
-//    [UIView animateWithDuration:0.25 animations:^{
-//        self.inputToolBarNode.frame = targetFrame;
-//    }];
 }
 
 - (void)didReceiveMemoryWarning {
