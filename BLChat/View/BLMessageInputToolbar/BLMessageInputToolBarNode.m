@@ -289,6 +289,7 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
 - (void)editableTextNodeDidBeginEditing:(ASEditableTextNode *)editableTextNode {
 
     BLInputToolBarState currentState = BLInputToolBarStateKeyboard;
+    self.inputToolBarCurrentState = currentState;
     
     if (self.expressionButtonNode.selected) {
         [self switchInputToolBarStateActionCurrentState:BLInputToolBarStateExpression

@@ -23,6 +23,7 @@
 //views
 @property (nonatomic, strong) BLMessagesCollectionNode *collectionNode;
 @end
+
 @implementation BLMessagesViewController
 #pragma mark - lifecycle
 - (instancetype)init {
@@ -79,6 +80,8 @@
     CGFloat collectionNodeHeight = CGRectGetHeight(self.node.bounds) - self.inputToolBarViewController.inputToolBarHeight - navigationBarHeight - statusBarHeight;
     self.collectionNode.frame = CGRectMake(0, 0, CGRectGetWidth(self.node.bounds), collectionNodeHeight);
     self.inputToolBarViewController.collectionInitialFrame = self.collectionNode.frame;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignInputTextNodeFirstResponder:)];
+    [self.collectionNode.view addGestureRecognizer:tap];
 }
 
 - (void)setupInputToolBarWithCollectionNode:(ASCollectionNode *)collectionNode {
@@ -90,6 +93,10 @@
     [self.node addSubnode:viewController.node];
     [viewController didMoveToParentViewController:self];
     [self.node.view sendSubviewToBack:viewController.view];
+}
+
+- (void)resignInputTextNodeFirstResponder:(UITapGestureRecognizer *)tap {
+    [self.inputToolBarViewController resignTextNodeFirstResponder];
 }
 
 #pragma mark - private method
@@ -164,5 +171,9 @@
     }
 
     action(self, collectionNode, cell);
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.inputToolBarViewController resignTextNodeFirstResponder];
 }
 @end

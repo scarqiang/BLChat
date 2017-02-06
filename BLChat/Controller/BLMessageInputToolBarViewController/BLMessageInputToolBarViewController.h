@@ -14,4 +14,6 @@
 
 - (instancetype)initWithContentCollectionNode:(ASCollectionNode *)collectionNode;
 
+- (void)resignTextNodeFirstResponder;
+
 @end
