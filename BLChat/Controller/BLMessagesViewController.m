@@ -31,7 +31,6 @@
         self.node.backgroundColor = [UIColor whiteColor];
         _dataSource = [[BLMessagesViewControllerDataSource alloc] init];
         _dataSource.delegate = self;
-        [self configureCollectionNode];
     }
 
     return self;
@@ -39,7 +38,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    [self configureCollectionNode];
+    
     NSMutableArray<id<BLMessageData>> *messages = [NSMutableArray array];
 
     for (NSInteger i = 0; i < 20; i++) {
@@ -63,13 +64,15 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumLineSpacing = 0;
     flowLayout.minimumInteritemSpacing = 0;
-    _collectionNode = [[BLMessagesCollectionNode alloc] initWithCollectionViewLayout:flowLayout];
-    _collectionNode.delegate = self;
-    _collectionNode.dataSource = self;
-    [self.node addSubnode:_collectionNode];
-    [self setupInputToolBarWithCollectionNode:_collectionNode];
+    self.collectionNode = [[BLMessagesCollectionNode alloc] initWithCollectionViewLayout:flowLayout];
+    self.collectionNode.delegate = self;
+    self.collectionNode.dataSource = self;
+    [self.node addSubnode:self.collectionNode];
+    [self setupInputToolBarWithCollectionNode:self.collectionNode];
     
-    CGFloat collectionNodeHeight = CGRectGetHeight(self.node.bounds) - self.inputToolBarViewController.inputToolBarHeight;
+    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
+    CGFloat collectionNodeHeight = CGRectGetHeight(self.node.bounds) - self.inputToolBarViewController.inputToolBarHeight - navigationBarHeight - statusBarHeight;
     self.collectionNode.frame = CGRectMake(0, 0, CGRectGetWidth(self.node.bounds), collectionNodeHeight);
     self.inputToolBarViewController.collectionInitialFrame = self.collectionNode.frame;
 }
@@ -78,7 +81,7 @@
     self.collectionNode.view.alwaysBounceVertical = YES;
     
     BLMessageInputToolBarViewController *viewController = [[BLMessageInputToolBarViewController alloc] initWithContentCollectionNode:collectionNode];
-    _inputToolBarViewController = viewController;
+    self.inputToolBarViewController = viewController;
     [self addChildViewController:viewController];
     [self.node addSubnode:viewController.node];
     [viewController didMoveToParentViewController:self];

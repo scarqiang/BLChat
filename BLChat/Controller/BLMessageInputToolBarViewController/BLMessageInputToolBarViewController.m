@@ -28,7 +28,7 @@
     self = [super initWithNode:[ASDisplayNode new]];
     
     if (self) {
-        [self setupSubNode];
+
     }
     
     return self;
@@ -47,17 +47,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addNotificationAction];
-    
+    [self setupSubNode];
     // Do any additional setup after loading the view.
 }
 
 - (void)setupSubNode {
-    _inputToolBarNode = [[BLMessageInputToolBarNode alloc] initWithDelegate:self];
+    
+    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
+    
+    self.inputToolBarNode = [[BLMessageInputToolBarNode alloc] initWithDelegate:self];
     CGRect screenFrame = [UIScreen mainScreen].bounds;
     CGSize size = [_inputToolBarNode layoutThatFits:ASSizeRangeMake(CGSizeZero, self.view.frame.size)].size;
-    _inputToolBarNode.frame = CGRectMake(0, screenFrame.size.height - size.height, CGRectGetWidth(screenFrame), size.height);
-    _inputToolBarNormalFrame = _inputToolBarNode.frame;
-    _inputToolBarNode.inputToolBarNormalFrame = _inputToolBarNormalFrame;
+    CGFloat barY = screenFrame.size.height - size.height - statusBarHeight - navigationBarHeight;
+    
+    self.inputToolBarNode.frame = CGRectMake(0, barY, CGRectGetWidth(screenFrame), size.height);
+    self.inputToolBarNormalFrame = self.inputToolBarNode.frame;
+    self.inputToolBarNode.inputToolBarNormalFrame = self.inputToolBarNormalFrame;
     [self.view addSubnode:self.inputToolBarNode];
 }
 
@@ -101,7 +107,7 @@
     
     
     CGRect barFrame = self.inputToolBarNode.frame;
-    CGFloat riseHeight = CGRectGetHeight([UIScreen mainScreen].bounds) - barFrame.origin.y - CGRectGetHeight(barFrame);
+    CGFloat riseHeight = CGRectGetHeight(self.view.bounds) - barFrame.origin.y - CGRectGetHeight(barFrame);
     CGFloat increaseHeight = riseHeight - kbSize.height;
     barFrame.origin.y = barFrame.origin.y + increaseHeight;
     self.inputToolBarNode.frame = barFrame;
@@ -133,7 +139,7 @@
                         options:animationCurveOption
                      animations:^{
                          
-                         CGFloat barY = CGRectGetHeight([UIScreen mainScreen].bounds) - CGRectGetHeight(self.inputToolBarNode.frame);
+                         CGFloat barY = CGRectGetHeight(self.view.bounds) - CGRectGetHeight(self.inputToolBarNode.frame);
                          
                          CGRect barFrame = self.inputToolBarNode.frame;
                          barFrame.origin.y = barY;
