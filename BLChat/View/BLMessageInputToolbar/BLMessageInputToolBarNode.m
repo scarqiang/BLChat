@@ -323,6 +323,7 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
         editableTextNode.textView.text = @"";
         
         CGFloat textNodeHeight = self.inputTextNode.textView.contentSize.height;
+        self.textNumberLine = 1;
         self.inputTextNode.style.preferredSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, textNodeHeight);
         [self transitionLayoutWithAnimation:YES shouldMeasureAsync:NO measurementCompletion:nil];
         
@@ -347,7 +348,6 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
     }
     
     self.inputTextNode.style.preferredSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, textNodeHeight);
-    self.textNumberLine = 1;
     [self transitionLayoutWithAnimation:YES shouldMeasureAsync:NO measurementCompletion:nil];
     
 }

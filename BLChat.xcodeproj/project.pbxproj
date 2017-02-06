@@ -151,6 +151,7 @@
 		F7A742551E36F3A5004AF3DB /* inactive_page_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7A742101E36F3A5004AF3DB /* inactive_page_image@2x.png */; };
 		F7A742591E372D4A004AF3DB /* BLMessageInputToolBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A742581E372D4A004AF3DB /* BLMessageInputToolBarViewController.m */; };
 		F7A7425D1E373519004AF3DB /* BLMessageInputToolBarNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A7425C1E373519004AF3DB /* BLMessageInputToolBarNode.m */; };
+		F7AC8E551E48883C004E681C /* BLFaceBoardNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F7AC8E541E48883C004E681C /* BLFaceBoardNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -345,6 +346,8 @@
 		F7A742581E372D4A004AF3DB /* BLMessageInputToolBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessageInputToolBarViewController.m; sourceTree = "<group>"; };
 		F7A7425B1E373519004AF3DB /* BLMessageInputToolBarNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessageInputToolBarNode.h; sourceTree = "<group>"; };
 		F7A7425C1E373519004AF3DB /* BLMessageInputToolBarNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessageInputToolBarNode.m; sourceTree = "<group>"; };
+		F7AC8E531E48883C004E681C /* BLFaceBoardNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLFaceBoardNode.h; sourceTree = "<group>"; };
+		F7AC8E541E48883C004E681C /* BLFaceBoardNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLFaceBoardNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -701,6 +704,8 @@
 			children = (
 				F7A7425B1E373519004AF3DB /* BLMessageInputToolBarNode.h */,
 				F7A7425C1E373519004AF3DB /* BLMessageInputToolBarNode.m */,
+				F7AC8E531E48883C004E681C /* BLFaceBoardNode.h */,
+				F7AC8E541E48883C004E681C /* BLFaceBoardNode.m */,
 			);
 			path = BLMessageInputToolbar;
 			sourceTree = "<group>";
@@ -1022,6 +1027,7 @@
 				828C91531E7995D8E1ACAE0B /* BLMessagesCollectionNode.m in Sources */,
 				828C9A7A5C7D167DDC6CB815 /* BLMessagesConstant.m in Sources */,
 				828C9BD0EE568D8DA8F22EFB /* BLMessagesCollectionNodeCell.m in Sources */,
+				F7AC8E551E48883C004E681C /* BLFaceBoardNode.m in Sources */,
 				828C98D1F851ECAA3166AC08 /* BLMessagesTimeSeparatorNode.m in Sources */,
 				828C9078D8DF34C575A6B1EF /* BLMessagesContentNode.m in Sources */,
 				828C9395A2391420F48C7527 /* BLMessagesTextContentNode.m in Sources */,

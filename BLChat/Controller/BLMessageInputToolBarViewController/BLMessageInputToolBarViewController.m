@@ -12,6 +12,7 @@
 
 @interface BLMessageInputToolBarViewController ()<BLMessageInputToolBarNodeDelegate>
 @property (nonatomic, strong) BLMessageInputToolBarNode *inputToolBarNode;
+@property (nonatomic, strong) ASDisplayNode *faceBoardNode;
 @property (nonatomic, readwrite) CGFloat inputToolBarHeight;
 @property (nonatomic, weak) ASCollectionNode *collectionNode;
 @property (nonatomic) CGRect inputToolBarNormalFrame;
@@ -55,7 +56,7 @@
 }
 
 - (void)setupSubNode {
-    
+    //input tool bar
     CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
     CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
     
@@ -68,6 +69,8 @@
     self.inputToolBarNormalFrame = self.inputToolBarNode.frame;
     self.inputToolBarNode.inputToolBarNormalFrame = self.inputToolBarNormalFrame;
     [self.view addSubnode:self.inputToolBarNode];
+    
+    //face board node
 }
 
 - (CGFloat)inputToolBarHeight {
@@ -120,14 +123,17 @@
     self.inputToolBarRiseFrame = self.inputToolBarNode.frame;
     self.inputToolBarNode.inputToolBarRiseFrame = self.inputToolBarNode.frame;
 
-    
     CGPoint bottomOffset = CGPointMake(0, self.collectionNode.view.contentSize.height);
-    [self.collectionNode.view setContentOffset:bottomOffset animated:NO];
     
     [UIView animateWithDuration:animationDuration
                           delay:0.f
                         options:animationCurveOption
                      animations:^{
+                         
+                         if (!CGPointEqualToPoint(self.collectionNode.view.contentOffset, bottomOffset)) {
+                             [self.collectionNode.view setContentOffset:bottomOffset animated:NO];
+                         }
+                         
                          [self setupCollectionNodeFrameWithBarFrame:barFrame];
                      } completion:nil];
 }
@@ -167,8 +173,13 @@
 layoutTransitionWithBarFrame:(CGRect)barFrame
                     duration:(NSTimeInterval)duration {
     
+    CGPoint bottomOffset = CGPointMake(0, self.collectionNode.view.contentSize.height);
+
+    if (CGPointEqualToPoint(self.collectionNode.view.contentOffset, bottomOffset)) {
+        return;
+    }
+    
     if (inputToolBarNode.inputToolBarCurrentState == BLInputToolBarStateKeyboard) {
-        CGPoint bottomOffset = CGPointMake(0, self.collectionNode.view.contentSize.height);
         [self.collectionNode.view setContentOffset:bottomOffset animated:NO];
     }
     
