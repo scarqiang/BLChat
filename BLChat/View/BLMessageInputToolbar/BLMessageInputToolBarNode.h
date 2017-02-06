@@ -10,7 +10,6 @@
 
 @class BLMessageInputToolBarNode;
 
-extern CGFloat const BLInputToolBarNodeHeight;
 extern CGFloat const BLInputTextNodeHeight;;
 
 typedef NS_ENUM(NSUInteger, BLInputToolBarState) {

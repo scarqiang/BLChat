@@ -12,6 +12,7 @@
 
 @interface BLMessageInputToolBarViewController ()<BLMessageInputToolBarNodeDelegate>
 @property (nonatomic, strong) BLMessageInputToolBarNode *inputToolBarNode;
+@property (nonatomic, readwrite) CGFloat inputToolBarHeight;
 @property (nonatomic) CGRect inputToolBarNormalFrame;
 @property (nonatomic) CGRect inputToolBarRiseFrame;
 @end
@@ -43,11 +44,14 @@
     _inputToolBarNode = [[BLMessageInputToolBarNode alloc] initWithDelegate:self];
     CGRect screenFrame = [UIScreen mainScreen].bounds;
     CGSize size = [_inputToolBarNode layoutThatFits:ASSizeRangeMake(CGSizeZero, self.view.frame.size)].size;
-    _inputToolBarNode.frame = CGRectMake(0, screenFrame.size.height - BLInputToolBarNodeHeight, CGRectGetWidth(screenFrame), size.height);
+    _inputToolBarNode.frame = CGRectMake(0, screenFrame.size.height - size.height, CGRectGetWidth(screenFrame), size.height);
     _inputToolBarNormalFrame = _inputToolBarNode.frame;
     _inputToolBarNode.inputToolBarNormalFrame = _inputToolBarNormalFrame;
     [self.view addSubnode:self.inputToolBarNode];
-    
+}
+
+- (CGFloat)inputToolBarHeight {
+        return CGRectGetHeight(_inputToolBarNode.frame);
 }
 
 #pragma mark - keyboard notification action

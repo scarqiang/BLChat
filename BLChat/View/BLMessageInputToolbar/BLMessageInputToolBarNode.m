@@ -9,7 +9,6 @@
 #import "BLMessageInputToolBarNode.h"
 #import <YYKit/YYKit.h>
 
-CGFloat const BLInputToolBarNodeHeight = 50.f;
 CGFloat const BLInputTextNodeHeight = 34.f;
 CGFloat const BLInputTextNodeFontSize = 15.f;
 CGFloat const BLInputItemSpecWidth = 10.f;

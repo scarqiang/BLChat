@@ -9,5 +9,5 @@
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 
 @interface BLMessageInputToolBarViewController : ASViewController
-
+@property (nonatomic, readonly) CGFloat inputToolBarHeight;
 @end

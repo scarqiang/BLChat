@@ -16,7 +16,7 @@
 @interface BLMessagesViewController () <BLChatViewControllerDataSourceDelegate, BLMessagesCollectionNodeDelegate, BLMessagesCollectionNodeDataSource, ASCollectionViewDelegateFlowLayout>
 //model
 @property (nonatomic, strong) BLMessagesViewControllerDataSource *dataSource;
-
+@property (nonatomic, strong) BLMessageInputToolBarViewController *inputToolBarViewController;
 //views
 @property (nonatomic, strong) BLMessagesCollectionNode *collectionNode;
 @end
@@ -25,9 +25,10 @@
 - (instancetype)init {
     self = [super initWithNode:[ASDisplayNode new]];
     if (self) {
+        self.node.backgroundColor = [UIColor whiteColor];
         _dataSource = [[BLMessagesViewControllerDataSource alloc] init];
         _dataSource.delegate = self;
-        
+        [self setupInputToolBar];
         [self configureCollectionNode];
     }
 
@@ -37,14 +38,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.node.backgroundColor = [UIColor whiteColor];
-    self.collectionNode.view.alwaysBounceVertical = YES;
-    
-//    BLMessageInputToolBarViewController *viewController = [[BLMessageInputToolBarViewController alloc] init];
-//    [self addChildViewController:viewController];
-//    [self.view addSubnode:viewController.node];
-//    [viewController didMoveToParentViewController:self];
-   
     NSMutableArray<id<BLMessageData>> *messages = [NSMutableArray array];
     for (NSInteger i = 0; i < 2000; i++) {
         [messages addObject:[BLMessage randomSampleMessage]];
@@ -54,8 +47,23 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    self.collectionNode.frame = self.node.bounds;
+    
+    CGFloat collectionNodeHeight = CGRectGetHeight(self.node.bounds) - self.inputToolBarViewController.inputToolBarHeight;
+    self.collectionNode.frame = CGRectMake(0, 0, CGRectGetWidth(self.node.bounds), collectionNodeHeight);
 }
+
+#pragma mark - setup input tool bar
+
+- (void)setupInputToolBar {
+    self.collectionNode.view.alwaysBounceVertical = YES;
+    
+    BLMessageInputToolBarViewController *viewController = [[BLMessageInputToolBarViewController alloc] init];
+    _inputToolBarViewController = viewController;
+    [self addChildViewController:viewController];
+    [self.view addSubnode:viewController.node];
+    [viewController didMoveToParentViewController:self];
+}
+
 #pragma mark - configure
 - (void)configureCollectionNode {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
