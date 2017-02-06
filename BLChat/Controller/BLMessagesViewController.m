@@ -40,10 +40,10 @@
     self.node.backgroundColor = [UIColor whiteColor];
     self.collectionNode.view.alwaysBounceVertical = YES;
     
-    BLMessageInputToolBarViewController *viewController = [[BLMessageInputToolBarViewController alloc] init];
-    [self addChildViewController:viewController];
-    [self.view addSubnode:viewController.node];
-    [viewController didMoveToParentViewController:self];
+//    BLMessageInputToolBarViewController *viewController = [[BLMessageInputToolBarViewController alloc] init];
+//    [self addChildViewController:viewController];
+//    [self.view addSubnode:viewController.node];
+//    [viewController didMoveToParentViewController:self];
    
     NSMutableArray<id<BLMessageData>> *messages = [NSMutableArray array];
     for (NSInteger i = 0; i < 2000; i++) {
