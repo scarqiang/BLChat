@@ -347,7 +347,7 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
     }
     
     self.inputTextNode.style.preferredSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, textNodeHeight);
-    
+    self.textNumberLine = 1;
     [self transitionLayoutWithAnimation:YES shouldMeasureAsync:NO measurementCompletion:nil];
     
 }
@@ -438,8 +438,7 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
     CGRect fromFrame = [context initialFrameForNode:self.inputTextNode];
     CGFloat textViewHeigth = self.inputTextNode.textView.contentSize.height;
     
-    fromFrame.size.height = self.textNumberLine < 5 ? textViewHeigth :
-    self.maxTextNodeHeight;
+    fromFrame.size.height = self.textNumberLine < 5 ? textViewHeigth : self.maxTextNodeHeight;
     
     [UIView animateWithDuration:BLInputAnimationDuration animations:^{
         
@@ -448,8 +447,7 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
         BOOL isResized = (CGSizeEqualToSize(fromSize, toSize) == NO);
         if (isResized == YES) {
             CGPoint position = self.frame.origin;
-            CGFloat textNodeHeight = self.textNumberLine < 5 ? textViewHeigth :
-            self.maxTextNodeHeight;
+            CGFloat textNodeHeight = self.textNumberLine < 5 ? textViewHeigth : self.maxTextNodeHeight;
             CGFloat barHeight = textNodeHeight + BLInputToolBarLineHeight + 2 * BLInputTextNodeInsetHeight;
             CGFloat barY = CGRectGetMinY(self.inputToolBarRiseFrame) + CGRectGetHeight(self.inputToolBarRiseFrame) - barHeight;
             CGRect barFrame = self.frame;
