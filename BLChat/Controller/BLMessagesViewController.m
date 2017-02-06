@@ -18,6 +18,7 @@
 @interface BLMessagesViewController () <BLChatViewControllerDataSourceDelegate, BLMessagesCollectionNodeDelegate, BLMessagesCollectionNodeDataSource, ASCollectionViewDelegateFlowLayout>
 //model
 @property (nonatomic, strong) BLMessagesViewControllerDataSource *dataSource;
+@property (nonatomic) BOOL viewDidLayout;
 @property (nonatomic, strong) BLMessageInputToolBarViewController *inputToolBarViewController;
 //views
 @property (nonatomic, strong) BLMessagesCollectionNode *collectionNode;
@@ -40,27 +41,21 @@
     [super viewDidLoad];
 
     NSMutableArray<id<BLMessageData>> *messages = [NSMutableArray array];
+
     for (NSInteger i = 0; i < 2000; i++) {
         [messages addObject:[BLMessage randomSampleMessage]];
     }
     self.dataSource.messages = messages;
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-}
-
-#pragma mark - setup input tool bar
-
-- (void)setupInputToolBarWithCollectionNode:(ASCollectionNode *)collectionNode {
-    self.collectionNode.view.alwaysBounceVertical = YES;
-    
-    BLMessageInputToolBarViewController *viewController = [[BLMessageInputToolBarViewController alloc] initWithContentCollectionNode:collectionNode];
-    _inputToolBarViewController = viewController;
-    [self addChildViewController:viewController];
-    [self.node addSubnode:viewController.node];
-    [viewController didMoveToParentViewController:self];
-    [self.node.view sendSubviewToBack:viewController.view];
+    [self scrollToBottom:NO];
 }
 
 #pragma mark - configure
@@ -77,6 +72,24 @@
     CGFloat collectionNodeHeight = CGRectGetHeight(self.node.bounds) - self.inputToolBarViewController.inputToolBarHeight;
     self.collectionNode.frame = CGRectMake(0, 0, CGRectGetWidth(self.node.bounds), collectionNodeHeight);
     self.inputToolBarViewController.collectionInitialFrame = self.collectionNode.frame;
+}
+
+- (void)setupInputToolBarWithCollectionNode:(ASCollectionNode *)collectionNode {
+    self.collectionNode.view.alwaysBounceVertical = YES;
+    
+    BLMessageInputToolBarViewController *viewController = [[BLMessageInputToolBarViewController alloc] initWithContentCollectionNode:collectionNode];
+    _inputToolBarViewController = viewController;
+    [self addChildViewController:viewController];
+    [self.node addSubnode:viewController.node];
+    [viewController didMoveToParentViewController:self];
+    [self.node.view sendSubviewToBack:viewController.view];
+}
+
+#pragma mark - private method
+- (void)scrollToBottom:(BOOL)animated {
+    [self.collectionNode scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.dataSource.messages.count - 1 inSection:0]
+                                atScrollPosition:UICollectionViewScrollPositionBottom
+                                        animated:animated];
 }
 #pragma mark - collection node data source
 - (NSInteger)collectionNode:(ASCollectionNode *)collectionNode numberOfItemsInSection:(NSInteger)section {
@@ -144,6 +157,4 @@
 
     action(self, collectionNode, cell);
 }
-
-#pragma mark - chat view controller data source delegate
 @end

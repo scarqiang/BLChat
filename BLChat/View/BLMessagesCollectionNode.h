@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface BLMessagesCollectionNode : ASCollectionNode
+@interface BLMessagesCollectionNode : ASCollectionNode <BLMessagesCollectionNodeCellDelegate>
 @property (weak, nonatomic) id<BLMessagesCollectionNodeDelegate> delegate;
 @property (weak, nonatomic) id<BLMessagesCollectionNodeDataSource> dataSource;
 @end

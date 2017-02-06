@@ -6,7 +6,7 @@
 #import "BLMessagesCollectionNode.h"
 
 
-@interface BLMessagesCollectionNode () <BLMessagesCollectionNodeCellDelegate>
+@interface BLMessagesCollectionNode ()
 @end
 
 @implementation BLMessagesCollectionNode
