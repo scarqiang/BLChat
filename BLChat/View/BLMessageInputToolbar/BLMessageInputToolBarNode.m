@@ -288,7 +288,7 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
 
 - (void)editableTextNodeDidBeginEditing:(ASEditableTextNode *)editableTextNode {
 
-    BLInputToolBarState currentState = BLInputToolBarStateNone;
+    BLInputToolBarState currentState = BLInputToolBarStateKeyboard;
     
     if (self.expressionButtonNode.selected) {
         [self switchInputToolBarStateActionCurrentState:BLInputToolBarStateExpression
@@ -302,6 +302,12 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
                                             targetState:BLInputToolBarStateKeyboard
                                        targetButtonNode:self.additionalButtonNode];
         currentState = BLInputToolBarStateAddition;
+    }
+}
+
+- (void)editableTextNodeDidFinishEditing:(ASEditableTextNode *)editableTextNode {
+    if (self.inputToolBarCurrentState == BLInputToolBarStateKeyboard) {
+        self.inputToolBarCurrentState = BLInputToolBarStateNone;
     }
 }
 
