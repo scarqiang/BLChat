@@ -52,6 +52,9 @@ didLoosenSoundRecordButtonNode:(ASButtonNode *)recordButtonNode;
 layoutTransitionWithBarFrame:(CGRect)barFrame
                  duration:(NSTimeInterval)duration;
 
+- (void)    inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
+didClickSendButtonActionWithText:(NSString *)inputText;
+
 @end
 
 @interface BLMessageInputToolBarNode : ASDisplayNode

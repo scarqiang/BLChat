@@ -15,7 +15,7 @@
 #import "BLMessagesCollectionNodeCell.h"
 #import "BLMessageInputToolBarViewController.h"
 
-@interface BLMessagesViewController () <BLChatViewControllerDataSourceDelegate, BLMessagesCollectionNodeDelegate, BLMessagesCollectionNodeDataSource, ASCollectionViewDelegateFlowLayout>
+@interface BLMessagesViewController () <BLChatViewControllerDataSourceDelegate, BLMessagesCollectionNodeDelegate, BLMessagesCollectionNodeDataSource, ASCollectionViewDelegateFlowLayout, BLMessageInputToolBarViewControllerDelegate>
 //model
 @property (nonatomic, strong) BLMessagesViewControllerDataSource *dataSource;
 @property (nonatomic) BOOL viewDidLayout;
@@ -87,7 +87,7 @@
 - (void)setupInputToolBarWithCollectionNode:(ASCollectionNode *)collectionNode {
     self.collectionNode.view.alwaysBounceVertical = YES;
     
-    BLMessageInputToolBarViewController *viewController = [[BLMessageInputToolBarViewController alloc] initWithContentCollectionNode:collectionNode];
+    BLMessageInputToolBarViewController *viewController = [[BLMessageInputToolBarViewController alloc] initWithContentCollectionNode:collectionNode delegate:self];
     self.inputToolBarViewController = viewController;
     [self addChildViewController:viewController];
     [self.node addSubnode:viewController.node];
@@ -176,4 +176,10 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.inputToolBarViewController resignTextNodeFirstResponder];
 }
+
+#pragma mark - BLMessageInputToolBarViewControllerDelegate
+- (void)barViewController:(BLMessageInputToolBarViewController *)viewController didClickInputBarSendButtonWithInputText:(NSString *)inputText {
+    
+}
+
 @end

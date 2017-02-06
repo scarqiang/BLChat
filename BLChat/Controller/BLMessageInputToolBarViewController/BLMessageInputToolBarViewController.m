@@ -16,6 +16,7 @@
 @property (nonatomic, weak) ASCollectionNode *collectionNode;
 @property (nonatomic) CGRect inputToolBarNormalFrame;
 @property (nonatomic) CGRect inputToolBarRiseFrame;
+@property (nonatomic, weak) id<BLMessageInputToolBarViewControllerDelegate> delegate;
 @end
 
 @implementation BLMessageInputToolBarViewController
@@ -35,11 +36,13 @@
 }
 
 
-- (instancetype)initWithContentCollectionNode:(ASCollectionNode *)collectionNode {
+- (instancetype)initWithContentCollectionNode:(ASCollectionNode *)collectionNode
+                                     delegate:(id<BLMessageInputToolBarViewControllerDelegate>)delegate {
     self = [self init];
     
     if (self) {
         _collectionNode = collectionNode;
+        _delegate = delegate;
     }
     return self;
 }
@@ -77,6 +80,9 @@
     return _collectionInitialFrame;
 }
 
+- (void)resignTextNodeFirstResponder {
+    [self.inputToolBarNode.inputTextNode resignFirstResponder];
+}
 #pragma mark - keyboard notification action
 
 - (void)addNotificationAction {
@@ -175,9 +181,14 @@ layoutTransitionWithBarFrame:(CGRect)barFrame
     
 }
 
-- (void)resignTextNodeFirstResponder {
-    [self.inputToolBarNode.inputTextNode resignFirstResponder];
+
+- (void)    inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
+didClickSendButtonActionWithText:(NSString *)inputText {
+    if ([self.delegate respondsToSelector:@selector(barViewController:didClickInputBarSendButtonWithInputText:)]) {
+        [self.delegate barViewController:self didClickInputBarSendButtonWithInputText:inputText];
+    }
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

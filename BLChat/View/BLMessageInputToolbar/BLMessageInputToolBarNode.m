@@ -90,7 +90,7 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
         textNode.style.preferredSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, BLInputTextNodeHeight);
         textNode.textView.font = [UIFont systemFontOfSize:BLInputTextNodeFontSize];
         textNode.textContainerInset = UIEdgeInsetsMake(8, 5, 8, 5);
-//        textNode.returnKeyType = UIReturnKeySend;
+        textNode.returnKeyType = UIReturnKeySend;
         textNode;
     });
     
@@ -315,6 +315,14 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
 - (BOOL)editableTextNode:(ASEditableTextNode *)editableTextNode
  shouldChangeTextInRange:(NSRange)range
          replacementText:(NSString *)text {
+    
+    if ([text isEqualToString:@"\n"]) {
+        if ([self.delegate respondsToSelector:@selector(inputToolBarNode:didClickSendButtonActionWithText:)]) {
+            [self.delegate inputToolBarNode:self didClickSendButtonActionWithText:editableTextNode.textView.text];
+        }
+        editableTextNode.textView.text = @"";
+        return NO;
+    }
     
     return YES;
 }
