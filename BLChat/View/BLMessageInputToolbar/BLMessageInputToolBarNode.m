@@ -14,6 +14,7 @@ CGFloat const BLInputTextNodeFontSize = 15.f;
 CGFloat const BLInputItemSpecWidth = 10.f;
 CGFloat const BLInputItemInsetHeight = 5.f;
 CGFloat const BLInputTextNodeInsetHeight = 8.f;
+NSTimeInterval const BLInputAnimationDuration = 0.25f;
 #define BLInputToolBarLineHeight 1.f/[UIScreen mainScreen].scale
 
 @interface BLMessageInputToolBarNode ()<ASEditableTextNodeDelegate>
@@ -382,7 +383,7 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
 
 - (void)voiceStateLayoutTransition:(id<ASContextTransitioning>)context {
     
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:BLInputAnimationDuration animations:^{
         
         CGSize fromSize = [context layoutForKey:ASTransitionContextFromLayoutKey].size;
         CGSize toSize = [context layoutForKey:ASTransitionContextToLayoutKey].size;
@@ -393,6 +394,10 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
             self.voiceButtonNode.frame = [context finalFrameForNode:self.voiceButtonNode];
             self.additionalButtonNode.frame = [context finalFrameForNode:self.additionalButtonNode];
             self.expressionButtonNode.frame = [context finalFrameForNode:self.expressionButtonNode];
+        }
+        
+        if ([self.delegate respondsToSelector:@selector(inputToolBarNode:layoutTransitionWithBarFrame:duration:)]) {
+            [self.delegate inputToolBarNode:self layoutTransitionWithBarFrame:self.frame duration:BLInputAnimationDuration];
         }
         
     } completion:^(BOOL finished) {
@@ -416,7 +421,7 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
     fromFrame.size.height = self.textNumberLine < 5 ? textViewHeigth :
     self.maxTextNodeHeight;
     
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:BLInputAnimationDuration animations:^{
         
         CGSize fromSize = [context layoutForKey:ASTransitionContextFromLayoutKey].size;
         CGSize toSize = [context layoutForKey:ASTransitionContextToLayoutKey].size;
@@ -435,6 +440,10 @@ CGFloat const BLInputTextNodeInsetHeight = 8.f;
             self.voiceButtonNode.frame = [context finalFrameForNode:self.voiceButtonNode];
             self.additionalButtonNode.frame = [context finalFrameForNode:self.additionalButtonNode];
             self.expressionButtonNode.frame = [context finalFrameForNode:self.expressionButtonNode];
+            
+            if ([self.delegate respondsToSelector:@selector(inputToolBarNode:layoutTransitionWithBarFrame:duration:)]) {
+                [self.delegate inputToolBarNode:self layoutTransitionWithBarFrame:self.frame duration:BLInputAnimationDuration];
+            }
         }
         
         self.inputTextNode.frame = fromFrame;

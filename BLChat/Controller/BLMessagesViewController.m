@@ -120,6 +120,7 @@
 
 - (nullable NSString *)formattedTimeForCollectionNode:(BLMessagesCollectionNode *)collectionNode
                                           atIndexPath:(NSIndexPath *)indexPath {
+    
     NSIndexPath *previousIndexPath = indexPath.row == 0 ? nil : [NSIndexPath indexPathForItem:indexPath.row - 1 inSection:1];
     id<BLMessageData> previousMessageData = !previousIndexPath ? nil : [collectionNode.dataSource messageDataForCollectionNode:collectionNode
                                                                                                                    atIndexPath:previousIndexPath];
@@ -135,8 +136,8 @@
     } else {
         return [[BLDateFormatter sharedInstance] formattedChatTime:currentMessageData.sendingTime];
     }
-
 }
+
 
 #pragma mark - collection node delegate
 - (ASSizeRange)collectionNode:(ASCollectionNode *)collectionNode constrainedSizeForItemAtIndexPath:(NSIndexPath *)indexPath {

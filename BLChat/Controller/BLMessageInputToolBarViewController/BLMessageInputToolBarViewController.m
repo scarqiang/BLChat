@@ -99,22 +99,24 @@
     
     double animationDuration = [info[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
+    
+    CGRect barFrame = self.inputToolBarNode.frame;
+    CGFloat riseHeight = CGRectGetHeight([UIScreen mainScreen].bounds) - barFrame.origin.y - CGRectGetHeight(barFrame);
+    CGFloat increaseHeight = riseHeight - kbSize.height;
+    barFrame.origin.y = barFrame.origin.y + increaseHeight;
+    self.inputToolBarNode.frame = barFrame;
+    self.inputToolBarRiseFrame = self.inputToolBarNode.frame;
+    self.inputToolBarNode.inputToolBarRiseFrame = self.inputToolBarNode.frame;
+
+    
+    CGPoint bottomOffset = CGPointMake(0, self.collectionNode.view.contentSize.height);
+    [self.collectionNode.view setContentOffset:bottomOffset animated:NO];
+    
     [UIView animateWithDuration:animationDuration
                           delay:0.f
                         options:animationCurveOption
                      animations:^{
-                         
-                         CGRect barFrame = self.inputToolBarNode.frame;
-                         CGFloat riseHeight = CGRectGetHeight([UIScreen mainScreen].bounds) - barFrame.origin.y - CGRectGetHeight(barFrame);
-                         CGFloat increaseHeight = riseHeight - kbSize.height;
-                         barFrame.origin.y = barFrame.origin.y + increaseHeight;
-                         self.inputToolBarNode.frame = barFrame;
-                         self.inputToolBarRiseFrame = self.inputToolBarNode.frame;
-                         self.inputToolBarNode.inputToolBarRiseFrame = self.inputToolBarNode.frame;
-                         CGRect collectionNodeFrame = self.collectionInitialFrame;
-                         collectionNodeFrame.size.height = barFrame.origin.y;
-                         self.collectionNode.frame = collectionNodeFrame;
-
+                         [self setupCollectionNodeFrameWithBarFrame:barFrame];
                      } completion:nil];
 }
 
@@ -136,12 +138,30 @@
                          CGRect barFrame = self.inputToolBarNode.frame;
                          barFrame.origin.y = barY;
                          self.inputToolBarNode.frame = barFrame;
-                         self.collectionNode.frame = self.collectionInitialFrame;
+                         [self setupCollectionNodeFrameWithBarFrame:barFrame];
+                         
                      } completion:nil];
+}
+
+- (void)setupCollectionNodeFrameWithBarFrame:(CGRect)barFrame {
+    CGRect collectionNodeFrame = self.collectionNode.frame;
+    collectionNodeFrame.size.height = barFrame.origin.y;
+    self.collectionNode.frame = collectionNodeFrame;
 }
 
 #pragma mark - BLMessageInputToolBarNodeDelegate
 
+- (void)    inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
+layoutTransitionWithBarFrame:(CGRect)barFrame
+                    duration:(NSTimeInterval)duration {
+    
+    if (inputToolBarNode.inputToolBarCurrentState == BLInputToolBarStateKeyboard) {
+        CGPoint bottomOffset = CGPointMake(0, self.collectionNode.view.contentSize.height);
+        [self.collectionNode.view setContentOffset:bottomOffset animated:NO];
+    }
+    
+    [self setupCollectionNodeFrameWithBarFrame:barFrame];
+}
 
 - (void)inputToolBarTextNodeDidUpdateText:(ASEditableTextNode *)editableTextNode
                            textNumberLine:(NSInteger)textNumberLine

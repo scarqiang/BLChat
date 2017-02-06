@@ -48,6 +48,10 @@ pressingSoundRecordButtonNode:(ASButtonNode *)recordButtonNode;
 - (void)      inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
 didLoosenSoundRecordButtonNode:(ASButtonNode *)recordButtonNode;
 
+- (void) inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
+layoutTransitionWithBarFrame:(CGRect)barFrame
+                 duration:(NSTimeInterval)duration;
+
 @end
 
 @interface BLMessageInputToolBarNode : ASDisplayNode
