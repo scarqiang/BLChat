@@ -30,7 +30,6 @@
         self.node.backgroundColor = [UIColor whiteColor];
         _dataSource = [[BLMessagesViewControllerDataSource alloc] init];
         _dataSource.delegate = self;
-        [self setupInputToolBar];
         [self configureCollectionNode];
     }
 
@@ -49,21 +48,19 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    
-    CGFloat collectionNodeHeight = CGRectGetHeight(self.node.bounds) - self.inputToolBarViewController.inputToolBarHeight;
-    self.collectionNode.frame = CGRectMake(0, 0, CGRectGetWidth(self.node.bounds), collectionNodeHeight);
 }
 
 #pragma mark - setup input tool bar
 
-- (void)setupInputToolBar {
+- (void)setupInputToolBarWithCollectionNode:(ASCollectionNode *)collectionNode {
     self.collectionNode.view.alwaysBounceVertical = YES;
     
-    BLMessageInputToolBarViewController *viewController = [[BLMessageInputToolBarViewController alloc] init];
+    BLMessageInputToolBarViewController *viewController = [[BLMessageInputToolBarViewController alloc] initWithContentCollectionNode:collectionNode];
     _inputToolBarViewController = viewController;
     [self addChildViewController:viewController];
-    [self.view addSubnode:viewController.node];
+    [self.node addSubnode:viewController.node];
     [viewController didMoveToParentViewController:self];
+    [self.node.view sendSubviewToBack:viewController.view];
 }
 
 #pragma mark - configure
@@ -75,6 +72,11 @@
     _collectionNode.delegate = self;
     _collectionNode.dataSource = self;
     [self.node addSubnode:_collectionNode];
+    [self setupInputToolBarWithCollectionNode:_collectionNode];
+    
+    CGFloat collectionNodeHeight = CGRectGetHeight(self.node.bounds) - self.inputToolBarViewController.inputToolBarHeight;
+    self.collectionNode.frame = CGRectMake(0, 0, CGRectGetWidth(self.node.bounds), collectionNodeHeight);
+    self.inputToolBarViewController.collectionInitialFrame = self.collectionNode.frame;
 }
 #pragma mark - collection node data source
 - (NSInteger)collectionNode:(ASCollectionNode *)collectionNode numberOfItemsInSection:(NSInteger)section {

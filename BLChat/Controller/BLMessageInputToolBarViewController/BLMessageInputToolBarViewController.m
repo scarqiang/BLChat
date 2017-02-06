@@ -13,6 +13,7 @@
 @interface BLMessageInputToolBarViewController ()<BLMessageInputToolBarNodeDelegate>
 @property (nonatomic, strong) BLMessageInputToolBarNode *inputToolBarNode;
 @property (nonatomic, readwrite) CGFloat inputToolBarHeight;
+@property (nonatomic, weak) ASCollectionNode *collectionNode;
 @property (nonatomic) CGRect inputToolBarNormalFrame;
 @property (nonatomic) CGRect inputToolBarRiseFrame;
 @end
@@ -30,6 +31,16 @@
         [self setupSubNode];
     }
     
+    return self;
+}
+
+
+- (instancetype)initWithContentCollectionNode:(ASCollectionNode *)collectionNode {
+    self = [self init];
+    
+    if (self) {
+        _collectionNode = collectionNode;
+    }
     return self;
 }
 
@@ -52,6 +63,12 @@
 
 - (CGFloat)inputToolBarHeight {
         return CGRectGetHeight(_inputToolBarNode.frame);
+}
+
+
+- (CGRect)collectionInitialFrame {
+    NSAssert(!CGRectIsEmpty(_collectionInitialFrame), @"未设置collectionNode的frame");
+    return _collectionInitialFrame;
 }
 
 #pragma mark - keyboard notification action
@@ -94,6 +111,9 @@
                          self.inputToolBarNode.frame = barFrame;
                          self.inputToolBarRiseFrame = self.inputToolBarNode.frame;
                          self.inputToolBarNode.inputToolBarRiseFrame = self.inputToolBarNode.frame;
+                         CGRect collectionNodeFrame = self.collectionInitialFrame;
+                         collectionNodeFrame.size.height = barFrame.origin.y;
+                         self.collectionNode.frame = collectionNodeFrame;
 
                      } completion:nil];
 }
@@ -116,6 +136,7 @@
                          CGRect barFrame = self.inputToolBarNode.frame;
                          barFrame.origin.y = barY;
                          self.inputToolBarNode.frame = barFrame;
+                         self.collectionNode.frame = self.collectionInitialFrame;
                      } completion:nil];
 }
 

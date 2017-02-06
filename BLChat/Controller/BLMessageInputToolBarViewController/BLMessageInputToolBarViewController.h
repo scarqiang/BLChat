@@ -10,4 +10,8 @@
 
 @interface BLMessageInputToolBarViewController : ASViewController
 @property (nonatomic, readonly) CGFloat inputToolBarHeight;
+@property (nonatomic) CGRect collectionInitialFrame;
+
+- (instancetype)initWithContentCollectionNode:(ASCollectionNode *)collectionNode;
+
 @end
