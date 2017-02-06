@@ -71,7 +71,7 @@
 }
 
 - (CGFloat)inputToolBarHeight {
-        return CGRectGetHeight(_inputToolBarNode.frame);
+    return CGRectGetHeight(_inputToolBarNode.frame);
 }
 
 

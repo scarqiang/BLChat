@@ -321,6 +321,11 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
             [self.delegate inputToolBarNode:self didClickSendButtonActionWithText:editableTextNode.textView.text];
         }
         editableTextNode.textView.text = @"";
+        
+        CGFloat textNodeHeight = self.inputTextNode.textView.contentSize.height;
+        self.inputTextNode.style.preferredSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, textNodeHeight);
+        [self transitionLayoutWithAnimation:YES shouldMeasureAsync:NO measurementCompletion:nil];
+        
         return NO;
     }
     
