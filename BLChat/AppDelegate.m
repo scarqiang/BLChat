@@ -19,7 +19,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     BLMessagesViewController *chatVC = [[BLMessagesViewController alloc] init];
-    self.window.rootViewController = chatVC;
+    UINavigationController *navigationController = [[UINavigationController alloc]
+            initWithRootViewController:chatVC];
+    self.window.rootViewController = navigationController;
     
     [self.window makeKeyAndVisible];
     return YES;

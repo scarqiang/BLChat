@@ -29,8 +29,8 @@
     paragraphStyle.alignment = NSTextAlignmentCenter;
 
     NSDictionary *attributes = @{
-            NSFontAttributeName:[UIFont systemFontOfSize:12.f],
-            NSForegroundColorAttributeName:[UIColor colorWithRed:53.f / 255.f green:53.f / 255.f blue:53.f / 255.f alpha:1.f],
+            NSFontAttributeName:[UIFont systemFontOfSize:10.f],
+            NSForegroundColorAttributeName:[UIColor colorWithRed:153.f / 255.f green:153.f / 255.f blue:153.f / 255.f alpha:1.f],
             NSParagraphStyleAttributeName: paragraphStyle
     };
 
@@ -39,9 +39,14 @@
 }
 
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
-    return [ASCenterLayoutSpec centerLayoutSpecWithCenteringOptions:ASCenterLayoutSpecCenteringXY
-                                                      sizingOptions:ASCenterLayoutSpecSizingOptionDefault
-                                                              child:self.timeSeparatorTextNode];
+    self.timeSeparatorTextNode.style.spacingBefore = 8.f;
+    self.timeSeparatorTextNode.style.spacingAfter = 5.f;
+
+    return [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical
+                                                   spacing:0
+                                            justifyContent:ASStackLayoutJustifyContentCenter
+                                                alignItems:ASStackLayoutAlignItemsCenter
+                                                  children:@[self.timeSeparatorTextNode]];
 }
 
 @end

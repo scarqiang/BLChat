@@ -9,6 +9,8 @@
 #import "BLMessagesViewController.h"
 #import "BLMessagesViewControllerDataSource.h"
 #import "BLMessagesCollectionNode.h"
+#import "BLDateFormatter.h"
+
 #import "BLMessage.h"
 #import "BLMessagesCollectionNodeCell.h"
 #import "BLMessageInputToolBarViewController.h"
@@ -67,7 +69,7 @@
 #pragma mark - configure
 - (void)configureCollectionNode {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.minimumLineSpacing = 2;
+    flowLayout.minimumLineSpacing = 0;
     flowLayout.minimumInteritemSpacing = 0;
     _collectionNode = [[BLMessagesCollectionNode alloc] initWithCollectionViewLayout:flowLayout];
     _collectionNode.delegate = self;
@@ -91,7 +93,6 @@
     cell.senderName = message.senderName;
     cell.avatarNode.image = message.avatarImage;
     cell.formattedTime = [collectionNode.dataSource formattedTimeForCollectionNode:collectionNode atIndexPath:indexPath];
-    cell.backgroundColor = [UIColor redColor];
 
     cell.delegate = collectionNode;
     return cell;
@@ -105,11 +106,21 @@
 - (nullable NSString *)formattedTimeForCollectionNode:(BLMessagesCollectionNode *)collectionNode
                                           atIndexPath:(NSIndexPath *)indexPath {
     NSIndexPath *previousIndexPath = indexPath.row == 0 ? nil : [NSIndexPath indexPathForItem:indexPath.row - 1 inSection:1];
-    id<BLMessageData> currentMessageData = [collectionNode.dataSource messageDataForCollectionNode:collectionNode
-                                                                                       atIndexPath:indexPath];
     id<BLMessageData> previousMessageData = !previousIndexPath ? nil : [collectionNode.dataSource messageDataForCollectionNode:collectionNode
                                                                                                                    atIndexPath:previousIndexPath];
-    return @"12:33";
+    id<BLMessageData> currentMessageData = [collectionNode.dataSource messageDataForCollectionNode:collectionNode
+                                                                                       atIndexPath:indexPath];
+    if (!previousMessageData) {
+        return [[BLDateFormatter sharedInstance] formattedChatTime:currentMessageData.sendingTime];
+    }
+
+    NSTimeInterval timeDiff = currentMessageData.sendingTime - previousMessageData.sendingTime;
+    if (timeDiff < 60) {
+        return nil;
+    } else {
+        return [[BLDateFormatter sharedInstance] formattedChatTime:currentMessageData.sendingTime];
+    }
+
 }
 
 #pragma mark - collection node delegate

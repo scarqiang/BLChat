@@ -6,6 +6,7 @@
 #import "BLMessagesCollectionNodeCell.h"
 #import "BLMessagesConstant.h"
 #import "ASDimension.h"
+#import "BLMessagesTimeSeparatorNode.h"
 
 
 @interface BLMessagesCollectionNodeCell ()
@@ -13,7 +14,7 @@
 
 @property (nonatomic) ASNetworkImageNode *avatarNode;
 @property (nonatomic) ASTextNode *senderNameTextNode;
-@property (nonatomic) ASTextNode *timeSeparatorTextNode;
+@property (nonatomic) BLMessagesTimeSeparatorNode *timeSeparatorTextNode;
 @property (nonatomic) ASButtonNode *accessoryButton;
 @property (nonatomic) UIActivityIndicatorView *indicatorView;
 @property (nonatomic) ASDisplayNode *indicatorNode;
@@ -55,10 +56,9 @@
     });
 
     _timeSeparatorTextNode = ({
-        ASTextNode *textNode = [[ASTextNode alloc] init];
-        textNode.maximumNumberOfLines = 1;
+        BLMessagesTimeSeparatorNode *node = [[BLMessagesTimeSeparatorNode alloc] init];
 
-        textNode;
+        node;
     });
 
     _indicatorNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView * {
@@ -189,17 +189,18 @@
     }
 
     _formattedTime = formattedTime;
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    paragraphStyle.alignment = NSTextAlignmentCenter;
-
-    NSDictionary *attributes = @{
-            NSFontAttributeName:[UIFont systemFontOfSize:12.f],
-            NSForegroundColorAttributeName:[UIColor colorWithRed:53.f / 255.f green:53.f / 255.f blue:53.f / 255.f alpha:1.f],
-            NSParagraphStyleAttributeName: paragraphStyle
-    };
-
-    self.timeSeparatorTextNode.attributedText = [[NSAttributedString alloc] initWithString:formattedTime
-                                                                          attributes:attributes];
+    self.timeSeparatorTextNode.formattedTime = formattedTime;
+//    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+//    paragraphStyle.alignment = NSTextAlignmentCenter;
+//
+//    NSDictionary *attributes = @{
+//            NSFontAttributeName:[UIFont systemFontOfSize:12.f],
+//            NSForegroundColorAttributeName:[UIColor colorWithRed:53.f / 255.f green:53.f / 255.f blue:53.f / 255.f alpha:1.f],
+//            NSParagraphStyleAttributeName: paragraphStyle
+//    };
+//
+//    self.timeSeparatorTextNode.attributedText = [[NSAttributedString alloc] initWithString:formattedTime
+//                                                                          attributes:attributes];
 }
 
 - (void)setContentNode:(BLMessagesContentNode *)contentNode {

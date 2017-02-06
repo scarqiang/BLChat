@@ -16,6 +16,7 @@
 		828C9BD0EE568D8DA8F22EFB /* BLMessagesCollectionNodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C92FF7298967813209D2D /* BLMessagesCollectionNodeCell.m */; };
 		828C9C5CB552638314850B7E /* BLMessagesPhotoContentNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C934AFB74E0354A0CB249 /* BLMessagesPhotoContentNode.m */; };
 		828C9E16040015E619F1662F /* BLMessagesViewControllerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C9B2E1AD0E99A0276E629 /* BLMessagesViewControllerDataSource.m */; };
+		842258681E481B51007407CA /* BLDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 842258671E481B51007407CA /* BLDateFormatter.m */; };
 		8436C0F21E38AF5800E53F50 /* send_MsgBg_h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8436C0E61E38AF5800E53F50 /* send_MsgBg_h@2x.png */; };
 		8436C0F31E38AF5800E53F50 /* send_MsgBg_h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8436C0E71E38AF5800E53F50 /* send_MsgBg_h@3x.png */; };
 		8436C0F41E38AF5800E53F50 /* send_MsgBg_Plain_h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8436C0E81E38AF5800E53F50 /* send_MsgBg_Plain_h@2x.png */; };
@@ -177,6 +178,8 @@
 		828C9DCAF1AC81CAC8845B1E /* BLMessagesConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesConstant.m; sourceTree = "<group>"; };
 		828C9F19540C264C006B83F1 /* BLMessagesTextContentNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesTextContentNode.m; sourceTree = "<group>"; };
 		828C9F3E5C2FFE665C53C921 /* BLMessagesConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessagesConstant.h; sourceTree = "<group>"; };
+		842258661E481B51007407CA /* BLDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLDateFormatter.h; sourceTree = "<group>"; };
+		842258671E481B51007407CA /* BLDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLDateFormatter.m; sourceTree = "<group>"; };
 		8436C0E61E38AF5800E53F50 /* send_MsgBg_h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send_MsgBg_h@2x.png"; sourceTree = "<group>"; };
 		8436C0E71E38AF5800E53F50 /* send_MsgBg_h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send_MsgBg_h@3x.png"; sourceTree = "<group>"; };
 		8436C0E81E38AF5800E53F50 /* send_MsgBg_Plain_h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send_MsgBg_Plain_h@2x.png"; sourceTree = "<group>"; };
@@ -347,6 +350,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		842258651E481B51007407CA /* Dependency */ = {
+			isa = PBXGroup;
+			children = (
+				842258661E481B51007407CA /* BLDateFormatter.h */,
+				842258671E481B51007407CA /* BLDateFormatter.m */,
+			);
+			path = Dependency;
+			sourceTree = "<group>";
+		};
 		846778CD1E2F0DB500648298 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,6 +446,7 @@
 		F7546F791E2E2DA2003E38DE /* BLChat */ = {
 			isa = PBXGroup;
 			children = (
+				842258651E481B51007407CA /* Dependency */,
 				F7872BF21E373CB60089C176 /* Factory */,
 				F7872BF31E373CB60089C176 /* Resource */,
 				F7A741C51E36F3A5004AF3DB /* FaceBoard */,
@@ -956,6 +969,7 @@
 				F76776341E37623B006F36C3 /* BLMessagesViewController.m in Sources */,
 				F7A742111E36F3A5004AF3DB /* FaceBoard.m in Sources */,
 				F7A742591E372D4A004AF3DB /* BLMessageInputToolBarViewController.m in Sources */,
+				842258681E481B51007407CA /* BLDateFormatter.m in Sources */,
 				F7546F7F1E2E2DA2003E38DE /* AppDelegate.m in Sources */,
 				F7546F7C1E2E2DA2003E38DE /* main.m in Sources */,
 				828C9E16040015E619F1662F /* BLMessagesViewControllerDataSource.m in Sources */,
