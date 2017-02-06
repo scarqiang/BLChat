@@ -21,6 +21,7 @@
     BLMessagesViewController *chatVC = [[BLMessagesViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc]
             initWithRootViewController:chatVC];
+    navigationController.navigationBar.translucent = NO;
     self.window.rootViewController = navigationController;
     
     [self.window makeKeyAndVisible];
