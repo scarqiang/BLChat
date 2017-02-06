@@ -10,13 +10,13 @@
 #import "BLMessagesTextContentNode.h"
 #import "BLMessagesPhotoContentNode.h"
 
-
+static NSTimeInterval sendingTime = 1486364341;
 static BOOL reversed = NO;
 @implementation BLMessage
 + (instancetype)randomSampleMessage {
     BLMessage *message = [BLMessage new];
     message.senderName = @"黄志强";
-    message.sendingTime = 1485270243;
+    message.sendingTime = [message randomSendingTime];
     message.avatarImage = [UIImage imageNamed:@"demo_avatar_cook"];
     message.messageDisplayType = reversed ? BLMessageDisplayTypeLeft : BLMessageDisplayTypeRight;
     message.contentNode = [message randomContentNodeWithMessage:message];
@@ -44,6 +44,12 @@ static BOOL reversed = NO;
         default:
             return [UIImage imageNamed:@"goldengate"];
     }
+}
+
+- (NSTimeInterval)randomSendingTime {
+    NSInteger random = arc4random_uniform(10);
+    sendingTime += random * 15;
+    return sendingTime;
 }
 
 - (NSString *)randomText {

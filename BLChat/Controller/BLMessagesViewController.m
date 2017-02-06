@@ -42,7 +42,7 @@
 
     NSMutableArray<id<BLMessageData>> *messages = [NSMutableArray array];
 
-    for (NSInteger i = 0; i < 2000; i++) {
+    for (NSInteger i = 0; i < 20; i++) {
         [messages addObject:[BLMessage randomSampleMessage]];
     }
     self.dataSource.messages = messages;
