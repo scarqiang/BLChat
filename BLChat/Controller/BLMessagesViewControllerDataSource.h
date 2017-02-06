@@ -11,4 +11,5 @@
 @interface BLMessagesViewControllerDataSource : NSObject
 @property (weak, nonatomic) id<BLChatViewControllerDataSourceDelegate> delegate;
 @property (nonatomic) NSMutableArray<id<BLMessageData>> *messages;
+@property (nonatomic) BOOL didScrollToBottomWhenFirstLoading;
 @end

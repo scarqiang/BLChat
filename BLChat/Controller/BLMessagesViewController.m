@@ -52,11 +52,15 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if (!self.dataSource.didScrollToBottomWhenFirstLoading) {
+        [self scrollToBottom:NO];
+        self.dataSource.didScrollToBottomWhenFirstLoading = YES;
+    }
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    [self scrollToBottom:NO];
+
 }
 
 #pragma mark - configure
