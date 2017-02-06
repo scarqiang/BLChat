@@ -190,17 +190,6 @@
 
     _formattedTime = formattedTime;
     self.timeSeparatorTextNode.formattedTime = formattedTime;
-//    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-//    paragraphStyle.alignment = NSTextAlignmentCenter;
-//
-//    NSDictionary *attributes = @{
-//            NSFontAttributeName:[UIFont systemFontOfSize:12.f],
-//            NSForegroundColorAttributeName:[UIColor colorWithRed:53.f / 255.f green:53.f / 255.f blue:53.f / 255.f alpha:1.f],
-//            NSParagraphStyleAttributeName: paragraphStyle
-//    };
-//
-//    self.timeSeparatorTextNode.attributedText = [[NSAttributedString alloc] initWithString:formattedTime
-//                                                                          attributes:attributes];
 }
 
 - (void)setContentNode:(BLMessagesContentNode *)contentNode {

@@ -9,6 +9,7 @@
 #import "BLMessage.h"
 #import "BLMessagesTextContentNode.h"
 #import "BLMessagesPhotoContentNode.h"
+#import "BLMessagesAudioContentNode.h"
 
 static NSTimeInterval sendingTime = 1486364341;
 static BOOL reversed = NO;
@@ -25,14 +26,17 @@ static BOOL reversed = NO;
 }
 
 - (BLMessagesContentNode *)randomContentNodeWithMessage:(BLMessage *)message {
-    NSInteger random = arc4random_uniform(2);
+    NSInteger random = arc4random_uniform(3);
     switch (random) {
         case 0:
             return [BLMessagesTextContentNode textContentNodeWithText:[message randomText]
                                                    messageDisplayType:message.messageDisplayType];
-        default:
+        case 1:
             return [BLMessagesPhotoContentNode photoContentNodeWithImage:[message randomImage]
                                                       messageDisplayType:message.messageDisplayType];
+        default:
+            return [BLMessagesAudioContentNode audioContentNodeWithTimeLength:arc4random_uniform(119) + 1
+                                                           messageDisplayType:message.messageDisplayType];
     }
 }
 

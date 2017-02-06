@@ -11,5 +11,6 @@
 
 @interface BLMessagesAudioContentNode : BLMessagesContentNode
 
-- (instancetype)initWithTimeLength:(NSTimeInterval)length;
+- (instancetype)initWithTimeLength:(NSTimeInterval)length messageDisplayType:(BLMessageDisplayType)displayType;
++ (instancetype)audioContentNodeWithTimeLength:(NSTimeInterval)length messageDisplayType:(BLMessageDisplayType)displayType;
 @end
