@@ -12,6 +12,7 @@
 		828C91531E7995D8E1ACAE0B /* BLMessagesCollectionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C9855607890602D035871 /* BLMessagesCollectionNode.m */; };
 		828C9395A2391420F48C7527 /* BLMessagesTextContentNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C9F19540C264C006B83F1 /* BLMessagesTextContentNode.m */; };
 		828C98D1F851ECAA3166AC08 /* BLMessagesTimeSeparatorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C9DA98F6DB4FA04119CC7 /* BLMessagesTimeSeparatorNode.m */; };
+		828C9A05BDABE16CACCD0837 /* BLTextMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C9B496C335C9869A05322 /* BLTextMessage.m */; };
 		828C9A7A5C7D167DDC6CB815 /* BLMessagesConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C9DCAF1AC81CAC8845B1E /* BLMessagesConstant.m */; };
 		828C9BD0EE568D8DA8F22EFB /* BLMessagesCollectionNodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C92FF7298967813209D2D /* BLMessagesCollectionNodeCell.m */; };
 		828C9C5CB552638314850B7E /* BLMessagesPhotoContentNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C934AFB74E0354A0CB249 /* BLMessagesPhotoContentNode.m */; };
@@ -178,6 +179,7 @@
 		828C92FB6C1174FBBA812336 /* BLMessagesPhotoContentNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessagesPhotoContentNode.h; sourceTree = "<group>"; };
 		828C92FF7298967813209D2D /* BLMessagesCollectionNodeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesCollectionNodeCell.m; sourceTree = "<group>"; };
 		828C934AFB74E0354A0CB249 /* BLMessagesPhotoContentNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesPhotoContentNode.m; sourceTree = "<group>"; };
+		828C94D0C059B9DEB17731DB /* BLTextMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLTextMessage.h; sourceTree = "<group>"; };
 		828C95E3CC62C3787DF6D683 /* BLMessagesContentNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessagesContentNode.h; sourceTree = "<group>"; };
 		828C96D6A88762E274157D06 /* BLMessagesTextContentNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessagesTextContentNode.h; sourceTree = "<group>"; };
 		828C96D7F734C1975B3C0BAE /* BLMessagesViewControllerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessagesViewControllerDataSource.h; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		828C9855607890602D035871 /* BLMessagesCollectionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesCollectionNode.m; sourceTree = "<group>"; };
 		828C9885F14CE3BC26FABD2B /* BLMessagesTimeSeparatorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessagesTimeSeparatorNode.h; sourceTree = "<group>"; };
 		828C9B2E1AD0E99A0276E629 /* BLMessagesViewControllerDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesViewControllerDataSource.m; sourceTree = "<group>"; };
+		828C9B496C335C9869A05322 /* BLTextMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLTextMessage.m; sourceTree = "<group>"; };
 		828C9DA98F6DB4FA04119CC7 /* BLMessagesTimeSeparatorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesTimeSeparatorNode.m; sourceTree = "<group>"; };
 		828C9DCAF1AC81CAC8845B1E /* BLMessagesConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesConstant.m; sourceTree = "<group>"; };
 		828C9F19540C264C006B83F1 /* BLMessagesTextContentNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesTextContentNode.m; sourceTree = "<group>"; };
@@ -393,6 +396,8 @@
 				845133A61E363A1C00E57E09 /* BLMessage.m */,
 				828C9DCAF1AC81CAC8845B1E /* BLMessagesConstant.m */,
 				828C9F3E5C2FFE665C53C921 /* BLMessagesConstant.h */,
+				828C9B496C335C9869A05322 /* BLTextMessage.m */,
+				828C94D0C059B9DEB17731DB /* BLTextMessage.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1034,6 +1039,7 @@
 				828C9C5CB552638314850B7E /* BLMessagesPhotoContentNode.m in Sources */,
 				F7A742121E36F3A5004AF3DB /* FaceButton.m in Sources */,
 				F7A742131E36F3A5004AF3DB /* GrayPageControl.m in Sources */,
+				828C9A05BDABE16CACCD0837 /* BLTextMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

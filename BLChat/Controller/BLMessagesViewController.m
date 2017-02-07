@@ -13,14 +13,15 @@
 
 #import "BLMessage.h"
 #import "BLMessagesCollectionNodeCell.h"
+#import "BLTextMessage.h"
 #import "BLMessageInputToolBarViewController.h"
 
-@interface BLMessagesViewController () <BLChatViewControllerDataSourceDelegate, BLMessagesCollectionNodeDelegate, BLMessagesCollectionNodeDataSource, ASCollectionViewDelegateFlowLayout, BLMessageInputToolBarViewControllerDelegate>
+@interface BLMessagesViewController () <BLMessagesViewControllerDataSourceDelegate, BLMessagesCollectionNodeDelegate, BLMessagesCollectionNodeDataSource, ASCollectionViewDelegateFlowLayout, BLMessageInputToolBarViewControllerDelegate>
 //model
 @property (nonatomic, strong) BLMessagesViewControllerDataSource *dataSource;
-@property (nonatomic) BOOL viewDidLayout;
-@property (nonatomic, strong) BLMessageInputToolBarViewController *inputToolBarViewController;
+
 //views
+@property (nonatomic, strong) BLMessageInputToolBarViewController *inputToolBarViewController;
 @property (nonatomic, strong) BLMessagesCollectionNode *collectionNode;
 @end
 
@@ -152,7 +153,6 @@
     }
 }
 
-
 #pragma mark - collection node delegate
 - (ASSizeRange)collectionNode:(ASCollectionNode *)collectionNode constrainedSizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -162,10 +162,10 @@
     return ASSizeRangeMake(minItemSize, maxItemSize);
 }
 
-- (void)  didTapContentNode:(BLMessagesContentNode *)contentNode
-             inMessagesCell:(BLMessagesCollectionNodeCell *)cell
-           inCollectionNode:(BLMessagesCollectionNode *)collectionNode
- preferredContentNodeAction:(BLMessagesContentNodeAction)action {
+- (void)didTapContentNode:(BLMessagesContentNode *)contentNode
+           inMessagesCell:(BLMessagesCollectionNodeCell *)cell
+         inCollectionNode:(BLMessagesCollectionNode *)collectionNode
+ performContentNodeAction:(BLMessagesContentNodeAction)action {
     if (!action) {
         return;
     }
@@ -177,9 +177,20 @@
     [self.inputToolBarViewController resignTextNodeFirstResponder];
 }
 
+#pragma mark - BLMessagesViewControllerDataSource
+- (void)messagesViewControllerDataSource:(BLMessagesViewControllerDataSource *)dateSource
+                    didReceiveNewMessage:(id <BLMessageData>)newMessage
+                                   index:(NSInteger)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+    [self.collectionNode insertItemsAtIndexPaths:@[indexPath]];
+    [self scrollToBottom:YES];
+}
+
 #pragma mark - BLMessageInputToolBarViewControllerDelegate
 - (void)barViewController:(BLMessageInputToolBarViewController *)viewController didClickInputBarSendButtonWithInputText:(NSString *)inputText {
-    
+    BLTextMessage *textMessage = [BLTextMessage textMessageWithText:inputText
+                                                 messageDisplayType:BLMessageDisplayTypeRight];
+    [self.dataSource didReceiveNewMessage:textMessage];
 }
 
 @end

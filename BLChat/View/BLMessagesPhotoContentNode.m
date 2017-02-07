@@ -53,8 +53,9 @@
 }
 
 - (void)didTapContentNode {
-    [self.delegate didTapMessagesContentNode:self preferredAction:^(BLMessagesViewController *messagesViewController,
-            BLMessagesCollectionNode *collectionNode, BLMessagesCollectionNodeCell *collectionNodeCell) {
+    [self.delegate didTapMessagesContentNode:self performAction:^(BLMessagesViewController *messagesViewController,
+                                                                  BLMessagesCollectionNode *collectionNode,
+                                                                  BLMessagesCollectionNodeCell *collectionNodeCell) {
         NSLog(@"photo is tapped");
     }];
 }

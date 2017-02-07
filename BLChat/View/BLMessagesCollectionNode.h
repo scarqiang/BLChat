@@ -8,10 +8,10 @@
 @protocol BLMessageData;
 NS_ASSUME_NONNULL_BEGIN
 @protocol BLMessagesCollectionNodeDelegate <ASCollectionDelegate>
-- (void)    didTapContentNode:(BLMessagesContentNode *)contentNode
-               inMessagesCell:(BLMessagesCollectionNodeCell *)cell
-             inCollectionNode:(BLMessagesCollectionNode *)collectionNode
-   preferredContentNodeAction:(BLMessagesContentNodeAction)action;
+- (void)didTapContentNode:(BLMessagesContentNode *)contentNode
+           inMessagesCell:(BLMessagesCollectionNodeCell *)cell
+         inCollectionNode:(BLMessagesCollectionNode *)collectionNode
+ performContentNodeAction:(BLMessagesContentNodeAction)action;
 
 @end
 

@@ -198,13 +198,13 @@
     contentNode.delegate = self;
 }
 #pragma mark - BLMessagesContentNodeDelegate
-- (void)didTapMessagesContentNode:(BLMessagesContentNode *)contentNode preferredAction:(BLMessagesContentNodeAction)action {
+- (void)didTapMessagesContentNode:(BLMessagesContentNode *)contentNode performAction:(BLMessagesContentNodeAction)action {
     if (contentNode != self.contentNode) {
         return;
     }
 
     [self.delegate didTapContentNode:contentNode
                       inMessagesCell:self
-          preferredContentNodeAction:action];
+            performContentNodeAction:action];
 }
 @end

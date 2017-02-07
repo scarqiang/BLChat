@@ -4,10 +4,16 @@
 //
 
 #import "BLMessagesViewControllerDataSource.h"
+#import "NSArray+YYAdd.h"
+
 @interface BLMessagesViewControllerDataSource ()
 
 @end
 
 @implementation BLMessagesViewControllerDataSource
-
+- (void)didReceiveNewMessage:(id<BLMessageData>)newMessage {
+    [self.messages appendObject:newMessage];
+    [self.delegate messagesViewControllerDataSource:self
+                               didReceiveNewMessage:newMessage index:self.messages.count - 1];
+}
 @end

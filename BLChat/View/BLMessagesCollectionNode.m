@@ -23,10 +23,11 @@
 }
 
 #pragma mark - BLMessagesCollectionNodeCellDelegate
-- (void)didTapContentNode:(BLMessagesContentNode *)contentNode inMessagesCell:(BLMessagesCollectionNodeCell *)cell  preferredContentNodeAction:(BLMessagesContentNodeAction)action {
+- (void)didTapContentNode:(BLMessagesContentNode *)contentNode inMessagesCell:(BLMessagesCollectionNodeCell *)cell
+ performContentNodeAction:(BLMessagesContentNodeAction)action {
     [self.delegate didTapContentNode:contentNode
                       inMessagesCell:cell
                     inCollectionNode:self
-          preferredContentNodeAction:action];
+            performContentNodeAction:action];
 }
 @end
