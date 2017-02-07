@@ -27,7 +27,6 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
 @property (nonatomic, weak) id<BLMessageInputToolBarNodeDelegate> delegate;
 @property (nonatomic, readwrite) BLInputToolBarState inputToolBarCurrentState;
 @property (nonatomic, readwrite) BLInputToolBarState inputToolBarPreviousState;
-@property (nonatomic, readwrite) CGFloat barBottomItemHeight;
 @property (nonatomic) CGRect maxTextNodeFrame;
 @property (nonatomic) CGFloat maxTextNodeHeight;
 @property (nonatomic) NSInteger textNumberLine;
@@ -149,49 +148,52 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
 - (void)didClickVoiceButtonNode:(ASButtonNode *)buttonNode {
 
     BLInputToolBarState targetState = buttonNode.selected ? BLInputToolBarStateKeyboard : BLInputToolBarStateVoice;
-    
-    if ([self.delegate respondsToSelector:@selector(inputToolBarNode:didClickVoiceButtonNode:currentState:targetState:)]) {
-        [self.delegate inputToolBarNode:self
-                didClickVoiceButtonNode:buttonNode
-                           currentState:self.inputToolBarCurrentState
-                            targetState:targetState];
-    }
-    
+    BLInputToolBarState previousState = self.inputToolBarCurrentState;
+
     [self switchInputToolBarStateActionCurrentState:self.inputToolBarCurrentState
                                         targetState:targetState
                                    targetButtonNode:buttonNode];
+
+    if ([self.delegate respondsToSelector:@selector(inputToolBarNode:didClickVoiceButtonNode:previousState:currentState:)]) {
+        [self.delegate inputToolBarNode:self
+                didClickVoiceButtonNode:buttonNode
+                          previousState:previousState
+                           currentState:targetState];
+    }
 }
 
 - (void)didClickExpressionButtonNode:(ASButtonNode *)buttonNode {
 
     BLInputToolBarState targetState = buttonNode.selected ? BLInputToolBarStateKeyboard : BLInputToolBarStateExpression;
-    
-    if ([self.delegate respondsToSelector:@selector(inputToolBarNode:didClickExpressionButtonNode:currentState:targetState:)]) {
-        [self.delegate inputToolBarNode:self
-           didClickExpressionButtonNode:buttonNode
-                           currentState:self.inputToolBarCurrentState
-                            targetState:targetState];
-    }
-    
+    BLInputToolBarState previousState = self.inputToolBarCurrentState;
+
     [self switchInputToolBarStateActionCurrentState:self.inputToolBarCurrentState
                                         targetState:targetState
                                    targetButtonNode:buttonNode];
+
+    if ([self.delegate respondsToSelector:@selector(inputToolBarNode:didClickExpressionButtonNode:previousState:currentState:)]) {
+        [self.delegate inputToolBarNode:self
+           didClickExpressionButtonNode:buttonNode
+                          previousState:previousState
+                           currentState:targetState];
+    }
 }
 
 - (void)didClickAdditionalButtonNode:(ASButtonNode *)buttonNode {
 
     BLInputToolBarState targetState = buttonNode.selected ? BLInputToolBarStateKeyboard : BLInputToolBarStateAddition;
-    
-    if ([self.delegate respondsToSelector:@selector(inputToolBarNode:didClickAdditionalButtonNode:currentState:targetState:)]) {
-        [self.delegate inputToolBarNode:self
-           didClickAdditionalButtonNode:buttonNode
-                           currentState:self.inputToolBarCurrentState
-                            targetState:targetState];
-    }
-    
+    BLInputToolBarState previousState = self.inputToolBarCurrentState;
+
     [self switchInputToolBarStateActionCurrentState:self.inputToolBarCurrentState
                                         targetState:targetState
                                    targetButtonNode:buttonNode];
+
+    if ([self.delegate respondsToSelector:@selector(inputToolBarNode:didClickAdditionalButtonNode:previousState:currentState:)]) {
+        [self.delegate inputToolBarNode:self
+           didClickAdditionalButtonNode:buttonNode
+                          previousState:previousState
+                           currentState:targetState];
+    }
 }
 
 - (void)switchInputToolBarStateActionCurrentState:(BLInputToolBarState)currentState
@@ -217,6 +219,20 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
         buttonNode.selected = NO;
         self.inputToolBarCurrentState = targetState;
         [self.inputTextNode becomeFirstResponder];
+    }
+    else if (targetState == BLInputToolBarStateNone) {
+        switch (currentState) {
+            case BLInputToolBarStateExpression:
+                [self setupExpressionButtonNodeImage:self.expressionButtonNode];
+                self.expressionButtonNode.selected = NO;
+                break;
+            case BLInputToolBarStateAddition:
+                [self setupAdditionalButtonNodeImage:self.additionalButtonNode];
+                self.additionalButtonNode.selected = NO;
+                break;
+            default:
+                break;
+        }
     }
     else {
         switch (currentState) {
@@ -471,6 +487,35 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
         [context completeTransition:finished];
         removeNode.hidden = NO;
     }];
+}
+
+- (void)resignInputToolBarFirstResponder {
+
+    self.inputToolBarPreviousState = self.inputToolBarCurrentState;
+    self.inputToolBarCurrentState = BLInputToolBarStateNone;
+
+    if (self.inputTextNode.isFirstResponder) {
+        [self.inputTextNode resignFirstResponder];
+    }
+
+    switch (self.inputToolBarPreviousState) {
+        case BLInputToolBarStateExpression:
+            [self switchInputToolBarStateActionCurrentState:BLInputToolBarStateExpression
+                                                targetState:BLInputToolBarStateNone
+                                           targetButtonNode:self.expressionButtonNode];
+            break;
+        case BLInputToolBarStateAddition:
+            [self switchInputToolBarStateActionCurrentState:BLInputToolBarStateAddition
+                                                targetState:BLInputToolBarStateNone
+                                           targetButtonNode:self.additionalButtonNode];
+            break;
+        default:
+            break;
+    }
+
+    if ([self.delegate respondsToSelector:@selector( inputToolBarNode:resignFirstResponderWithResignState:)]) {
+        [self.delegate inputToolBarNode:self resignFirstResponderWithResignState:self.inputToolBarPreviousState];
+    }
 }
 
 @end

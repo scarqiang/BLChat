@@ -8,8 +8,9 @@
 
 #define EmojiRecent @"EmojiRecent"
 
-typedef void  (^EmojiClicked)(NSString *key,NSString *value);
 
+
+typedef void  (^EmojiClicked)(NSString *key,NSString *value);
 #import <UIKit/UIKit.h>
 #import "FaceButton.h"
 #import "GrayPageControl.h"
@@ -33,9 +34,9 @@ typedef void  (^EmojiClicked)(NSString *key,NSString *value);
     
     float               _btnWidth;
 }
-@property (nonatomic, retain) UITextField *inputTextField;
-@property (nonatomic, retain) UITextView *inputTextView;
-@property(nonatomic,assign)id <FaceBoardDelegate>delegate;
+@property (nonatomic, weak) UITextField *inputTextField;
+@property (nonatomic, weak) UITextView *inputTextView;
+@property(nonatomic,weak)id <FaceBoardDelegate>delegate;
 @property(nonatomic,copy)EmojiClicked  emojiClicked;//聊天时emoji被点过的blocks
 -(void)setKeyBoard:(BOOL)isRecentlyUsed;
 

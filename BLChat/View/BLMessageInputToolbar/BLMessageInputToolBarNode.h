@@ -23,24 +23,26 @@ typedef NS_ENUM(NSUInteger, BLInputToolBarState) {
 
 @protocol BLMessageInputToolBarNodeDelegate <NSObject>
 
+@optional
+
 - (void)inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
  didClickVoiceButtonNode:(ASButtonNode *)voiceButtonNode
-            currentState:(BLInputToolBarState)currentState
-             targetState:(BLInputToolBarState)targetState;
+           previousState:(BLInputToolBarState)previousState
+            currentState:(BLInputToolBarState)currentState;
 
 - (void)    inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
 didClickExpressionButtonNode:(ASButtonNode *)expressionButtonNode
-                currentState:(BLInputToolBarState)currentState
-                 targetState:(BLInputToolBarState)targetState;
+               previousState:(BLInputToolBarState)previousState
+                currentState:(BLInputToolBarState)currentState;
 
 - (void)    inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
 didClickAdditionalButtonNode:(ASButtonNode *)additionalButtonNode
-                currentState:(BLInputToolBarState)currentState
-                 targetState:(BLInputToolBarState)targetState;
+               previousState:(BLInputToolBarState)previousState
+                currentState:(BLInputToolBarState)currentState;
 
 - (void)inputToolBarTextNodeDidBeginEditing:(ASEditableTextNode *)editableTextNode
-                               currentState:(BLInputToolBarState)currentState
-                                targetState:(BLInputToolBarState)targetState;
+                              previousState:(BLInputToolBarState)previousState
+                               currentState:(BLInputToolBarState)currentState;
 
 - (void)     inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
 pressingSoundRecordButtonNode:(ASButtonNode *)recordButtonNode;
@@ -55,15 +57,20 @@ layoutTransitionWithBarFrame:(CGRect)barFrame
 - (void)    inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
 didClickSendButtonActionWithText:(NSString *)inputText;
 
+- (void)           inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
+resignFirstResponderWithResignState:(BLInputToolBarState)resignState;
+
 @end
 
 @interface BLMessageInputToolBarNode : ASDisplayNode
 @property (nonatomic, readonly) BLInputToolBarState inputToolBarCurrentState;
 @property (nonatomic, readonly) BLInputToolBarState inputToolBarPreviousState;
 @property (nonatomic, strong, readonly) ASEditableTextNode *inputTextNode;
-@property (nonatomic, readonly) CGFloat barBottomItemHeight;
 @property (nonatomic) CGRect inputToolBarNormalFrame;
 @property (nonatomic) CGRect inputToolBarRiseFrame;
 
 - (instancetype)initWithDelegate:(id<BLMessageInputToolBarNodeDelegate>)delegate;
+
+- (void)resignInputToolBarFirstResponder;
+
 @end

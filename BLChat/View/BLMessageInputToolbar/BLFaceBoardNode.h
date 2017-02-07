@@ -9,7 +9,10 @@
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 #import "FaceBoard.h"
 
+@protocol BLFaceBoardNodeDelegate <NSObject>
+@end
 
 @interface BLFaceBoardNode : ASDisplayNode
-- (instancetype)initWithDelegate:(id<FaceBoardDelegate>)delegate;
+
+- (instancetype)initWithDelegate:(id <BLFaceBoardNodeDelegate>)delegate textViewNode:(ASEditableTextNode *)textViewNode;
 @end

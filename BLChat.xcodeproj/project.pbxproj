@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A6A433AE992BB425FF707F5 /* emojiRecent_n@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A6A4ABE8856F447342B5FB2 /* emojiRecent_n@3x.png */; };
+		4A6A43D1555C4EFF8488621E /* emojiRecent_h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A6A4EB18793F9EAB02CC4EC /* emojiRecent_h@2x.png */; };
+		4A6A48FE11BD324C51629241 /* emojiRecent_h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A6A48955D2937625DCA7D50 /* emojiRecent_h@3x.png */; };
+		4A6A4C0B449D4318AAF29F99 /* emojiRecent_n@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A6A4FEAB10A76552FC4F12B /* emojiRecent_n@2x.png */; };
 		546F8D279040FD8280FE25B5 /* libPods-BLChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52091AA63C3541606F711640 /* libPods-BLChat.a */; };
 		828C9078D8DF34C575A6B1EF /* BLMessagesContentNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C911D6739F4A6672B98AA /* BLMessagesContentNode.m */; };
 		828C91531E7995D8E1ACAE0B /* BLMessagesCollectionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 828C9855607890602D035871 /* BLMessagesCollectionNode.m */; };
@@ -60,6 +64,7 @@
 		845B499A1E4B350E00657BE7 /* outgoing_normal_bubble@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845B49921E4B350E00657BE7 /* outgoing_normal_bubble@3x.png */; };
 		846EB99E1E49CF7500ED145D /* sendMFailed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 846EB99C1E49CF7500ED145D /* sendMFailed@2x.png */; };
 		846EB99F1E49CF7500ED145D /* sendMFailed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 846EB99D1E49CF7500ED145D /* sendMFailed@3x.png */; };
+		F74B997C1E49F14C00210528 /* faceMap_ch.plist in Resources */ = {isa = PBXBuildFile; fileRef = F74B997B1E49F14C00210528 /* faceMap_ch.plist */; };
 		F7546F7C1E2E2DA2003E38DE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7B1E2E2DA2003E38DE /* main.m */; };
 		F7546F7F1E2E2DA2003E38DE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7E1E2E2DA2003E38DE /* AppDelegate.m */; };
 		F7546F821E2E2DA2003E38DE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F811E2E2DA2003E38DE /* ViewController.m */; };
@@ -185,6 +190,10 @@
 
 /* Begin PBXFileReference section */
 		03DF93984C9E9A3DDCC27876 /* Pods-BLChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BLChat/Pods-BLChat.debug.xcconfig"; sourceTree = "<group>"; };
+		4A6A48955D2937625DCA7D50 /* emojiRecent_h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emojiRecent_h@3x.png"; sourceTree = "<group>"; };
+		4A6A4ABE8856F447342B5FB2 /* emojiRecent_n@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emojiRecent_n@3x.png"; sourceTree = "<group>"; };
+		4A6A4EB18793F9EAB02CC4EC /* emojiRecent_h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emojiRecent_h@2x.png"; sourceTree = "<group>"; };
+		4A6A4FEAB10A76552FC4F12B /* emojiRecent_n@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emojiRecent_n@2x.png"; sourceTree = "<group>"; };
 		52091AA63C3541606F711640 /* libPods-BLChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BLChat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		828C911D6739F4A6672B98AA /* BLMessagesContentNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessagesContentNode.m; sourceTree = "<group>"; };
 		828C92FB6C1174FBBA812336 /* BLMessagesPhotoContentNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessagesPhotoContentNode.h; sourceTree = "<group>"; };
@@ -254,6 +263,7 @@
 		846EB99D1E49CF7500ED145D /* sendMFailed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sendMFailed@3x.png"; sourceTree = "<group>"; };
 		848D1B081E3603A10081414E /* BLChat-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BLChat-prefix.pch"; sourceTree = "<group>"; };
 		BB7AD314456607B3B54830D2 /* Pods-BLChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-BLChat/Pods-BLChat.release.xcconfig"; sourceTree = "<group>"; };
+		F74B997B1E49F14C00210528 /* faceMap_ch.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = faceMap_ch.plist; sourceTree = "<group>"; };
 		F7546F771E2E2DA2003E38DE /* BLChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7546F7B1E2E2DA2003E38DE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F7546F7D1E2E2DA2003E38DE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -570,6 +580,7 @@
 				845B49921E4B350E00657BE7 /* outgoing_normal_bubble@3x.png */,
 				846EB99C1E49CF7500ED145D /* sendMFailed@2x.png */,
 				846EB99D1E49CF7500ED145D /* sendMFailed@3x.png */,
+				F74B997B1E49F14C00210528 /* faceMap_ch.plist */,
 				842258A21E4866B5007407CA /* audio_n@2x.png */,
 				842258A31E4866B5007407CA /* audio_n@3x.png */,
 				842258921E48666C007407CA /* audioMic@2x.png */,
@@ -623,6 +634,10 @@
 				F7872BF51E373CCC0089C176 /* Message_List_Voice_H@3x.png */,
 				F7872BF61E373CCC0089C176 /* Message_List_Voice_N@2x.png */,
 				F7872BF71E373CCC0089C176 /* Message_List_Voice_N@3x.png */,
+				4A6A4EB18793F9EAB02CC4EC /* emojiRecent_h@2x.png */,
+				4A6A48955D2937625DCA7D50 /* emojiRecent_h@3x.png */,
+				4A6A4FEAB10A76552FC4F12B /* emojiRecent_n@2x.png */,
+				4A6A4ABE8856F447342B5FB2 /* emojiRecent_n@3x.png */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -964,6 +979,7 @@
 				F7A742221E36F3A5004AF3DB /* 014@2x.png in Resources */,
 				8436C1091E38AF8300E53F50 /* receive_MsgBgplay@3x.png in Resources */,
 				845B49931E4B350E00657BE7 /* incoming_highlight_bubble@2x.png in Resources */,
+				F74B997C1E49F14C00210528 /* faceMap_ch.plist in Resources */,
 				F7A742291E36F3A5004AF3DB /* 021@2x.png in Resources */,
 				F7A742411E36F3A5004AF3DB /* 045@2x.png in Resources */,
 				F7A742511E36F3A5004AF3DB /* 099@2x.png in Resources */,
@@ -991,6 +1007,10 @@
 				8436C0F61E38AF5800E53F50 /* send_MsgBg_Plain_n@2x.png in Resources */,
 				8436C0F31E38AF5800E53F50 /* send_MsgBg_h@3x.png in Resources */,
 				845B49991E4B350E00657BE7 /* outgoing_normal_bubble@2x.png in Resources */,
+				4A6A43D1555C4EFF8488621E /* emojiRecent_h@2x.png in Resources */,
+				4A6A48FE11BD324C51629241 /* emojiRecent_h@3x.png in Resources */,
+				4A6A4C0B449D4318AAF29F99 /* emojiRecent_n@2x.png in Resources */,
+				4A6A433AE992BB425FF707F5 /* emojiRecent_n@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

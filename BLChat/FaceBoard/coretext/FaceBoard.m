@@ -268,7 +268,8 @@
         }
     
         NSMutableString *faceString = [[NSMutableString alloc]initWithString:self.inputTextView.text];
-        [faceString replaceCharactersInRange:range withString:[_faceMap objectForKey:[NSString stringWithFormat:@"%03d",i]]];
+        NSString *mapString = [_faceMap objectForKey:[NSString stringWithFormat:@"%03d",i]];
+        [faceString replaceCharactersInRange:range withString:mapString];
         self.inputTextView.text = faceString;
 //        [faceString release];
         self.inputTextView.selectedRange=NSMakeRange(range.location+[[_faceMap objectForKey:[NSString stringWithFormat:@"%03d",i]] length],0);

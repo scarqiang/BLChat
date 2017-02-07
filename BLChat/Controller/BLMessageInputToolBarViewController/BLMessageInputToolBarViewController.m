@@ -8,15 +8,18 @@
 
 #import "BLMessageInputToolBarViewController.h"
 #import "BLMessageInputToolBarNode.h"
+#import "BLFaceBoardNode.h"
 
+NSTimeInterval const kBLBottomItemRiseAnimationTime = 0.35;
 
-@interface BLMessageInputToolBarViewController ()<BLMessageInputToolBarNodeDelegate>
+@interface BLMessageInputToolBarViewController ()<BLMessageInputToolBarNodeDelegate,BLFaceBoardNodeDelegate>
 @property (nonatomic, strong) BLMessageInputToolBarNode *inputToolBarNode;
-@property (nonatomic, strong) ASDisplayNode *faceBoardNode;
+@property (nonatomic, strong) BLFaceBoardNode *faceBoardNode;
 @property (nonatomic, readwrite) CGFloat inputToolBarHeight;
 @property (nonatomic, weak) ASCollectionNode *collectionNode;
 @property (nonatomic) CGRect inputToolBarNormalFrame;
 @property (nonatomic) CGRect inputToolBarRiseFrame;
+@property (nonatomic) CGFloat barBottomItemHeight;
 @property (nonatomic, weak) id<BLMessageInputToolBarViewControllerDelegate> delegate;
 @end
 
@@ -35,7 +38,6 @@
     
     return self;
 }
-
 
 - (instancetype)initWithContentCollectionNode:(ASCollectionNode *)collectionNode
                                      delegate:(id<BLMessageInputToolBarViewControllerDelegate>)delegate {
@@ -62,7 +64,7 @@
     
     self.inputToolBarNode = [[BLMessageInputToolBarNode alloc] initWithDelegate:self];
     CGRect screenFrame = [UIScreen mainScreen].bounds;
-    CGSize size = [_inputToolBarNode layoutThatFits:ASSizeRangeMake(CGSizeZero, self.view.frame.size)].size;
+    CGSize size = [self.inputToolBarNode layoutThatFits:ASSizeRangeMake(CGSizeZero, self.view.frame.size)].size;
     CGFloat barY = screenFrame.size.height - size.height - statusBarHeight - navigationBarHeight;
     
     self.inputToolBarNode.frame = CGRectMake(0, barY, CGRectGetWidth(screenFrame), size.height);
@@ -71,6 +73,11 @@
     [self.view addSubnode:self.inputToolBarNode];
     
     //face board node
+    self.faceBoardNode = [[BLFaceBoardNode alloc] initWithDelegate:self textViewNode:self.inputToolBarNode.inputTextNode];
+    CGSize faceSize = [self.faceBoardNode layoutThatFits:ASSizeRangeMake(CGSizeZero, self.view.frame.size)].size;
+    self.faceBoardNode.frame = CGRectMake(0, self.view.bounds.size.height - navigationBarHeight - statusBarHeight, faceSize.width,
+            faceSize.height);
+    [self.view addSubnode:self.faceBoardNode];
 }
 
 - (CGFloat)inputToolBarHeight {
@@ -84,7 +91,7 @@
 }
 
 - (void)resignTextNodeFirstResponder {
-    [self.inputToolBarNode.inputTextNode resignFirstResponder];
+    [self.inputToolBarNode resignInputToolBarFirstResponder];
 }
 #pragma mark - keyboard notification action
 
@@ -113,27 +120,21 @@
     }
     
     double animationDuration = [info[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    
-    CGRect barFrame = self.inputToolBarNode.frame;
+
+    CGRect barFrame = self.inputToolBarNormalFrame;
     CGFloat riseHeight = CGRectGetHeight(self.view.bounds) - barFrame.origin.y - CGRectGetHeight(barFrame);
     CGFloat increaseHeight = riseHeight - kbSize.height;
     barFrame.origin.y = barFrame.origin.y + increaseHeight;
     self.inputToolBarNode.frame = barFrame;
     self.inputToolBarRiseFrame = self.inputToolBarNode.frame;
     self.inputToolBarNode.inputToolBarRiseFrame = self.inputToolBarNode.frame;
-
-    CGPoint bottomOffset = CGPointMake(0, self.collectionNode.view.contentSize.height);
     
     [UIView animateWithDuration:animationDuration
                           delay:0.f
                         options:animationCurveOption
                      animations:^{
-                         
-                         if (!CGPointEqualToPoint(self.collectionNode.view.contentOffset, bottomOffset)) {
-                             [self.collectionNode.view setContentOffset:bottomOffset animated:NO];
-                         }
-                         
+
+                         [self collectionNodeScrollToBottom];
                          [self setupCollectionNodeFrameWithBarFrame:barFrame];
                      } completion:nil];
 }
@@ -150,9 +151,13 @@
                           delay:0.f
                         options:animationCurveOption
                      animations:^{
-                         
                          CGFloat barY = CGRectGetHeight(self.view.bounds) - CGRectGetHeight(self.inputToolBarNode.frame);
-                         
+                         //如果之前打开了face board，就把通过其高度调整bar的y轴
+                         if (self.inputToolBarNode.inputToolBarCurrentState == BLInputToolBarStateExpression) {
+                             CGFloat faceBoardHeight = [self faceBoardAnimationTransition];
+                             barY -= faceBoardHeight;
+                         }
+
                          CGRect barFrame = self.inputToolBarNode.frame;
                          barFrame.origin.y = barY;
                          self.inputToolBarNode.frame = barFrame;
@@ -167,7 +172,73 @@
     self.collectionNode.frame = collectionNodeFrame;
 }
 
+- (void)collectionNodeScrollToBottom {
+    CGPoint bottomOffset = CGPointMake(0, self.collectionNode.view.contentSize.height);
+    if (!CGPointEqualToPoint(self.collectionNode.view.contentOffset, bottomOffset)) {
+        [self.collectionNode.view setContentOffset:bottomOffset animated:NO];
+    }
+}
+
+- (CGFloat)faceBoardAnimationTransition {
+
+    BOOL currentStateExpression = self.inputToolBarNode.inputToolBarCurrentState == BLInputToolBarStateExpression;
+    BOOL previousStateExpression = self.inputToolBarNode.inputToolBarPreviousState == BLInputToolBarStateExpression;
+
+    if (currentStateExpression) {
+        CGRect frame = self.faceBoardNode.frame;
+        frame.origin.y = self.view.bounds.size.height - frame.size.height;
+        self.faceBoardNode.frame = frame;
+        return frame.size.height;
+    }
+
+    if (previousStateExpression) {
+        CGRect frame = self.faceBoardNode.frame;
+        frame.origin.y = self.view.bounds.size.height;
+        self.faceBoardNode.frame = frame;
+        return frame.size.height;
+    }
+
+    return  0.f;
+}
+
 #pragma mark - BLMessageInputToolBarNodeDelegate
+
+- (void)    inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
+didClickExpressionButtonNode:(ASButtonNode *)expressionButtonNode
+               previousState:(BLInputToolBarState)previousState
+                currentState:(BLInputToolBarState)currentState {
+    //点击表情按钮，之前状态是键盘，不经过此处理face board升起动画，在键盘降下处理防止动画重复
+    if (previousState == BLInputToolBarStateKeyboard) {
+        return;
+    }
+    //点击表情按钮，之前状态是表情，把face board给降下来
+    if (previousState == BLInputToolBarStateExpression) {
+        [self faceBoardAnimationTransition];
+        return;
+    }
+    //升起face board
+    [UIView animateWithDuration:kBLBottomItemRiseAnimationTime animations:^{
+
+        CGFloat riseHeight = [self faceBoardAnimationTransition];
+        CGRect barFrame = self.inputToolBarNode.frame;
+        barFrame.origin.y -= riseHeight;
+        self.inputToolBarNode.frame = barFrame;
+        [self collectionNodeScrollToBottom];
+        [self setupCollectionNodeFrameWithBarFrame:barFrame];
+    }];
+
+}
+
+- (void)inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
+ didClickVoiceButtonNode:(ASButtonNode *)voiceButtonNode
+           previousState:(BLInputToolBarState)previousState
+            currentState:(BLInputToolBarState)currentState {
+    //点击表情按钮，之前状态是表情，把face board给降下来
+    if (previousState == BLInputToolBarStateExpression) {
+        [self triggerFallFaceBoardAnimation];
+        return;
+    }
+}
 
 - (void)    inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
 layoutTransitionWithBarFrame:(CGRect)barFrame
@@ -186,18 +257,33 @@ layoutTransitionWithBarFrame:(CGRect)barFrame
     [self setupCollectionNodeFrameWithBarFrame:barFrame];
 }
 
-- (void)inputToolBarTextNodeDidUpdateText:(ASEditableTextNode *)editableTextNode
-                           textNumberLine:(NSInteger)textNumberLine
-                                barHeight:(CGFloat)barHeight {
-    
-}
-
-
 - (void)    inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
 didClickSendButtonActionWithText:(NSString *)inputText {
     if ([self.delegate respondsToSelector:@selector(barViewController:didClickInputBarSendButtonWithInputText:)]) {
         [self.delegate barViewController:self didClickInputBarSendButtonWithInputText:inputText];
     }
+}
+
+- (void)           inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode
+resignFirstResponderWithResignState:(BLInputToolBarState)resignState {
+
+    if (resignState == BLInputToolBarStateExpression) {
+        [self triggerFallFaceBoardAnimation];
+    }
+}
+
+
+#pragma mark - bottom animation action
+- (void)triggerFallFaceBoardAnimation {
+    [UIView animateWithDuration:kBLBottomItemRiseAnimationTime animations:^{
+
+        CGFloat riseHeight = [self faceBoardAnimationTransition];
+        CGRect barFrame = self.inputToolBarNode.frame;
+        barFrame.origin.y += riseHeight;
+        self.inputToolBarNode.frame = barFrame;
+        [self collectionNodeScrollToBottom];
+        [self setupCollectionNodeFrameWithBarFrame:barFrame];
+    }];
 }
 
 
