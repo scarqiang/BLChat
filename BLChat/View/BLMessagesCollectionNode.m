@@ -30,4 +30,9 @@
                     inCollectionNode:self
             performContentNodeAction:action];
 }
+
+- (void)didTapAccessoryButtonInCell:(BLMessagesCollectionNodeCell *)cell {
+    [self.delegate didTapAccessoryButtonInCell:cell
+                                collectionNode:self];
+}
 @end

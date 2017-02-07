@@ -4,10 +4,8 @@
 //
 
 #import "BLMessagesCollectionNodeCell.h"
-#import "BLMessagesConstant.h"
 #import "ASDimension.h"
 #import "BLMessagesTimeSeparatorNode.h"
-
 
 @interface BLMessagesCollectionNodeCell () <BLMessagesContentNodeDelegate>
 @property (nonatomic, assign) BLMessageDisplayType messageDisplayType;
@@ -16,7 +14,6 @@
 @property (nonatomic) ASTextNode *senderNameTextNode;
 @property (nonatomic) BLMessagesTimeSeparatorNode *timeSeparatorTextNode;
 @property (nonatomic) ASButtonNode *accessoryButton;
-@property (nonatomic) UIActivityIndicatorView *indicatorView;
 @property (nonatomic) ASDisplayNode *indicatorNode;
 
 @end
@@ -33,8 +30,6 @@
         [self addSubnode:_avatarNode];
         [self addSubnode:_senderNameTextNode];
         [self addSubnode:_timeSeparatorTextNode];
-        [self addSubnode:_accessoryButton];
-        [self addSubnode:_indicatorNode];
     }
 
     return self;
@@ -61,29 +56,9 @@
         node;
     });
 
-    _indicatorNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView * {
-        _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-        return _indicatorView;
-    }];
-
-    _accessoryButton = ({
-        ASButtonNode *buttonNode = [ASButtonNode new];
-
-        buttonNode;
-    });
-
 }
 
-
-- (void)stopIndicatorAnimating {
-    [self.indicatorView stopAnimating];
-    [self.indicatorNode removeFromSupernode];
-}
-
-- (void)startIndicatorAnimating {
-    [self.indicatorView startAnimating];
-}
-
+#pragma mark - layout
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
     if (!self.contentNode) {
         NSAssert(NO, @"content node must not be nil");
@@ -112,8 +87,32 @@
                                              justifyContent:ASStackLayoutJustifyContentStart
                                                  alignItems:isIncoming ? ASStackLayoutAlignItemsStart : ASStackLayoutAlignItemsEnd
                                                    children:@[[self senderNameLayoutSpecWithIsIncoming:isIncoming], contentNodeLayoutSpec]];
-    NSArray *contentArray = isIncoming ? @[self.avatarNode, contentLayoutSpec] : @[contentLayoutSpec, self.avatarNode];
 
+    NSArray *contentArray;
+    switch (self.messageLoadingStatus) {
+        case BLMessageLoadingStatusLoading: {
+            contentArray = isIncoming ? @[self.avatarNode, contentLayoutSpec, self.indicatorNode] : @[self.indicatorNode, contentLayoutSpec, self.avatarNode];
+            self.indicatorNode.style.alignSelf = ASStackLayoutAlignSelfCenter;
+            if (isIncoming) {
+                self.indicatorNode.style.spacingBefore = kBLMessagesSpaceBetweenAccessoryViewAndContentNode;
+            } else {
+                self.indicatorNode.style.spacingAfter = kBLMessagesSpaceBetweenAccessoryViewAndContentNode;
+            }
+        }
+            break;
+        case BLMessageLoadingStatusLoadingFailed: {
+            contentArray = isIncoming ? @[self.avatarNode, contentLayoutSpec, self.accessoryButton] : @[self.accessoryButton, contentLayoutSpec, self.avatarNode];
+            self.accessoryButton.style.alignSelf = ASStackLayoutAlignSelfCenter;
+            if (isIncoming) {
+                self.accessoryButton.style.spacingBefore = kBLMessagesSpaceBetweenAccessoryViewAndContentNode;
+            } else {
+                self.accessoryButton.style.spacingAfter = kBLMessagesSpaceBetweenAccessoryViewAndContentNode;
+            }
+        }
+            break;
+        default:
+            contentArray = isIncoming ? @[self.avatarNode, contentLayoutSpec] : @[contentLayoutSpec, self.avatarNode];
+    }
     ASStackLayoutSpec *avatarAndContentLayoutSpec =
     [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal
                                             spacing:0
@@ -167,7 +166,7 @@
                                                   child:[self.contentNode preferredLayoutSpec]];
     return insetLayoutSpec;
 }
-#pragma mark - setters
+#pragma mark - setters and getters
 - (void)setSenderName:(NSString *)senderName {
     if (!senderName) {
         return;
@@ -197,6 +196,84 @@
     [self addSubnode:contentNode];
     contentNode.delegate = self;
 }
+
+- (void)setMessageLoadingStatus:(BLMessageLoadingStatus)messageLoadingStatus {
+    //默认是BLMessageLoadingStatusLoadingSuccess
+    if (_messageLoadingStatus == messageLoadingStatus) {
+        return;
+    }
+    UIActivityIndicatorView *spinner = (UIActivityIndicatorView *) self.indicatorNode.view;
+    _messageLoadingStatus = messageLoadingStatus;
+    switch (messageLoadingStatus) {
+        case BLMessageLoadingStatusLoading: {
+            self.accessoryButton.hidden = YES;
+            [spinner startAnimating];
+            [self setNeedsLayout];
+        }
+            break;
+        case BLMessageLoadingStatusLoadingFailed: {
+            [spinner stopAnimating];
+            self.accessoryButton.hidden = NO;
+            [self setNeedsLayout];
+        }
+            break;
+        case BLMessageLoadingStatusLoadingSuccess: {
+            self.accessoryButton.hidden = YES;
+            [spinner stopAnimating];
+            [self setNeedsLayout];
+        }
+            break;
+        default:
+            NSAssert(NO, @"undefined message loading status");
+            break;
+    }
+}
+
+- (ASDisplayNode *)indicatorNode {
+    if (!_indicatorNode) {
+        _indicatorNode = ({
+            ASDisplayNode *node = [[ASDisplayNode alloc] initWithViewBlock:^UIView * {
+                return [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];;
+            }];
+            node.style.preferredSize = CGSizeMake(kBLMessagesSpaceAccessoryViewWidth, kBLMessagesSpaceAccessoryViewWidth);
+            node.backgroundColor = [UIColor clearColor];
+
+            node;
+        });
+        [self addSubnode:_indicatorNode];
+    }
+    return _indicatorNode;
+}
+
+- (ASButtonNode *)accessoryButton {
+    if (!_accessoryButton) {
+        _accessoryButton = ({
+            ASButtonNode *buttonNode = [ASButtonNode new];
+            [buttonNode setImage:[UIImage imageNamed:kBLMessagesLoadingFailedImageName] forState:ASControlStateNormal];
+            [buttonNode addTarget:self action:@selector(didTapAccessoryButton:)
+                 forControlEvents:ASControlNodeEventTouchUpInside];
+
+            buttonNode;
+        });
+
+        [self addSubnode:_accessoryButton];
+    }
+
+    return _accessoryButton;
+}
+
+- (void)didTapAccessoryButton:(ASButtonNode *)button {
+    [self.delegate didTapAccessoryButtonInCell:self];
+}
+
+#pragma mark - helpers
+- (void)checkMessageLoadingStatus {
+    if (self.messageLoadingStatus == BLMessageLoadingStatusLoading) {
+        UIActivityIndicatorView *spinner = (UIActivityIndicatorView *) self.indicatorNode.view;
+        [spinner startAnimating];
+    }
+}
+
 #pragma mark - BLMessagesContentNodeDelegate
 - (void)didTapMessagesContentNode:(BLMessagesContentNode *)contentNode performAction:(BLMessagesContentNodeAction)action {
     if (contentNode != self.contentNode) {
@@ -207,4 +284,5 @@
                       inMessagesCell:self
             performContentNodeAction:action];
 }
+
 @end

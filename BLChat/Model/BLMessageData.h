@@ -20,6 +20,23 @@ typedef NS_ENUM(NSUInteger, BLMessageDisplayType) {
      */
     BLMessageDisplayTypeRight,
 };
+
+typedef NS_ENUM(NSUInteger, BLMessageLoadingStatus) {
+    /*
+     * 消息加载成功
+     */
+    BLMessageLoadingStatusLoadingSuccess = 0,
+    /*
+     * 消息加载失败
+     */
+    BLMessageLoadingStatusLoadingFailed = 1,
+    /*
+     * 消息正在加载
+     */
+    BLMessageLoadingStatusLoading = 2,
+
+};
+
 @class BLMessagesContentNode;
 
 @protocol BLMessageData <NSObject>
@@ -28,4 +45,5 @@ typedef NS_ENUM(NSUInteger, BLMessageDisplayType) {
 @property (nonatomic) UIImage *avatarImage;
 @property (nonatomic) BLMessagesContentNode *contentNode;
 @property (nonatomic) BLMessageDisplayType messageDisplayType;
+@property (nonatomic) BLMessageLoadingStatus messageLoadingStatus;
 @end

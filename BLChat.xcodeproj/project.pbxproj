@@ -49,6 +49,8 @@
 		8436C1091E38AF8300E53F50 /* receive_MsgBgplay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8436C1031E38AF8300E53F50 /* receive_MsgBgplay@3x.png */; };
 		8436C10B1E38B1A700E53F50 /* beiliao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8436C10A1E38B1A700E53F50 /* beiliao@2x.png */; };
 		845133A71E363A1C00E57E09 /* BLMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 845133A61E363A1C00E57E09 /* BLMessage.m */; };
+		846EB99E1E49CF7500ED145D /* sendMFailed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 846EB99C1E49CF7500ED145D /* sendMFailed@2x.png */; };
+		846EB99F1E49CF7500ED145D /* sendMFailed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 846EB99D1E49CF7500ED145D /* sendMFailed@3x.png */; };
 		F7546F7C1E2E2DA2003E38DE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7B1E2E2DA2003E38DE /* main.m */; };
 		F7546F7F1E2E2DA2003E38DE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7E1E2E2DA2003E38DE /* AppDelegate.m */; };
 		F7546F821E2E2DA2003E38DE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F811E2E2DA2003E38DE /* ViewController.m */; };
@@ -229,6 +231,8 @@
 		8451339E1E36399000E57E09 /* BLMessageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessageData.h; sourceTree = "<group>"; };
 		845133A51E363A1C00E57E09 /* BLMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessage.h; sourceTree = "<group>"; };
 		845133A61E363A1C00E57E09 /* BLMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessage.m; sourceTree = "<group>"; };
+		846EB99C1E49CF7500ED145D /* sendMFailed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sendMFailed@2x.png"; sourceTree = "<group>"; };
+		846EB99D1E49CF7500ED145D /* sendMFailed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sendMFailed@3x.png"; sourceTree = "<group>"; };
 		848D1B081E3603A10081414E /* BLChat-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BLChat-prefix.pch"; sourceTree = "<group>"; };
 		BB7AD314456607B3B54830D2 /* Pods-BLChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-BLChat/Pods-BLChat.release.xcconfig"; sourceTree = "<group>"; };
 		F7546F771E2E2DA2003E38DE /* BLChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -535,6 +539,8 @@
 		F7872BF31E373CB60089C176 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				846EB99C1E49CF7500ED145D /* sendMFailed@2x.png */,
+				846EB99D1E49CF7500ED145D /* sendMFailed@3x.png */,
 				842258A21E4866B5007407CA /* audio_n@2x.png */,
 				842258A31E4866B5007407CA /* audio_n@3x.png */,
 				842258921E48666C007407CA /* audioMic@2x.png */,
@@ -896,6 +902,7 @@
 				F7A7423E1E36F3A5004AF3DB /* 042@2x.png in Resources */,
 				F7A742201E36F3A5004AF3DB /* 012@2x.png in Resources */,
 				F7A742151E36F3A5004AF3DB /* 001@2x.png in Resources */,
+				846EB99E1E49CF7500ED145D /* sendMFailed@2x.png in Resources */,
 				F7872BF91E373CCC0089C176 /* Message_List_Voice_H@3x.png in Resources */,
 				F7A742541E36F3A5004AF3DB /* backFaceSelect@2x.png in Resources */,
 				F7A742491E36F3A5004AF3DB /* 053@2x.png in Resources */,
@@ -915,6 +922,7 @@
 				F7872BFB1E373CCC0089C176 /* Message_List_Voice_N@3x.png in Resources */,
 				8436C0F81E38AF5800E53F50 /* send_MsgBg_S_Play@2x.png in Resources */,
 				F7A7421A1E36F3A5004AF3DB /* 006@2x.png in Resources */,
+				846EB99F1E49CF7500ED145D /* sendMFailed@3x.png in Resources */,
 				F7872C231E37413C0089C176 /* Message_List_Emoji_N@3x.png in Resources */,
 				F7A7423A1E36F3A5004AF3DB /* 038@2x.png in Resources */,
 				8436C1041E38AF8300E53F50 /* receive_MsgBg_h@2x.png in Resources */,

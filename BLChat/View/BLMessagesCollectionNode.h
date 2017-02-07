@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
          inCollectionNode:(BLMessagesCollectionNode *)collectionNode
  performContentNodeAction:(BLMessagesContentNodeAction)action;
 
+- (void)didTapAccessoryButtonInCell:(BLMessagesCollectionNodeCell *)cell collectionNode:(BLMessagesCollectionNode *)collectionNode;
 @end
 
 @protocol BLMessagesCollectionNodeDataSource <ASCollectionDataSource>
@@ -20,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
                                       atIndexPath:(NSIndexPath *)indexPath;
 - (nullable NSString *)formattedTimeForCollectionNode:(BLMessagesCollectionNode *)collectionNode
                                           atIndexPath:(NSIndexPath *)indexPath;
-
 @end
 
 @interface BLMessagesCollectionNode : ASCollectionNode <BLMessagesCollectionNodeCellDelegate>

@@ -52,3 +52,8 @@ CGFloat const kBLMessagesIncomingContentNodeBottomMargin = 0.f;
 
 CGFloat const kBLMessagesPhotoMessageMaxWidth = 150.f;
 CGFloat const kBLMessagesPhotoMessageMaxHeight = 200.f;
+
+CGFloat const kBLMessagesSpaceBetweenAccessoryViewAndContentNode = 5.f;
+CGFloat const kBLMessagesSpaceAccessoryViewWidth = 18.f;
+
+NSString * const kBLMessagesLoadingFailedImageName = @"sendMFailed";

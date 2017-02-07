@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)didTapContentNode:(BLMessagesContentNode *)contentNode
            inMessagesCell:(BLMessagesCollectionNodeCell *)cell
  performContentNodeAction:(BLMessagesContentNodeAction)action;
+- (void)didTapAccessoryButtonInCell:(BLMessagesCollectionNodeCell *)cell;
 @end
 
 @interface BLMessagesCollectionNodeCell : ASCellNode
@@ -23,7 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) BLMessagesContentNode *contentNode;
 @property (nonatomic, assign) BOOL shouldDisplayName;
+@property (nonatomic) BLMessageLoadingStatus messageLoadingStatus;
 
 - (instancetype)initWithMessageDisplayType:(BLMessageDisplayType)displayType;
+
+- (void)checkMessageLoadingStatus;
 @end
 NS_ASSUME_NONNULL_END

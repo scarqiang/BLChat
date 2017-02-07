@@ -48,3 +48,7 @@ extern CGFloat const kBLMessagesIncomingContentNodeBottomMargin;
 
 extern CGFloat const kBLMessagesPhotoMessageMaxWidth;
 extern CGFloat const kBLMessagesPhotoMessageMaxHeight;
+
+extern CGFloat const kBLMessagesSpaceBetweenAccessoryViewAndContentNode;
+extern CGFloat const kBLMessagesSpaceAccessoryViewWidth;
+extern NSString * const kBLMessagesLoadingFailedImageName;

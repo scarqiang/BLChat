@@ -11,6 +11,6 @@
 @property (nonatomic) UIImage *avatarImage;
 @property (nonatomic) BLMessagesContentNode *contentNode;
 @property (nonatomic) BLMessageDisplayType messageDisplayType;
-
+@property (nonatomic) BLMessageLoadingStatus messageLoadingStatus;
 + (instancetype)textMessageWithText:(NSString *)text messageDisplayType:(BLMessageDisplayType)displayType;
 @end

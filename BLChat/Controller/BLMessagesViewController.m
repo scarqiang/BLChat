@@ -10,9 +10,6 @@
 #import "BLMessagesViewControllerDataSource.h"
 #import "BLMessagesCollectionNode.h"
 #import "BLDateFormatter.h"
-
-#import "BLMessage.h"
-#import "BLMessagesCollectionNodeCell.h"
 #import "BLTextMessage.h"
 #import "BLMessageInputToolBarViewController.h"
 
@@ -123,7 +120,7 @@
     cell.senderName = message.senderName;
     cell.avatarNode.image = message.avatarImage;
     cell.formattedTime = [collectionNode.dataSource formattedTimeForCollectionNode:collectionNode atIndexPath:indexPath];
-
+    cell.messageLoadingStatus = message.messageLoadingStatus;
     cell.delegate = collectionNode;
     return cell;
 
@@ -162,6 +159,11 @@
     return ASSizeRangeMake(minItemSize, maxItemSize);
 }
 
+- (void)collectionNode:(ASCollectionNode *)collectionNode willDisplayItemWithNode:(ASCellNode *)node {
+    BLMessagesCollectionNodeCell *nodeCell = (BLMessagesCollectionNodeCell *) node;
+    [nodeCell checkMessageLoadingStatus];
+}
+
 - (void)didTapContentNode:(BLMessagesContentNode *)contentNode
            inMessagesCell:(BLMessagesCollectionNodeCell *)cell
          inCollectionNode:(BLMessagesCollectionNode *)collectionNode
@@ -173,23 +175,39 @@
     action(self, collectionNode, cell);
 }
 
+- (void)didTapAccessoryButtonInCell:(BLMessagesCollectionNodeCell *)cell collectionNode:(BLMessagesCollectionNode *)collectionNode {
+    cell.messageLoadingStatus = BLMessageLoadingStatusLoadingSuccess;
+}
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.inputToolBarViewController resignTextNodeFirstResponder];
 }
 
 #pragma mark - BLMessagesViewControllerDataSource
+
 - (void)messagesViewControllerDataSource:(BLMessagesViewControllerDataSource *)dateSource
-                    didReceiveNewMessage:(id <BLMessageData>)newMessage
-                                   index:(NSInteger)index {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-    [self.collectionNode insertItemsAtIndexPaths:@[indexPath]];
-    [self scrollToBottom:YES];
+                    didReceiveNewMessage:(id <BLMessageData>)newMessage {
+    NSIndexPath *indexPath = [self.dataSource indexPathOfMessage:newMessage];
+    if (!indexPath) return;
+    [self.collectionNode performBatchUpdates:^{
+        [self.collectionNode insertItemsAtIndexPaths:@[indexPath]];
+    } completion:^(BOOL finished) {
+        [self scrollToBottom:YES];
+    }];
 }
 
+- (void)messagesViewControllerDataSource:(BLMessagesViewControllerDataSource *)dateSource
+           messageDidChangeLoadingStatus:(id <BLMessageData>)message {
+    NSIndexPath *indexPath = [self.dataSource indexPathOfMessage:message];
+    if (!indexPath) return;
+    BLMessagesCollectionNodeCell *nodeCell = [self.collectionNode nodeForItemAtIndexPath:indexPath];
+    nodeCell.messageLoadingStatus = message.messageLoadingStatus;
+}
 #pragma mark - BLMessageInputToolBarViewControllerDelegate
 - (void)barViewController:(BLMessageInputToolBarViewController *)viewController didClickInputBarSendButtonWithInputText:(NSString *)inputText {
     BLTextMessage *textMessage = [BLTextMessage textMessageWithText:inputText
                                                  messageDisplayType:BLMessageDisplayTypeRight];
+    textMessage.messageLoadingStatus = BLMessageLoadingStatusLoading;
     [self.dataSource didReceiveNewMessage:textMessage];
 }
 
