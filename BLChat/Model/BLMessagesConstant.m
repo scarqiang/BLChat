@@ -12,6 +12,9 @@ CGFloat const kBLMessagesCollectionNodeCellSenderNameMaxWidth = 100.f;
 
 #pragma mark - bubble
 NSString * const kBLMessagesIncomingBubbleImageName = @"receive_MsgBg";
+NSString * const kBLMessagesIncomingListenedAudioBubbleImageName = @"receive_MsgBgplay";
+NSString * const kBLMessagesOutgoingListenedAudioBubbleImageName = @"send_MsgBg_S";
+
 NSString * const kBLMessagesIncomingBubbleHighlightedImageName = @"receive_MsgBg_h";
 NSString * const kBLMessagesOutgoingBubbleImageName = @"send_MsgBg";
 NSString * const kBLMessagesOutgoingBubbleHighlightedImageName = @"send_MsgBg_h";

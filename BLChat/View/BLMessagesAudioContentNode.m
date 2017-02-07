@@ -8,11 +8,14 @@
 
 #import "BLMessagesAudioContentNode.h"
 #import "ASDimension.h"
-#include "math.h"
+
 @interface BLMessagesAudioContentNode ()
 @property (nonatomic) ASImageNode *bubbleBackgroundImageNode;
-@property (nonatomic) ASImageNode *videoIconImageNode;
-@property (nonatomic) ASTextNode *videoLengthTextNode;
+@property (nonatomic) ASImageNode *audioIconImageNode;
+@property (nonatomic) ASTextNode *audioLengthTextNode;
+@property (nonatomic) ASImageNode *audioListenedImageNode;
+@property (nonatomic) ASDisplayNode *audioListenedNode;
+
 @property (nonatomic) BLMessageDisplayType messageDisplayType;
 @property (nonatomic) NSTimeInterval timeLength;
 
@@ -35,13 +38,14 @@
             imageNode;
         });
 
-        _videoIconImageNode = ({
+        _audioIconImageNode = ({
             ASImageNode *imageNode = [[ASImageNode alloc] init];
             imageNode.image = [UIImage imageNamed:displayType == BLMessageDisplayTypeLeft ? @"audioPlay_n" : @"audio_n"];
+
             imageNode;
         });
 
-        _videoLengthTextNode = ({
+        _audioLengthTextNode = ({
             ASTextNode *textNode = [[ASTextNode alloc] init];
             NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
             paragraphStyle.alignment = _messageDisplayType == BLMessageDisplayTypeLeft ? NSTextAlignmentRight : NSTextAlignmentLeft;
@@ -58,11 +62,41 @@
         });
 
         [self addSubnode:_bubbleBackgroundImageNode];
-        [self addSubnode:_videoLengthTextNode];
-        [self addSubnode:_videoIconImageNode];
+        [self addSubnode:_audioLengthTextNode];
+        [self addSubnode:_audioIconImageNode];
     }
 
     return self;
+}
+
+- (void)didTapContentNode {
+    if (!self.audioListenedImageNode) {
+        self.audioListenedImageNode = ({
+            ASImageNode *imageNode = [ASImageNode new];
+            imageNode.image = [self resizableListenedBubbleImage:self.messageDisplayType == BLMessageDisplayTypeLeft];
+            imageNode.frame = self.bounds;
+
+            imageNode;
+        });
+        self.audioListenedNode = ({
+            ASDisplayNode *node = [ASDisplayNode new];
+            node.frame = CGRectMake(0, 0, 0, self.bounds.size.height);
+            node.clipsToBounds = YES;
+
+            node;
+        });
+
+        [self.audioListenedNode addSubnode:self.audioListenedImageNode];
+        [self insertSubnode:self.audioListenedNode aboveSubnode:self.bubbleBackgroundImageNode];
+
+        [UIView animateWithDuration:10 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.audioListenedNode.frame = self.bounds;
+         } completion:nil];
+    } else {
+        [self.audioListenedNode removeFromSupernode];
+        self.audioListenedImageNode = nil;
+        self.audioListenedNode = nil;
+    }
 }
 
 + (instancetype)audioContentNodeWithTimeLength:(NSTimeInterval)length messageDisplayType:(BLMessageDisplayType)displayType {
@@ -83,19 +117,19 @@
 }
 
 - (void)addConstrainWithCollectionNodeCellConstrainedSize:(ASSizeRange)constrainedSize {
-    self.videoLengthTextNode.style.width = ASDimensionMake([self timeLabelWidthWithConstrainedSize:constrainedSize
+    self.audioLengthTextNode.style.width = ASDimensionMake([self timeLabelWidthWithConstrainedSize:constrainedSize
                                                                                         timeLength:self.timeLength]);
 }
 
 - (CGFloat)timeLabelWidthWithConstrainedSize:(ASSizeRange)constrainedSize timeLength:(NSTimeInterval)timeLength {
     CGFloat normalizedTimeLength = MAX(MIN((CGFloat) (timeLength / 120.f), 1), 0);
-    CGFloat maxWidth = constrainedSize.max.width - 2 * (kBLMessagesCollectionNodeCellAvatarHeight + kBLMessagesIncomingMessageLeftMargin + kBLMessagesIncomingContentNodeLeftMargin) - kBLMessagesBubbleMouthWidth - self.videoIconImageNode.image.size.width - kBLMessagesIncomingBubbleContentLeftPadding - kBLMessagesIncomingBubbleContentRightPadding - self.spaceBetweenVideoIconAndTimeLabel;
+    CGFloat maxWidth = constrainedSize.max.width - 2 * (kBLMessagesCollectionNodeCellAvatarHeight + kBLMessagesIncomingMessageLeftMargin + kBLMessagesIncomingContentNodeLeftMargin) - kBLMessagesBubbleMouthWidth - self.audioIconImageNode.image.size.width - kBLMessagesIncomingBubbleContentLeftPadding - kBLMessagesIncomingBubbleContentRightPadding - self.spaceBetweenVideoIconAndTimeLabel;
     return MAX(sqrt(normalizedTimeLength) * maxWidth, 40);
 }
 
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
     BOOL isIncoming = self.messageDisplayType == BLMessageDisplayTypeLeft;
-    NSArray *contentArray = isIncoming ? @[self.videoLengthTextNode, self.videoIconImageNode] : @[self.videoIconImageNode, self.videoLengthTextNode];
+    NSArray *contentArray = isIncoming ? @[self.audioLengthTextNode, self.audioIconImageNode] : @[self.audioIconImageNode, self.audioLengthTextNode];
     ASStackLayoutSpec *contentStackLayoutSpec = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal
                                                                                         spacing:self.spaceBetweenVideoIconAndTimeLabel
                                                                                  justifyContent:isIncoming ?ASStackLayoutJustifyContentEnd : ASStackLayoutJustifyContentStart
@@ -112,6 +146,29 @@
     ASBackgroundLayoutSpec *bubbleAndContentBackgroundLayout = [ASBackgroundLayoutSpec backgroundLayoutSpecWithChild:contentInsetLayoutSpec
                                                                                                           background:self.bubbleBackgroundImageNode];
     return bubbleAndContentBackgroundLayout;
+}
+
+- (UIImage *)resizableListenedBubbleImage:(BOOL)isIncoming {
+    UIImage *image;
+    if (isIncoming) {
+        UIEdgeInsets capInsets = UIEdgeInsetsMake(
+                kBLMessagesIncomingBubbleCapTop,
+                kBLMessagesIncomingBubbleCapLeft,
+                kBLMessagesIncomingBubbleCapBottom,
+                kBLMessagesIncomingBubbleCapRight);
+        image = [[UIImage imageNamed:kBLMessagesIncomingListenedAudioBubbleImageName] resizableImageWithCapInsets:capInsets resizingMode:UIImageResizingModeStretch];
+    } else {
+        UIEdgeInsets capInsets = UIEdgeInsetsMake(
+                kBLMessagesIncomingBubbleCapTop,
+                kBLMessagesIncomingBubbleCapRight,
+                kBLMessagesIncomingBubbleCapBottom,
+                kBLMessagesIncomingBubbleCapLeft);
+
+        image = [[UIImage imageNamed:kBLMessagesOutgoingListenedAudioBubbleImageName] resizableImageWithCapInsets:capInsets
+                                                                                                   resizingMode:UIImageResizingModeStretch];
+    }
+
+    return image;
 }
 
 @end

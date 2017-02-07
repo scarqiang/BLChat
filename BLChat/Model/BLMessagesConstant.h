@@ -16,6 +16,8 @@ extern NSString * const kBLMessagesPlainIncomingBubbleImageName;
 extern NSString * const kBLMessagesPlainIncomingBubbleHighlightedImageName;
 extern NSString * const kBLMessagesPlainOutgoingBubbleImageName;
 extern NSString * const kBLMessagesPlainOutgoingBubbleHighlightedImageName;
+extern NSString * const kBLMessagesIncomingListenedAudioBubbleImageName;
+extern NSString * const kBLMessagesOutgoingListenedAudioBubbleImageName;
 
 extern CGFloat const kBLMessagesBubbleContentPadding;
 extern CGFloat const kBLMessagesBubbleMouthWidth;
