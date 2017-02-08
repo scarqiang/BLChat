@@ -107,8 +107,8 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
         node;
     });
     
-    UIImage *normalButtonImage = [UIImage imageWithColor:[UIColor colorWithRed:80.f/255.f green:82.f/255.f blue:83.f/255.f alpha:1]];
-    UIImage *highlightButtonImage = [UIImage imageWithColor:[UIColor colorWithRed:180.f/255.f green:180.f/255.f
+    UIImage *normalButtonImage = [UIImage yy_imageWithColor:[UIColor colorWithRed:80.f/255.f green:82.f/255.f blue:83.f/255.f alpha:1]];
+    UIImage *highlightButtonImage = [UIImage yy_imageWithColor:[UIColor colorWithRed:180.f/255.f green:180.f/255.f
                                                                              blue:181.f/255.f alpha:1]];
     
     _recordingButtonNode = ({

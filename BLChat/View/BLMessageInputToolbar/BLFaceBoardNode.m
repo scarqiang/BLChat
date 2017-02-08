@@ -6,10 +6,9 @@
 //  Copyright © 2017年 HZQ. All rights reserved.
 //
 
-#import <YYKit/UIImage+YYAdd.h>
-#import <YYKit/UIColor+YYAdd.h>
 #import "BLFaceBoardNode.h"
 #import <libextobjc/extobjc.h>
+#import "YYWebImage.h"
 
 CGFloat const kBLFaceBoardHeight = 169.f;
 CGFloat const kBLFaceBoardButtonHeight = 40.f;
@@ -44,7 +43,8 @@ CGFloat const kBLFaceBoardTitleFontSize = 18.f;
 - (void)setupSubNodesWithTextViewNode:(ASEditableTextNode *)textNode {
 
     self.automaticallyManagesSubnodes = YES;
-    self.backgroundColor = [UIColor colorWithHexString:@"efeeec"];
+    self.backgroundColor = [UIColor colorWithRed:94.f / 255.f green:93.f / 255.f blue:93.f / 255.f
+                                           alpha:1];
 
     _faceBoard = [[FaceBoard alloc] init];
     _faceBoard.delegate = self;
@@ -65,11 +65,17 @@ CGFloat const kBLFaceBoardTitleFontSize = 18.f;
         node;
     });
 
-    UIImage *buttonBackNormalImage = [UIImage imageWithColor:[UIColor colorWithHexString:@"efeeec"]];
+    UIImage *buttonBackNormalImage = [UIImage yy_imageWithColor:[UIColor colorWithRed:94.f / 255.f
+                                                                                green:93.f / 255.f
+                                                                                 blue:93.f / 255.f
+                                                                                alpha:1]];
 
-    UIImage *buttonBackSelectImage = [UIImage imageWithColor:[UIColor whiteColor]];
+    UIImage *buttonBackSelectImage = [UIImage yy_imageWithColor:[UIColor whiteColor]];
 
-    UIImage *sendButtonBackNormalImage = [UIImage imageWithColor:[UIColor colorWithHexString:@"ff6003"]];
+    UIImage *sendButtonBackNormalImage = [UIImage yy_imageWithColor:[UIColor colorWithRed:100.f / 255.f
+                                                                                    green:35.f / 255.f
+                                                                                     blue:1.f / 255.f
+                                                                                    alpha:1]];
 
     _recentButtonNode = ({
         ASButtonNode *buttonNode = [ASButtonNode new];
@@ -81,6 +87,11 @@ CGFloat const kBLFaceBoardTitleFontSize = 18.f;
         buttonNode;
     });
 
+    UIColor *buttonTitleColor = [UIColor colorWithRed:40.f / 255.f
+                                                green:40.f / 255.f
+                                                 blue:40.f / 255.f
+                                                alpha:1];
+
     _emojiButtonNode = ({
         ASButtonNode *buttonNode = [ASButtonNode new];
         buttonNode.style.preferredSize = CGSizeMake(kBLFaceBoardButtonWidth, kBLFaceBoardButtonHeight);
@@ -88,7 +99,7 @@ CGFloat const kBLFaceBoardTitleFontSize = 18.f;
         [buttonNode setBackgroundImage:buttonBackSelectImage forState:ASControlStateSelected];
         [buttonNode setTitle:@"贝贝"
                     withFont:[UIFont systemFontOfSize:kBLFaceBoardTitleFontSize]
-                   withColor:[UIColor colorWithHexString:@"666666"]
+                   withColor:buttonTitleColor
                     forState:ASControlStateNormal];
         buttonNode.selected = YES;
         buttonNode;

@@ -271,6 +271,8 @@ didUpdateContentNodeWihtRiseHeight:(CGFloat)riseHeight {
 
     CGPoint bottomOffset = CGPointMake(0, self.collectionNode.view.contentSize.height);
 
+    NSLog(@"========%@======",NSStringFromCGPoint(self.collectionNode.view.contentOffset));
+
     if (!CGPointEqualToPoint(self.collectionNode.view.contentOffset, bottomOffset)) {
         [self.collectionNode.view setContentOffset:bottomOffset animated:NO];
     }
