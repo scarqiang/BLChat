@@ -516,6 +516,10 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
 
 - (void)resignInputToolBarFirstResponder {
 
+    if (self.inputToolBarCurrentState == BLInputToolBarStateVoice) {
+        return;
+    }
+
     self.inputToolBarPreviousState = self.inputToolBarCurrentState;
     self.inputToolBarCurrentState = BLInputToolBarStateNone;
 
