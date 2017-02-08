@@ -138,11 +138,16 @@
     }
     NSDateFormatter *formatter = self.dateFormatter;
     [formatter setDateFormat:@"YYYYMMdd"];
-    NSString *dateNow = [formatter stringFromDate:[NSDate date]];
+    NSDate *dateNow = [NSDate date];
+    NSString *dateNowString = [formatter stringFromDate:dateNow];
     NSDateComponents *components = [[NSDateComponents alloc] init];
-    [components setDay:[[dateNow substringWithRange:NSMakeRange(6,2)] intValue]];
-    [components setMonth:[[dateNow substringWithRange:NSMakeRange(4,2)] intValue]];
-    [components setYear:[[dateNow substringWithRange:NSMakeRange(0,4)] intValue]];
+    [components setDay:[[dateNowString substringWithRange:NSMakeRange(6,2)] intValue]];
+    [components setMonth:[[dateNowString substringWithRange:NSMakeRange(4,2)] intValue]];
+    [components setYear:[[dateNowString substringWithRange:NSMakeRange(0,4)] intValue]];
+
+    enum NSCalendarUnit unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    NSDateComponents *targetDateComponents = [self.calendar components:unitFlags fromDate:targetDate];
+    NSDateComponents *nowDateComponents = [self.calendar components:unitFlags fromDate:dateNow];
 
     //今天 0点时间
     NSDate *startDateOfToday = [self.calendar dateFromComponents:components];
@@ -162,6 +167,8 @@
         dateFormat = @"晚上hh:mm";
     } else if (timeDiffInHour < 0 && timeDiffInHour >= -24){
         dateFormat = @"昨天HH:mm";
+    } else if (targetDateComponents.year == nowDateComponents.year){
+        dateFormat = @"MM-dd hh:mm";
     } else {
         dateFormat = @"YYYY-MM-dd hh:mm";
     }

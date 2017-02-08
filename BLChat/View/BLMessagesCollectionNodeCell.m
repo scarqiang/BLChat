@@ -285,4 +285,13 @@
             performContentNodeAction:action];
 }
 
+- (void)deleteMessageActionDidHappenInContentNode:(BLMessagesContentNode *)contentNode {
+    if (contentNode != self.contentNode) {
+        return;
+    }
+
+    [self.delegate deleteMessageActionDidHappenInContentNode:contentNode
+                                                messagesCell:self];
+}
+
 @end

@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
            inMessagesCell:(BLMessagesCollectionNodeCell *)cell
  performContentNodeAction:(BLMessagesContentNodeAction)action;
 - (void)didTapAccessoryButtonInCell:(BLMessagesCollectionNodeCell *)cell;
+- (void)deleteMessageActionDidHappenInContentNode:(BLMessagesContentNode *)contentNode messagesCell:(BLMessagesCollectionNodeCell *)cell;
 @end
 
 @interface BLMessagesCollectionNodeCell : ASCellNode

@@ -53,7 +53,7 @@ static BOOL reversed = NO;
 
 - (NSTimeInterval)randomSendingTime {
     NSInteger random = arc4random_uniform(10);
-    sendingTime += random * 15;
+    sendingTime += random * 9;
     return sendingTime;
 }
 

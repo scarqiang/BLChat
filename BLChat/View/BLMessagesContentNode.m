@@ -76,7 +76,7 @@
 }
 
 - (void)deleteMenuAction:(id)deleteMenuAction {
-
+    [self.delegate deleteMessageActionDidHappenInContentNode:self];
 }
 
 - (void)copyMenuAction:(id)copyMenuAction {

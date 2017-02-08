@@ -37,4 +37,16 @@
 
     return [NSIndexPath indexPathForItem:messageIndex inSection:0];
 }
+
+- (void)deleteMessage:(id<BLMessageData>)message {
+    NSIndexPath *indexPath = [self indexPathOfMessage:message];
+    [self.messages removeObjectAtIndex:(NSUInteger) indexPath.item];
+    if (!indexPath) {
+        return;
+    }
+
+    [self.delegate messagesViewControllerDataSource:self
+                                   didDeleteMessage:message
+                                        atIndexPath:indexPath];
+}
 @end

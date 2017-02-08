@@ -16,6 +16,7 @@ typedef void(^BLMessagesContentNodeAction)(BLMessagesViewController *messagesVie
 @protocol BLMessagesContentNodeDelegate <NSObject>
 - (void)didTapMessagesContentNode:(BLMessagesContentNode *)contentNode
                     performAction:(BLMessagesContentNodeAction)action;
+- (void)deleteMessageActionDidHappenInContentNode:(BLMessagesContentNode *)contentNode;
 @end
 
 @interface BLMessagesContentNode : ASDisplayNode

@@ -12,8 +12,9 @@
 #import "BLDateFormatter.h"
 #import "BLTextMessage.h"
 #import "BLMessageInputToolBarViewController.h"
+#import "ASCollectionInternal.h"
 
-@interface BLMessagesViewController () <BLMessagesViewControllerDataSourceDelegate, BLMessagesCollectionNodeDelegate, BLMessagesCollectionNodeDataSource, ASCollectionViewDelegateFlowLayout, BLMessageInputToolBarViewControllerDelegate>
+@interface BLMessagesViewController () <BLMessagesViewControllerDataSourceDelegate, BLMessagesCollectionNodeDelegate, BLMessagesCollectionNodeDataSource, ASCollectionDelegateFlowLayout, BLMessageInputToolBarViewControllerDelegate>
 //model
 @property (nonatomic, strong) BLMessagesViewControllerDataSource *dataSource;
 
@@ -179,12 +180,20 @@
     cell.messageLoadingStatus = BLMessageLoadingStatusLoadingSuccess;
 }
 
+- (void)deleteMessageActionDidHappenInContentNode:(BLMessagesContentNode *)contentNode
+                                     messagesCell:(BLMessagesCollectionNodeCell *)cell
+                                   collectionNode:(BLMessagesCollectionNode *)collectionNode {
+    NSIndexPath *indexPath = [collectionNode indexPathForNode:cell];
+    id<BLMessageData> message = [collectionNode .dataSource messageDataForCollectionNode:collectionNode
+                                                                             atIndexPath:indexPath];
+    [self.dataSource deleteMessage:message];
+}
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.inputToolBarViewController resignTextNodeFirstResponder];
 }
 
 #pragma mark - BLMessagesViewControllerDataSource
-
 - (void)messagesViewControllerDataSource:(BLMessagesViewControllerDataSource *)dateSource
                     didReceiveNewMessage:(id <BLMessageData>)newMessage {
     NSIndexPath *indexPath = [self.dataSource indexPathOfMessage:newMessage];
@@ -203,11 +212,52 @@
     BLMessagesCollectionNodeCell *nodeCell = [self.collectionNode nodeForItemAtIndexPath:indexPath];
     nodeCell.messageLoadingStatus = message.messageLoadingStatus;
 }
+
+- (void)messagesViewControllerDataSource:(BLMessagesViewControllerDataSource *)dateSource
+                        didDeleteMessage:(id <BLMessageData>)message
+                             atIndexPath:(NSIndexPath *)indexPath {
+    NSIndexPath *nextIndexPath;
+
+    if (indexPath.item < [self.collectionNode numberOfItemsInSection:0]) {
+        nextIndexPath = [NSIndexPath indexPathForItem:indexPath.item + 1 inSection:indexPath.section];
+    }
+
+    BOOL needReloadNextItem = NO;
+    BLMessagesCollectionNodeCell *currentCell = [self.collectionNode nodeForItemAtIndexPath:indexPath];
+    BLMessagesCollectionNodeCell *nextCell = nextIndexPath ? [self.collectionNode nodeForItemAtIndexPath:nextIndexPath] : nil;
+
+    if (nextCell) {
+        needReloadNextItem = currentCell.formattedTime && !nextCell.formattedTime;
+    }
+
+    CGPoint nextCellOrigin = [self.view convertPoint:nextCell.view.frame.origin fromView:nextCell.view.superview];
+    if (CGRectContainsPoint(self.node.bounds, nextCellOrigin)) {
+        [self.collectionNode performBatchAnimated:NO updates:^{
+            NSAssert([NSThread isMainThread], @"should on main thread");
+            [self.collectionNode deleteItemsAtIndexPaths:@[indexPath]];
+            if (nextIndexPath && needReloadNextItem) {
+                [self.collectionNode reloadItemsAtIndexPaths:@[nextIndexPath]];
+            }
+        } completion:nil];
+    } else {
+        [self.collectionNode performBatchAnimated:NO updates:^{
+            NSAssert([NSThread isMainThread], @"should on main thread");
+            [self.collectionNode deleteItemsAtIndexPaths:@[indexPath]];
+        } completion:^(BOOL finished){
+            [self.collectionNode performBatchAnimated:NO updates:^{
+                if (nextIndexPath && needReloadNextItem) {
+                    [self.collectionNode reloadItemsAtIndexPaths:@[indexPath]];
+                }
+            } completion:nil];
+        }];
+    }
+
+
+}
 #pragma mark - BLMessageInputToolBarViewControllerDelegate
 - (void)barViewController:(BLMessageInputToolBarViewController *)viewController didClickInputBarSendButtonWithInputText:(NSString *)inputText {
     BLTextMessage *textMessage = [BLTextMessage textMessageWithText:inputText
                                                  messageDisplayType:BLMessageDisplayTypeRight];
-//    textMessage.messageLoadingStatus = BLMessageLoadingStatusLoading;
     [self.dataSource didReceiveNewMessage:textMessage];
 }
 

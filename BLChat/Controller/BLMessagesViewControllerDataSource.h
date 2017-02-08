@@ -10,6 +10,9 @@ NS_ASSUME_NONNULL_BEGIN
                     didReceiveNewMessage:(id <BLMessageData>)newMessage;
 - (void)messagesViewControllerDataSource:(BLMessagesViewControllerDataSource *)dateSource
            messageDidChangeLoadingStatus:(id <BLMessageData>)message;
+- (void)messagesViewControllerDataSource:(BLMessagesViewControllerDataSource *)dateSource
+                        didDeleteMessage:(id <BLMessageData>)message
+                             atIndexPath:(NSIndexPath *)indexPath;
 @end
 
 @interface BLMessagesViewControllerDataSource : NSObject
@@ -20,5 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)didReceiveNewMessage:(id<BLMessageData>)newMessage;
 
 - (nullable NSIndexPath *)indexPathOfMessage:(id <BLMessageData>)message;
+
+- (void)deleteMessage:(id <BLMessageData>)message;
 @end
 NS_ASSUME_NONNULL_END

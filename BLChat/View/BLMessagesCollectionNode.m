@@ -35,4 +35,10 @@
     [self.delegate didTapAccessoryButtonInCell:cell
                                 collectionNode:self];
 }
+
+- (void)deleteMessageActionDidHappenInContentNode:(BLMessagesContentNode *)contentNode messagesCell:(BLMessagesCollectionNodeCell *)cell {
+    [self.delegate deleteMessageActionDidHappenInContentNode:contentNode
+                                                messagesCell:cell
+                                              collectionNode:self];
+}
 @end
