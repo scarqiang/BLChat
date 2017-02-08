@@ -9,7 +9,17 @@
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 #import "FaceBoard.h"
 
+@class BLFaceBoardNode;
+
 @protocol BLFaceBoardNodeDelegate <NSObject>
+- (void)faceBoardNode:(BLFaceBoardNode *)faceBoardNode
+   didClickSendButton:(ASButtonNode *)buttonNode
+                 text:(NSString *)text;
+
+
+- (void)faceBoardDidSelectEmojiAction:(BLFaceBoardNode *)faceBoardNode
+                          boardHeight:(CGFloat)boardHeight;
+
 @end
 
 @interface BLFaceBoardNode : ASDisplayNode

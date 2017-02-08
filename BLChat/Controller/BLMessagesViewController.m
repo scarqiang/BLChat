@@ -21,6 +21,7 @@
 //views
 @property (nonatomic, strong) BLMessageInputToolBarViewController *inputToolBarViewController;
 @property (nonatomic, strong) BLMessagesCollectionNode *collectionNode;
+@property (nonatomic) CGRect collectionNodeInitialFrame;
 @end
 
 @implementation BLMessagesViewController
@@ -79,7 +80,7 @@
     CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
     CGFloat collectionNodeHeight = CGRectGetHeight(self.node.bounds) - self.inputToolBarViewController.inputToolBarHeight - navigationBarHeight - statusBarHeight;
     self.collectionNode.frame = CGRectMake(0, 0, CGRectGetWidth(self.node.bounds), collectionNodeHeight);
-    self.inputToolBarViewController.collectionInitialFrame = self.collectionNode.frame;
+    self.collectionNodeInitialFrame = self.collectionNode.frame;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignInputTextNodeFirstResponder:)];
     [self.collectionNode.view addGestureRecognizer:tap];
 }
@@ -87,7 +88,8 @@
 - (void)setupInputToolBarWithCollectionNode:(ASCollectionNode *)collectionNode {
     self.collectionNode.view.alwaysBounceVertical = YES;
     
-    BLMessageInputToolBarViewController *viewController = [[BLMessageInputToolBarViewController alloc] initWithContentCollectionNode:collectionNode delegate:self];
+    BLMessageInputToolBarViewController *viewController = [[BLMessageInputToolBarViewController alloc]
+            initWithDelegate:self];
     self.inputToolBarViewController = viewController;
     [self addChildViewController:viewController];
     [self.node addSubnode:viewController.node];
@@ -262,6 +264,19 @@
     BLTextMessage *textMessage = [BLTextMessage textMessageWithText:inputText
                                                  messageDisplayType:BLMessageDisplayTypeRight];
     [self.dataSource didReceiveNewMessage:textMessage];
+}
+
+- (void)         barViewController:(BLMessageInputToolBarViewController *)viewController
+didUpdateContentNodeWihtRiseHeight:(CGFloat)riseHeight {
+
+    CGPoint bottomOffset = CGPointMake(0, self.collectionNode.view.contentSize.height);
+
+    if (!CGPointEqualToPoint(self.collectionNode.view.contentOffset, bottomOffset)) {
+        [self.collectionNode.view setContentOffset:bottomOffset animated:NO];
+    }
+    CGRect collectionNodeFrame = self.collectionNodeInitialFrame;
+    collectionNodeFrame.size.height -= riseHeight;
+    self.collectionNode.frame = collectionNodeFrame;
 }
 
 @end

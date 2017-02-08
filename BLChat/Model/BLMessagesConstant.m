@@ -62,3 +62,6 @@ CGFloat const kBLMessagesTimeLabelTopMargin = 18.f;
 CGFloat const kBLMessagesTimeLabelBottomMargin = 9.f;
 
 NSString * const kBLMessagesLoadingFailedImageName = @"sendMFailed";
+
+#pragma mark - notification name
+NSString * const kBLInputToolBarTextDidChangeNotification = @"kBLInputToolBarTextDidChangeNotification";

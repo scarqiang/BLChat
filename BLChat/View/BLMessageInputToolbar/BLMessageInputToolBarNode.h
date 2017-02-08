@@ -73,4 +73,6 @@ resignFirstResponderWithResignState:(BLInputToolBarState)resignState;
 
 - (void)resignInputToolBarFirstResponder;
 
+- (void)triggerInputToolBarDidSendAction;
+
 @end

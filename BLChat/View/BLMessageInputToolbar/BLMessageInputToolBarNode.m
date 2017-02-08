@@ -8,6 +8,7 @@
 
 #import "BLMessageInputToolBarNode.h"
 #import "YYWebImage.h"
+#import "BLMessagesConstant.h"
 
 CGFloat const BLInputTextNodeHeight = 34.f;
 CGFloat const BLInputTextNodeFontSize = 15.f;
@@ -33,12 +34,18 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
 @end
 
 @implementation BLMessageInputToolBarNode
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (instancetype)initWithDelegate:(id<BLMessageInputToolBarNodeDelegate>)delegate {
     self = [super init];
     
     if (self) {
         _delegate = delegate;
         [self setupSubNode];
+        [self addNotification];
     }
     return self;
 }
@@ -100,29 +107,47 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
         node;
     });
     
-    UIImage *normalButtonImage = [UIImage yy_imageWithColor:[UIColor colorWithRed:80.f/255.f green:82.f/255.f blue:83.f/255.f alpha:1]];
-    UIImage *hightlightButtonImage = [UIImage yy_imageWithColor:[UIColor colorWithRed:180.f/255.f green:180.f/255.f blue:181.f/255.f alpha:1]];
+    UIImage *normalButtonImage = [UIImage imageWithColor:[UIColor colorWithRed:80.f/255.f green:82.f/255.f blue:83.f/255.f alpha:1]];
+    UIImage *highlightButtonImage = [UIImage imageWithColor:[UIColor colorWithRed:180.f/255.f green:180.f/255.f
+                                                                             blue:181.f/255.f alpha:1]];
     
     _recordingButtonNode = ({
         ASButtonNode *button = [ASButtonNode new];
         [button setBackgroundImage:normalButtonImage forState:ASControlStateNormal];
-        [button setBackgroundImage:hightlightButtonImage forState:ASControlStateHighlighted];
-        
+        [button setBackgroundImage:highlightButtonImage forState:ASControlStateHighlighted];
+
         [button setTitle:@"按住说话" withFont:[UIFont systemFontOfSize:15.f] withColor:[UIColor whiteColor] forState:ASControlStateNormal];
         [button setTitle:@"松开发送" withFont:[UIFont systemFontOfSize:15.f] withColor:[UIColor whiteColor] forState:ASControlStateHighlighted];
-        
+
         [button addTarget:self action:@selector(pressRecordButtonNode:) forControlEvents:ASControlNodeEventTouchDown];
         [button addTarget:self action:@selector(didLoosenButtonNode:) forControlEvents:ASControlNodeEventTouchUpInside];
-        
+
         button.layer.cornerRadius = 4.f;
         button.clipsToBounds = YES;
         button.style.flexGrow = 1.f;
         button.style.flexShrink = 1.f;
         
         button.style.preferredSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, BLInputTextNodeHeight);
-        
         button;
     });
+}
+
+- (CGRect)inputToolBarNormalFrame {
+    NSAssert(!CGRectEqualToRect(CGRectZero, _inputToolBarNormalFrame), @"没有设置inputToolBarNormalFrame");
+    return _inputToolBarNormalFrame;
+}
+
+- (CGRect)inputToolBarRiseFrame {
+    NSAssert(!CGRectEqualToRect(CGRectZero, _inputToolBarRiseFrame), @"没有设置inputToolBarRiseFrame");
+    return _inputToolBarRiseFrame;
+}
+
+- (void)addNotification {
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(editableTextNodeDidUpdateText:)
+                                                 name:kBLInputToolBarTextDidChangeNotification
+                                               object:nil];
 }
 
 #pragma mark - target action
@@ -195,6 +220,8 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
                            currentState:targetState];
     }
 }
+
+#pragma mark - exchange state action
 
 - (void)switchInputToolBarStateActionCurrentState:(BLInputToolBarState)currentState
                                       targetState:(BLInputToolBarState)targetState
@@ -336,36 +363,34 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
         if ([self.delegate respondsToSelector:@selector(inputToolBarNode:didClickSendButtonActionWithText:)]) {
             [self.delegate inputToolBarNode:self didClickSendButtonActionWithText:editableTextNode.textView.text];
         }
-        editableTextNode.textView.text = @"";
-        
-        CGFloat textNodeHeight = self.inputTextNode.textView.contentSize.height;
-        self.textNumberLine = 1;
-        self.inputTextNode.style.preferredSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, textNodeHeight);
-        [self transitionLayoutWithAnimation:YES shouldMeasureAsync:NO measurementCompletion:nil];
-        
+
+        [self triggerInputToolBarDidSendAction];
         return NO;
     }
     
     return YES;
 }
 
-
 - (void)editableTextNodeDidUpdateText:(ASEditableTextNode *)editableTextNode {
-    
-    self.textNumberLine = editableTextNode.textView.contentSize.height / editableTextNode.textView.font.lineHeight;
+    self.textNumberLine = (NSInteger) (self.inputTextNode.textView.contentSize.height / self.inputTextNode.textView.font.lineHeight);
     CGFloat textNodeHeight = self.inputTextNode.textView.contentSize.height;
-    
+
     if (self.textNumberLine == 5) {
         self.maxTextNodeHeight = self.inputTextNode.textView.contentSize.height;
     }
-    
+
     if (self.textNumberLine > 5) {
         textNodeHeight = self.maxTextNodeHeight;
     }
-    
+
+    //判断是否是表情输入
+    if(self.inputTextNode.textView.text.length > 0 && ![editableTextNode isKindOfClass:[ASEditableTextNode class]]) {
+        NSRange bottom = NSMakeRange(self.inputTextNode.textView.text.length -1, 1);
+        [self.inputTextNode.textView scrollRangeToVisible:self.inputTextNode.textView.selectedRange];
+    }
+
     self.inputTextNode.style.preferredSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, textNodeHeight);
     [self transitionLayoutWithAnimation:YES shouldMeasureAsync:NO measurementCompletion:nil];
-    
 }
 
 #pragma mark - layout
@@ -516,6 +541,15 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
     if ([self.delegate respondsToSelector:@selector( inputToolBarNode:resignFirstResponderWithResignState:)]) {
         [self.delegate inputToolBarNode:self resignFirstResponderWithResignState:self.inputToolBarPreviousState];
     }
+}
+
+- (void)triggerInputToolBarDidSendAction {
+    self.inputTextNode.textView.text = @"";
+
+    CGFloat textNodeHeight = self.inputTextNode.textView.contentSize.height;
+    self.textNumberLine = 1;
+    self.inputTextNode.style.preferredSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, textNodeHeight);
+    [self transitionLayoutWithAnimation:YES shouldMeasureAsync:NO measurementCompletion:nil];
 }
 
 @end

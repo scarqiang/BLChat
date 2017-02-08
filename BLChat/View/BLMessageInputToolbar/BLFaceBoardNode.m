@@ -162,6 +162,11 @@ CGFloat const kBLFaceBoardTitleFontSize = 18.f;
 
 - (void)didClickSendButtonNode:(ASButtonNode *)buttonNode {
 
+    if ([self.delegate respondsToSelector:@selector(faceBoardNode:didClickSendButton:text:)]) {
+        [self.delegate faceBoardNode:self
+                  didClickSendButton:buttonNode
+                                text:self.faceBoard.inputTextView.text];
+    }
 }
 
 #pragma mark - private function
@@ -195,8 +200,10 @@ CGFloat const kBLFaceBoardTitleFontSize = 18.f;
 
 #pragma mark - FaceBoard delegate
 -(void)checkString {
-    [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification
-                                                        object:nil
-                                                      userInfo:nil];
+
+    if ([self.delegate respondsToSelector:@selector(faceBoardDidSelectEmojiAction:boardHeight:)]) {
+        [self.delegate faceBoardDidSelectEmojiAction:self
+                                         boardHeight:self.frame.size.height];
+    }
 }
 @end

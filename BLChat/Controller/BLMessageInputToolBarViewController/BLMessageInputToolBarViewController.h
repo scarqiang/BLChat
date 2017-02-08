@@ -15,13 +15,15 @@
 - (void)barViewController:(BLMessageInputToolBarViewController *)viewController
 didClickInputBarSendButtonWithInputText:(NSString *)inputText;
 
+- (void)         barViewController:(BLMessageInputToolBarViewController *)viewController
+didUpdateContentNodeWihtRiseHeight:(CGFloat)riseHeight;
+
 @end
 
 @interface BLMessageInputToolBarViewController : ASViewController
 @property (nonatomic, readonly) CGFloat inputToolBarHeight;
-@property (nonatomic) CGRect collectionInitialFrame;
 
-- (instancetype)initWithContentCollectionNode:(ASCollectionNode *)collectionNode delegate:(id<BLMessageInputToolBarViewControllerDelegate>)delegate;
+- (instancetype)initWithDelegate:(id <BLMessageInputToolBarViewControllerDelegate>)delegate;
 
 - (void)resignTextNodeFirstResponder;
 

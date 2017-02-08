@@ -54,3 +54,6 @@ extern CGFloat const kBLMessagesSpaceAccessoryViewWidth;
 extern NSString * const kBLMessagesLoadingFailedImageName;
 extern CGFloat const kBLMessagesTimeLabelTopMargin;
 extern CGFloat const kBLMessagesTimeLabelBottomMargin;
+
+#pragma mark - notification name
+extern NSString * const kBLInputToolBarTextDidChangeNotification;
