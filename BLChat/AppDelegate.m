@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "BLMessagesViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,14 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    BLMessagesViewController *chatVC = [[BLMessagesViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc]
+            initWithRootViewController:chatVC];
+    navigationController.navigationBar.translucent = NO;
+    self.window.rootViewController = navigationController;
+    
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
