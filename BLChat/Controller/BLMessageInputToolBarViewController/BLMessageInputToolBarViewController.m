@@ -237,11 +237,7 @@ didClickExpressionButtonNode:(ASButtonNode *)expressionButtonNode
  didClickVoiceButtonNode:(ASButtonNode *)voiceButtonNode
            previousState:(BLInputToolBarState)previousState
             currentState:(BLInputToolBarState)currentState {
-    //点击表情按钮，之前状态是表情，把face board给降下来
-    if (previousState == BLInputToolBarStateExpression) {
-        [self triggerFallFaceBoardAnimation];
-        return;
-    }
+    [self resetBottomBoardFrame];
 }
 
 - (void)    inputToolBarNode:(BLMessageInputToolBarNode *)inputToolBarNode

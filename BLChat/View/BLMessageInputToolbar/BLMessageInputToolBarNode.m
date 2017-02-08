@@ -443,19 +443,17 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
 }
 
 - (void)voiceStateLayoutTransition:(id<ASContextTransitioning>)context {
-    
+
     [UIView animateWithDuration:BLInputAnimationDuration animations:^{
         
         CGSize fromSize = [context layoutForKey:ASTransitionContextFromLayoutKey].size;
         CGSize toSize = [context layoutForKey:ASTransitionContextToLayoutKey].size;
-        BOOL isResized = (CGSizeEqualToSize(fromSize, toSize) == NO);
-        if (isResized == YES) {
-            CGPoint position = self.inputToolBarNormalFrame.origin;
-            self.frame = CGRectMake(position.x, position.y, toSize.width, toSize.height);
-            self.voiceButtonNode.frame = [context finalFrameForNode:self.voiceButtonNode];
-            self.additionalButtonNode.frame = [context finalFrameForNode:self.additionalButtonNode];
-            self.expressionButtonNode.frame = [context finalFrameForNode:self.expressionButtonNode];
-        }
+
+        CGPoint position = self.inputToolBarNormalFrame.origin;
+        self.frame = CGRectMake(position.x, position.y, toSize.width, toSize.height);
+        self.voiceButtonNode.frame = [context finalFrameForNode:self.voiceButtonNode];
+        self.additionalButtonNode.frame = [context finalFrameForNode:self.additionalButtonNode];
+        self.expressionButtonNode.frame = [context finalFrameForNode:self.expressionButtonNode];
         
         if ([self.delegate respondsToSelector:@selector(inputToolBarNode:layoutTransitionWithBarFrame:duration:)]) {
             [self.delegate inputToolBarNode:self layoutTransitionWithBarFrame:self.frame duration:BLInputAnimationDuration];
@@ -477,9 +475,9 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
     }
     
     CGRect fromFrame = [context initialFrameForNode:self.inputTextNode];
-    CGFloat textViewHeigth = self.inputTextNode.textView.contentSize.height;
+    CGFloat textViewHeight = self.inputTextNode.textView.contentSize.height;
     
-    fromFrame.size.height = self.textNumberLine < 5 ? textViewHeigth : self.maxTextNodeHeight;
+    fromFrame.size.height = self.textNumberLine < 5 ? textViewHeight : self.maxTextNodeHeight;
     
     [UIView animateWithDuration:BLInputAnimationDuration animations:^{
         
@@ -488,18 +486,27 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
         BOOL isResized = (CGSizeEqualToSize(fromSize, toSize) == NO);
         if (isResized == YES) {
             CGPoint position = self.frame.origin;
-            CGFloat textNodeHeight = self.textNumberLine < 5 ? textViewHeigth : self.maxTextNodeHeight;
+            CGFloat textNodeHeight = self.textNumberLine < 5 ? textViewHeight : self.maxTextNodeHeight;
             CGFloat barHeight = textNodeHeight + BLInputToolBarLineHeight + 2 * BLInputTextNodeInsetHeight;
-            CGFloat barY = CGRectGetMinY(self.inputToolBarRiseFrame) + CGRectGetHeight(self.inputToolBarRiseFrame) - barHeight;
+            //如果之前是录音状态,且当前状态不为键盘状态，barY则根据现在bar的高度计算,否则就计算键盘高度
+            CGFloat barY = 0.f;
+            if (self.inputToolBarPreviousState == BLInputToolBarStateVoice && self.inputToolBarCurrentState != BLInputToolBarStateKeyboard) {
+                barY = CGRectGetMinY(self.inputToolBarNormalFrame) + CGRectGetHeight(self.inputToolBarNormalFrame) -
+                        toSize.height;
+            }
+            else {
+                barY = CGRectGetMinY(self.inputToolBarRiseFrame) + CGRectGetHeight(self.inputToolBarRiseFrame) - barHeight;
+            }
+
             CGRect barFrame = self.frame;
             barFrame.origin.y = barY;
             barFrame.size.height = barHeight;
-            position.y = barY;
+            position.y =  barY;
             self.frame = CGRectMake(position.x, position.y, toSize.width, toSize.height);
             self.voiceButtonNode.frame = [context finalFrameForNode:self.voiceButtonNode];
             self.additionalButtonNode.frame = [context finalFrameForNode:self.additionalButtonNode];
             self.expressionButtonNode.frame = [context finalFrameForNode:self.expressionButtonNode];
-            
+
             if ([self.delegate respondsToSelector:@selector(inputToolBarNode:layoutTransitionWithBarFrame:duration:)]) {
                 [self.delegate inputToolBarNode:self layoutTransitionWithBarFrame:self.frame duration:BLInputAnimationDuration];
             }
