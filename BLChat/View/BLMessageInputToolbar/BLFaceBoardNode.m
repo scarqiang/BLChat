@@ -43,7 +43,7 @@ CGFloat const kBLFaceBoardTitleFontSize = 18.f;
 - (void)setupSubNodesWithTextViewNode:(ASEditableTextNode *)textNode {
 
     self.automaticallyManagesSubnodes = YES;
-    self.backgroundColor = [UIColor colorWithRed:94.f / 255.f green:93.f / 255.f blue:93.f / 255.f
+    self.backgroundColor = [UIColor colorWithRed:239.f / 255.f green:238.f / 255.f blue:236.f / 255.f
                                            alpha:1];
 
     _faceBoard = [[FaceBoard alloc] init];
@@ -65,16 +65,16 @@ CGFloat const kBLFaceBoardTitleFontSize = 18.f;
         node;
     });
 
-    UIImage *buttonBackNormalImage = [UIImage yy_imageWithColor:[UIColor colorWithRed:94.f / 255.f
-                                                                                green:93.f / 255.f
-                                                                                 blue:93.f / 255.f
+    UIImage *buttonBackNormalImage = [UIImage yy_imageWithColor:[UIColor colorWithRed:239.f / 255.f
+                                                                                green:238.f / 255.f
+                                                                                 blue:236.f / 255.f
                                                                                 alpha:1]];
 
     UIImage *buttonBackSelectImage = [UIImage yy_imageWithColor:[UIColor whiteColor]];
 
-    UIImage *sendButtonBackNormalImage = [UIImage yy_imageWithColor:[UIColor colorWithRed:100.f / 255.f
-                                                                                    green:35.f / 255.f
-                                                                                     blue:1.f / 255.f
+    UIImage *sendButtonBackNormalImage = [UIImage yy_imageWithColor:[UIColor colorWithRed:255.f / 255.f
+                                                                                    green:96.f / 255.f
+                                                                                     blue:3.f / 255.f
                                                                                     alpha:1]];
 
     _recentButtonNode = ({
@@ -87,9 +87,9 @@ CGFloat const kBLFaceBoardTitleFontSize = 18.f;
         buttonNode;
     });
 
-    UIColor *buttonTitleColor = [UIColor colorWithRed:40.f / 255.f
-                                                green:40.f / 255.f
-                                                 blue:40.f / 255.f
+    UIColor *buttonTitleColor = [UIColor colorWithRed:102.f / 255.f
+                                                green:102.f / 255.f
+                                                 blue:102.f / 255.f
                                                 alpha:1];
 
     _emojiButtonNode = ({
