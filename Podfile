@@ -4,7 +4,11 @@ target 'BLChat' do
   pod 'JSQMessagesViewController', '~> 7.3.4'
   pod 'AsyncDisplayKit/Core'
   pod 'libextobjc'
-  pod 'YYKit'
+  pod 'YYCache'
+  pod 'YYImage'
+  pod 'YYModel'
+  pod 'YYWebImage'
+  pod 'YYText'
 end
 
 

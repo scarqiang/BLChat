@@ -1,5 +1,5 @@
 PODS:
-  - AsyncDisplayKit/Core (2.0.2)
+  - AsyncDisplayKit/Core (2.1)
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
@@ -38,23 +38,37 @@ PODS:
     - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.4.1)
   - libextobjc/UmbrellaHeader (0.4.1)
-  - YYKit (1.0.9):
-    - YYKit/no-arc (= 1.0.9)
-  - YYKit/no-arc (1.0.9)
+  - YYCache (1.0.4)
+  - YYImage (1.0.4):
+    - YYImage/Core (= 1.0.4)
+  - YYImage/Core (1.0.4)
+  - YYModel (1.0.4)
+  - YYText (1.0.7)
+  - YYWebImage (1.0.5):
+    - YYCache
+    - YYImage
 
 DEPENDENCIES:
   - AsyncDisplayKit/Core
   - JSQMessagesViewController (~> 7.3.4)
   - libextobjc
-  - YYKit
+  - YYCache
+  - YYImage
+  - YYModel
+  - YYText
+  - YYWebImage
 
 SPEC CHECKSUMS:
-  AsyncDisplayKit: 5c22daa1499c530fcc3e5589ddb201bf1176842b
+  AsyncDisplayKit: 28de788f9d6ec573be7662f0fe8931e656357e93
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
-  YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
+  YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
+  YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: c08cc123afcd9eca788f09d6dd7abcd569c63eff
+PODFILE CHECKSUM: 13fd49cd6e7ffced70dc4c868c6d3112bddd4a4d
 
 COCOAPODS: 1.1.1

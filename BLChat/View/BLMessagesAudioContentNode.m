@@ -34,7 +34,7 @@
 
         _bubbleBackgroundImageNode = ({
             ASImageNode *imageNode = [ASImageNode new];
-            imageNode.image = [self resizableBubbleImageForMessageDisplayType:_messageDisplayType];
+            imageNode.image = [self resizableBubbleImageForMessageDisplayType:_messageDisplayType highlighted:NO];
             imageNode;
         });
 

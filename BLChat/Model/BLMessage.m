@@ -10,6 +10,7 @@
 #import "BLMessagesTextContentNode.h"
 #import "BLMessagesPhotoContentNode.h"
 #import "BLMessagesAudioContentNode.h"
+#import "UIImage+BLRoundedCorner.h"
 
 static NSTimeInterval sendingTime = 1486364341;
 static BOOL reversed = NO;
@@ -18,7 +19,7 @@ static BOOL reversed = NO;
     BLMessage *message = [BLMessage new];
     message.senderName = @"黄志强";
     message.sendingTime = [message randomSendingTime];
-    message.avatarImage = [UIImage imageNamed:@"demo_avatar_cook"];
+    message.avatarImage = [[UIImage imageNamed:@"demo_avatar_cook"] bl_beiLiaoAvatarWithHeight:kBLMessagesCollectionNodeCellAvatarHeight];
     message.messageDisplayType = reversed ? BLMessageDisplayTypeLeft : BLMessageDisplayTypeRight;
     message.contentNode = [message randomContentNodeWithMessage:message];
     reversed = !reversed;

@@ -5,6 +5,7 @@
 
 #import "BLTextMessage.h"
 #import "BLMessagesTextContentNode.h"
+#import "UIImage+BLRoundedCorner.h"
 
 @interface BLTextMessage ()
 @property (nonatomic, copy) NSString *text;
@@ -19,7 +20,7 @@
 
         _senderName = @"黄志强";
         _sendingTime = [NSDate date].timeIntervalSince1970;
-        _avatarImage = [UIImage imageNamed:@"demo_avatar_cook"];
+        _avatarImage = [[UIImage imageNamed:@"demo_avatar_cook"] bl_beiLiaoAvatarWithHeight:kBLMessagesCollectionNodeCellAvatarHeight];
 
     }
 

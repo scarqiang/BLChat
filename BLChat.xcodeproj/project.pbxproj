@@ -49,6 +49,7 @@
 		8436C1091E38AF8300E53F50 /* receive_MsgBgplay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8436C1031E38AF8300E53F50 /* receive_MsgBgplay@3x.png */; };
 		8436C10B1E38B1A700E53F50 /* beiliao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8436C10A1E38B1A700E53F50 /* beiliao@2x.png */; };
 		845133A71E363A1C00E57E09 /* BLMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 845133A61E363A1C00E57E09 /* BLMessage.m */; };
+		845B498A1E4AC2C900657BE7 /* UIImage+BLRoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B49891E4AC2C900657BE7 /* UIImage+BLRoundedCorner.m */; };
 		846EB99E1E49CF7500ED145D /* sendMFailed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 846EB99C1E49CF7500ED145D /* sendMFailed@2x.png */; };
 		846EB99F1E49CF7500ED145D /* sendMFailed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 846EB99D1E49CF7500ED145D /* sendMFailed@3x.png */; };
 		F7546F7C1E2E2DA2003E38DE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7546F7B1E2E2DA2003E38DE /* main.m */; };
@@ -231,6 +232,8 @@
 		8451339E1E36399000E57E09 /* BLMessageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessageData.h; sourceTree = "<group>"; };
 		845133A51E363A1C00E57E09 /* BLMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLMessage.h; sourceTree = "<group>"; };
 		845133A61E363A1C00E57E09 /* BLMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLMessage.m; sourceTree = "<group>"; };
+		845B49881E4AC2C900657BE7 /* UIImage+BLRoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BLRoundedCorner.h"; sourceTree = "<group>"; };
+		845B49891E4AC2C900657BE7 /* UIImage+BLRoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BLRoundedCorner.m"; sourceTree = "<group>"; };
 		846EB99C1E49CF7500ED145D /* sendMFailed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sendMFailed@2x.png"; sourceTree = "<group>"; };
 		846EB99D1E49CF7500ED145D /* sendMFailed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sendMFailed@3x.png"; sourceTree = "<group>"; };
 		848D1B081E3603A10081414E /* BLChat-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BLChat-prefix.pch"; sourceTree = "<group>"; };
@@ -386,6 +389,8 @@
 		842258651E481B51007407CA /* Dependency */ = {
 			isa = PBXGroup;
 			children = (
+				845B49881E4AC2C900657BE7 /* UIImage+BLRoundedCorner.h */,
+				845B49891E4AC2C900657BE7 /* UIImage+BLRoundedCorner.m */,
 				842258661E481B51007407CA /* BLDateFormatter.h */,
 				842258671E481B51007407CA /* BLDateFormatter.m */,
 			);
@@ -1026,6 +1031,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				845B498A1E4AC2C900657BE7 /* UIImage+BLRoundedCorner.m in Sources */,
 				845133A71E363A1C00E57E09 /* BLMessage.m in Sources */,
 				F7546F821E2E2DA2003E38DE /* ViewController.m in Sources */,
 				F7A7425D1E373519004AF3DB /* BLMessageInputToolBarNode.m in Sources */,

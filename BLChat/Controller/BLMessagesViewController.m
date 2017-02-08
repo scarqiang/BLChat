@@ -207,7 +207,7 @@
 - (void)barViewController:(BLMessageInputToolBarViewController *)viewController didClickInputBarSendButtonWithInputText:(NSString *)inputText {
     BLTextMessage *textMessage = [BLTextMessage textMessageWithText:inputText
                                                  messageDisplayType:BLMessageDisplayTypeRight];
-    textMessage.messageLoadingStatus = BLMessageLoadingStatusLoading;
+//    textMessage.messageLoadingStatus = BLMessageLoadingStatusLoading;
     [self.dataSource didReceiveNewMessage:textMessage];
 }
 

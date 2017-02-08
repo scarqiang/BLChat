@@ -35,7 +35,8 @@
             ASNetworkImageNode *imageNode = [ASNetworkImageNode new];
             imageNode.image = image;
             imageNode.style.preferredSize = [self photoDisplaySizeWithPhotoSize:image.size];
-            [self maskImageNode:imageNode withImage:[self resizableBubbleImageForMessageDisplayType:displayType]];
+            [self maskImageNode:imageNode
+                      withImage:[self resizableBubbleImageForMessageDisplayType:displayType highlighted:NO]];
 
             imageNode;
         });

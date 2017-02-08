@@ -38,12 +38,21 @@ typedef void(^BLMessagesContentNodeAction)(BLMessagesViewController *messagesVie
 /**
  * 获取响应消息展示类型的气泡图片
  * @param displayType 需要展示消息的类型
+ * @param highlighted 是否是高亮的
  * @return UIImage
  */
-- (nullable UIImage *)resizableBubbleImageForMessageDisplayType:(BLMessageDisplayType)displayType;
+- (UIImage *)resizableBubbleImageForMessageDisplayType:(BLMessageDisplayType)displayType highlighted:(BOOL)highlighted;
 /**
  * content node的点击action，供子类重写，默认没有任何实现
  */
 - (void)didTapContentNode;
+/**
+ * content node的长按时的action，供子类重写，默认实现为弹出
+ */
+- (void)didLongPressContentNode;
+/**
+ * 设置背景气泡的状态，供子类实现
+ */
+- (void)setHighlighted:(BOOL)highlighted;
 @end
 NS_ASSUME_NONNULL_END

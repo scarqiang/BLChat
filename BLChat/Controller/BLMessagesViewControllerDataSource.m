@@ -4,7 +4,6 @@
 //
 
 #import "BLMessagesViewControllerDataSource.h"
-#import "NSArray+YYAdd.h"
 #import "BLMessageData.h"
 
 @interface BLMessagesViewControllerDataSource ()
@@ -13,13 +12,13 @@
 
 @implementation BLMessagesViewControllerDataSource
 - (void)didReceiveNewMessage:(id<BLMessageData>)newMessage {
-    [self.messages appendObject:newMessage];
+    [self.messages addObject:newMessage];
     [self.delegate messagesViewControllerDataSource:self didReceiveNewMessage:newMessage];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 4 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        newMessage.messageLoadingStatus = BLMessageLoadingStatusLoadingFailed;
-        [self.delegate messagesViewControllerDataSource:self
-                          messageDidChangeLoadingStatus:newMessage];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 4 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//        newMessage.messageLoadingStatus = BLMessageLoadingStatusLoadingFailed;
+//        [self.delegate messagesViewControllerDataSource:self
+//                          messageDidChangeLoadingStatus:newMessage];
+//    });
 }
 
 - (nullable NSIndexPath *)indexPathOfMessage:(id<BLMessageData>)message {
