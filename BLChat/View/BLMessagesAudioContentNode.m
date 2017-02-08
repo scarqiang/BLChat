@@ -70,6 +70,7 @@
 }
 
 - (void)didTapContentNode {
+    [super didTapContentNode];
     if (!self.audioListenedImageNode) {
         self.audioListenedImageNode = ({
             ASImageNode *imageNode = [ASImageNode new];
@@ -167,8 +168,15 @@
         image = [[UIImage imageNamed:kBLMessagesOutgoingListenedAudioBubbleImageName] resizableImageWithCapInsets:capInsets
                                                                                                    resizingMode:UIImageResizingModeStretch];
     }
-
     return image;
 }
 
+- (void)setHighlighted:(BOOL)highlighted {
+    self.bubbleBackgroundImageNode.image = [self resizableBubbleImageForMessageDisplayType:self.messageDisplayType
+                                                                               highlighted:highlighted];
+}
+
+- (NSArray<UIMenuItem *> *)menuItemsForMenuController:(UIMenuController *)menuController {
+    return @[self.deleteMenuItem];
+}
 @end

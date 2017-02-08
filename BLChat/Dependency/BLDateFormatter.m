@@ -163,7 +163,7 @@
     } else if (timeDiffInHour < 0 && timeDiffInHour >= -24){
         dateFormat = @"昨天HH:mm";
     } else {
-        dateFormat = @"YYYY-MM-dd";
+        dateFormat = @"YYYY-MM-dd hh:mm";
     }
 
     result = [self formatTimeWith:time format:dateFormat];

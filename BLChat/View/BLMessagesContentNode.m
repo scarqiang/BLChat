@@ -6,7 +6,7 @@
 #import "BLMessagesContentNode.h"
 
 @interface BLMessagesContentNode ()
-@property (nonatomic) UIMenuController *menuController;
+@property (nonatomic, weak) UIMenuController *menuController;
 @property (nonatomic) UIMenuItem *theCopyMenuItem;
 @property (nonatomic) UIMenuItem *deleteMenuItem;
 @property (nonatomic) UIMenuItem *forwardMenuItem;
@@ -14,6 +14,21 @@
 @end
 
 @implementation BLMessagesContentNode
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(willHideMenu)
+                                                     name:UIMenuControllerWillHideMenuNotification
+                                                   object:nil];
+    }
+
+    return self;
+}
+
+- (void)willHideMenu {
+    [self setHighlighted:NO];
+}
 
 - (void)didLoad {
     [super didLoad];
@@ -40,18 +55,23 @@
         self.forwardMenuItem = [[UIMenuItem alloc] initWithTitle:@"转发" action:@selector(forwardMenuAction:)];
     }
 
-    [self.menuController setMenuItems:@[self.theCopyMenuItem, self.deleteMenuItem, self.forwardMenuItem]];
+    [self.menuController setMenuItems:[self menuItemsForMenuController:self.menuController]];
     NSLog(@"%@", NSStringFromCGRect(self.frame));
     [self.menuController setTargetRect:self.frame inView:self.view.superview];
+    [self becomeFirstResponder];
     [self.menuController setMenuVisible:YES animated:YES];
     [self setHighlighted:YES];
 }
 
-- (void)forwardMenuAction:(id)forwardMenuAction {
-
+- (BOOL)canBecomeFirstResponder {
+    return YES;
 }
 
-- (void)resendMenuAction:(id)resendMenuAction {
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    return YES;
+}
+
+- (void)forwardMenuAction:(id)forwardMenuAction {
 
 }
 
@@ -63,13 +83,12 @@
 
 }
 
-
 - (void)didTapContentNode {
-    
+    [self.menuController setMenuVisible:NO animated:YES];
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
-
+    NSAssert(NO, @"子类必需重写");
 }
 
 - (UIImage *)resizableBubbleImageForMessageDisplayType:(BLMessageDisplayType)displayType highlighted:(BOOL)highlighted {
@@ -112,5 +131,9 @@
 
 - (void)addConstrainWithCollectionNodeCellConstrainedSize:(ASSizeRange)constrainedSize {
 
+}
+
+- (NSArray<UIMenuItem *> *)menuItemsForMenuController:(UIMenuController *)menuController {
+    return @[self.theCopyMenuItem, self.deleteMenuItem, self.forwardMenuItem];
 }
 @end

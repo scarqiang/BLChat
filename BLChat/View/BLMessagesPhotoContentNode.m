@@ -12,6 +12,7 @@
 #import "BLMessagesViewController.h"
 #import "BLMessagesCollectionNode.h"
 #import "BLMessagesCollectionNodeCell.h"
+#import "UIImage+YYWebImage.h"
 
 @interface BLMessagesPhotoContentNode ()
 @property (nonatomic) ASNetworkImageNode *photoNode;
@@ -54,11 +55,16 @@
 }
 
 - (void)didTapContentNode {
+    [super didTapContentNode];
     [self.delegate didTapMessagesContentNode:self performAction:^(BLMessagesViewController *messagesViewController,
                                                                   BLMessagesCollectionNode *collectionNode,
                                                                   BLMessagesCollectionNodeCell *collectionNodeCell) {
         NSLog(@"photo is tapped");
     }];
+}
+
+- (void)setHighlighted:(BOOL)highlighted {
+    self.photoNode.alpha = (CGFloat) (highlighted ? 0.7 : 1.0);
 }
 
 - (void)maskImageNode:(ASImageNode *)imageNode withImage:(UIImage *)image {
@@ -106,5 +112,9 @@
                               (image.size.width - image.capInsets.right - image.capInsets.left) / image.size.width,
                               (image.size.height - image.capInsets.bottom - image.capInsets.top) / image.size.height);
     }
+}
+
+- (NSArray<UIMenuItem *> *)menuItemsForMenuController:(UIMenuController *)menuController {
+    return @[self.forwardMenuItem, self.deleteMenuItem];
 }
 @end
