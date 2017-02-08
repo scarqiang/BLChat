@@ -2,7 +2,7 @@
 // Created by 黄泽宇 on 1/24/17.
 // Copyright (c) 2017 HZQ. All rights reserved.
 //
-
+#import "BLMessagesConstant.h"
 #import "BLMessagesTimeSeparatorNode.h"
 @interface BLMessagesTimeSeparatorNode ()
 @property (nonatomic) ASTextNode *timeSeparatorTextNode;
@@ -29,8 +29,8 @@
     paragraphStyle.alignment = NSTextAlignmentCenter;
 
     NSDictionary *attributes = @{
-            NSFontAttributeName:[UIFont systemFontOfSize:10.f],
-            NSForegroundColorAttributeName:[UIColor colorWithRed:153.f / 255.f green:153.f / 255.f blue:153.f / 255.f alpha:1.f],
+            NSFontAttributeName:[UIFont systemFontOfSize:12.f],
+            NSForegroundColorAttributeName:[UIColor colorWithRed:180.f / 255.f green:181.f / 255.f blue:182.f / 255.f alpha:1.f],
             NSParagraphStyleAttributeName: paragraphStyle
     };
 
@@ -39,8 +39,8 @@
 }
 
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
-    self.timeSeparatorTextNode.style.spacingBefore = 8.f;
-    self.timeSeparatorTextNode.style.spacingAfter = 5.f;
+    self.timeSeparatorTextNode.style.spacingBefore = kBLMessagesTimeLabelTopMargin;
+    self.timeSeparatorTextNode.style.spacingAfter = kBLMessagesTimeLabelBottomMargin;
 
     return [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical
                                                    spacing:0

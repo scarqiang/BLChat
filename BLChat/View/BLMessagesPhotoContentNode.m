@@ -11,8 +11,6 @@
  */
 #import "BLMessagesViewController.h"
 #import "BLMessagesCollectionNode.h"
-#import "BLMessagesCollectionNodeCell.h"
-#import "UIImage+YYWebImage.h"
 
 @interface BLMessagesPhotoContentNode ()
 @property (nonatomic) ASNetworkImageNode *photoNode;

@@ -232,6 +232,7 @@
 
     CGPoint nextCellOrigin = [self.view convertPoint:nextCell.view.frame.origin fromView:nextCell.view.superview];
     if (CGRectContainsPoint(self.node.bounds, nextCellOrigin)) {
+        //当前和下一个cell都可见
         [self.collectionNode performBatchAnimated:NO updates:^{
             NSAssert([NSThread isMainThread], @"should on main thread");
             [self.collectionNode deleteItemsAtIndexPaths:@[indexPath]];
@@ -240,6 +241,7 @@
             }
         } completion:nil];
     } else {
+        //当前cell可见，下一个cell不可见，按上述reload方法会崩
         [self.collectionNode performBatchAnimated:NO updates:^{
             NSAssert([NSThread isMainThread], @"should on main thread");
             [self.collectionNode deleteItemsAtIndexPaths:@[indexPath]];

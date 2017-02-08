@@ -113,7 +113,7 @@
     } else {
         long minutes = (long) (timeLength / 60.f);
         long seconds = (long) ((NSInteger)(timeLength) % 60);
-        return seconds > 10 ? [NSString stringWithFormat:@"%ld:%ld\"", minutes, seconds] : [NSString stringWithFormat:@"%ld:0%ld\"", minutes, seconds];
+        return seconds >= 10 ? [NSString stringWithFormat:@"%ld:%ld\"", minutes, seconds] : [NSString stringWithFormat:@"%ld:0%ld\"", minutes, seconds];
     }
 }
 

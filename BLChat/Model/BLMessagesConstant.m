@@ -25,10 +25,10 @@ NSString * const kBLMessagesPlainOutgoingBubbleHighlightedImageName = @"send_Msg
 CGFloat const kBLMessagesBubbleContentPadding = 10.f;
 CGFloat const kBLMessagesBubbleMouthWidth = 5.f;
 
-CGFloat const kBLMessagesIncomingBubbleContentTopPadding = 15.f;
+CGFloat const kBLMessagesIncomingBubbleContentTopPadding = 8.f;
 CGFloat const kBLMessagesIncomingBubbleContentLeftPadding = 20.f;
-CGFloat const kBLMessagesIncomingBubbleContentBottomPadding = 15.f;
-CGFloat const kBLMessagesIncomingBubbleContentRightPadding = 15.f;
+CGFloat const kBLMessagesIncomingBubbleContentBottomPadding = 10.f;
+CGFloat const kBLMessagesIncomingBubbleContentRightPadding = 12.f;
 
 CGFloat const kBLMessagesIncomingBubbleCapLeft = 12.f;
 CGFloat const kBLMessagesIncomingBubbleCapRight = 20.f;
@@ -42,8 +42,8 @@ CGFloat const kBLMessagesIncomingSenderNameTopMargin = 0.f;
 
 CGFloat const kBLMessagesIncomingMessageLeftMargin = 10.f;
 CGFloat const kBLMessagesIncomingMessageRightMargin = 50.f;
-CGFloat const kBLMessagesIncomingMessageTopMargin = 5.f;
-CGFloat const kBLMessagesIncomingMessageBottomMargin = 10.f;
+CGFloat const kBLMessagesIncomingMessageTopMargin = 4.f;
+CGFloat const kBLMessagesIncomingMessageBottomMargin = 4.f;
 
 CGFloat const kBLMessagesIncomingContentNodeLeftMargin = 5.f;
 CGFloat const kBLMessagesIncomingContentNodeRightMargin = 0.f;
@@ -55,5 +55,8 @@ CGFloat const kBLMessagesPhotoMessageMaxHeight = 200.f;
 
 CGFloat const kBLMessagesSpaceBetweenAccessoryViewAndContentNode = 5.f;
 CGFloat const kBLMessagesSpaceAccessoryViewWidth = 18.f;
+
+CGFloat const kBLMessagesTimeLabelTopMargin = 18.f;
+CGFloat const kBLMessagesTimeLabelBottomMargin = 9.f;
 
 NSString * const kBLMessagesLoadingFailedImageName = @"sendMFailed";
