@@ -7,6 +7,7 @@
 //
 
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
+#import "BLMessageInputToolBarNode.h"
 
 @class BLMessageInputToolBarViewController;
 
@@ -22,6 +23,7 @@ didUpdateContentNodeWihtRiseHeight:(CGFloat)riseHeight;
 
 @interface BLMessageInputToolBarViewController : ASViewController
 @property (nonatomic, readonly) CGFloat inputToolBarHeight;
+@property (nonatomic, readonly) BLInputToolBarState inputToolBarState;
 
 - (instancetype)initWithDelegate:(id <BLMessageInputToolBarViewControllerDelegate>)delegate;
 

@@ -106,6 +106,7 @@
     [self.collectionNode scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.dataSource.messages.count - 1 inSection:0]
                                 atScrollPosition:UICollectionViewScrollPositionBottom
                                         animated:animated];
+
 }
 #pragma mark - collection node data source
 - (NSInteger)collectionNode:(ASCollectionNode *)collectionNode numberOfItemsInSection:(NSInteger)section {
@@ -271,14 +272,15 @@ didUpdateContentNodeWihtRiseHeight:(CGFloat)riseHeight {
 
     CGPoint bottomOffset = CGPointMake(0, self.collectionNode.view.contentSize.height);
 
-    NSLog(@"========%@======",NSStringFromCGPoint(self.collectionNode.view.contentOffset));
-
-    if (!CGPointEqualToPoint(self.collectionNode.view.contentOffset, bottomOffset)) {
+    if (!CGPointEqualToPoint(self.collectionNode.view.contentOffset, bottomOffset)
+            && viewController.inputToolBarState != BLInputToolBarStateVoice) {
         [self.collectionNode.view setContentOffset:bottomOffset animated:NO];
     }
+
     CGRect collectionNodeFrame = self.collectionNodeInitialFrame;
     collectionNodeFrame.size.height -= riseHeight;
     self.collectionNode.frame = collectionNodeFrame;
+
 }
 
 @end

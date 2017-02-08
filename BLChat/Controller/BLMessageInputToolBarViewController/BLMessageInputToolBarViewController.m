@@ -7,7 +7,6 @@
 //
 
 #import "BLMessageInputToolBarViewController.h"
-#import "BLMessageInputToolBarNode.h"
 #import "BLFaceBoardNode.h"
 #import "BLMessagesConstant.h"
 
@@ -75,6 +74,10 @@ NSTimeInterval const kBLBottomBoardRiseAnimationTime = 0.35;
     self.faceBoardNode.frame = CGRectMake(0, self.view.bounds.size.height - navigationBarHeight - statusBarHeight, faceSize.width,
             faceSize.height);
     [self.view addSubnode:self.faceBoardNode];
+}
+
+- (BLInputToolBarState)inputToolBarState {
+    return self.inputToolBarNode.inputToolBarCurrentState;
 }
 
 - (CGFloat)inputToolBarHeight {
