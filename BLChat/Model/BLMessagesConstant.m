@@ -11,13 +11,15 @@ CGFloat const kBLMessagesCollectionNodeCellAvatarHeight = 30.f;
 CGFloat const kBLMessagesCollectionNodeCellSenderNameMaxWidth = 100.f;
 
 #pragma mark - bubble
-NSString * const kBLMessagesIncomingBubbleImageName = @"receive_MsgBg";
+NSString * const kBLMessagesIncomingBubbleImageName = @"incoming_normal_bubble";
+NSString * const kBLMessagesIncomingBubbleHighlightedImageName = @"incoming_highlight_bubble";
+NSString * const kBLMessagesOutgoingBubbleImageName = @"outgoing_normal_bubble";
+NSString * const kBLMessagesOutgoingBubbleHighlightedImageName = @"outgoing_highlight_bubble";
+
 NSString * const kBLMessagesIncomingListenedAudioBubbleImageName = @"receive_MsgBgplay";
 NSString * const kBLMessagesOutgoingListenedAudioBubbleImageName = @"send_MsgBg_S";
 
-NSString * const kBLMessagesIncomingBubbleHighlightedImageName = @"receive_MsgBg_h";
-NSString * const kBLMessagesOutgoingBubbleImageName = @"send_MsgBg";
-NSString * const kBLMessagesOutgoingBubbleHighlightedImageName = @"send_MsgBg_h";
+
 NSString * const kBLMessagesPlainIncomingBubbleImageName = @"receiver_MsgBg_Plain_n";
 NSString * const kBLMessagesPlainIncomingBubbleHighlightedImageName = @"receiver_MsgBg_Plain_h";
 NSString * const kBLMessagesPlainOutgoingBubbleImageName = @"send_MsgBg_Plain_n";

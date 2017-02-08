@@ -28,7 +28,7 @@
 - (instancetype)init {
     self = [super initWithNode:[ASDisplayNode new]];
     if (self) {
-        self.node.backgroundColor = [UIColor whiteColor];
+        self.node.backgroundColor = [UIColor colorWithRed:242.f / 255.f green:242.f / 255.f blue:242.f / 255.f alpha:1.f];
         _dataSource = [[BLMessagesViewControllerDataSource alloc] init];
         _dataSource.delegate = self;
     }
@@ -71,6 +71,7 @@
     self.collectionNode = [[BLMessagesCollectionNode alloc] initWithCollectionViewLayout:flowLayout];
     self.collectionNode.delegate = self;
     self.collectionNode.dataSource = self;
+    self.collectionNode.backgroundColor = [UIColor clearColor];
     [self.node addSubnode:self.collectionNode];
     [self setupInputToolBarWithCollectionNode:self.collectionNode];
     
