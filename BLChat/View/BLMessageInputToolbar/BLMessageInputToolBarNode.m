@@ -137,10 +137,6 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
     return _inputToolBarNormalFrame;
 }
 
-- (CGRect)inputToolBarRiseFrame {
-    NSAssert(!CGRectEqualToRect(CGRectZero, _inputToolBarRiseFrame), @"没有设置inputToolBarRiseFrame");
-    return _inputToolBarRiseFrame;
-}
 
 - (void)addNotification {
 
@@ -172,6 +168,7 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
 
 - (void)didClickVoiceButtonNode:(ASButtonNode *)buttonNode {
 
+    self.inputToolBarRiseFrame = CGRectZero;
     BLInputToolBarState targetState = buttonNode.selected ? BLInputToolBarStateKeyboard : BLInputToolBarStateVoice;
     BLInputToolBarState previousState = self.inputToolBarCurrentState;
 
@@ -488,9 +485,9 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
             CGPoint position = self.frame.origin;
             CGFloat textNodeHeight = self.textNumberLine < 5 ? textViewHeight : self.maxTextNodeHeight;
             CGFloat barHeight = textNodeHeight + BLInputToolBarLineHeight + 2 * BLInputTextNodeInsetHeight;
-            //如果之前是录音状态,且当前状态不为键盘状态，barY则根据现在bar的高度计算,否则就计算键盘高度
+            //如果之前是录音状态，且已经上升了,barY则根据现在bar的高度计算,否则就计算键盘高度
             CGFloat barY = 0.f;
-            if (self.inputToolBarPreviousState == BLInputToolBarStateVoice && self.inputToolBarCurrentState != BLInputToolBarStateKeyboard) {
+            if (self.inputToolBarPreviousState == BLInputToolBarStateVoice && CGRectEqualToRect(CGRectZero, self.inputToolBarRiseFrame) ) {
                 barY = CGRectGetMinY(self.inputToolBarNormalFrame) + CGRectGetHeight(self.inputToolBarNormalFrame) -
                         toSize.height;
             }
@@ -527,6 +524,7 @@ NSTimeInterval const BLInputAnimationDuration = 0.25f;
         return;
     }
 
+    self.inputToolBarRiseFrame = CGRectZero;
     self.inputToolBarPreviousState = self.inputToolBarCurrentState;
     self.inputToolBarCurrentState = BLInputToolBarStateNone;
 
